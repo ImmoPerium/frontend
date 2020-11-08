@@ -1,17 +1,19 @@
 import './tailwind.output.css';
+import { Route, Switch, Redirect } from 'react-router-dom';
+/* import Register from './views/Register.js';
+import Bills from './Components/Bills.js'; */
+
 
 function App() {
+/*   const [token, setToken] = useState(localStorage.getItem('token'));
+  const [user, setUser] = useState(localStorage.getItem('user')); */
   return (
     <div className="App">
-      <header className="App-header">
-        <div class="h-24 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500" >IMMOPERIUM</div><br></br>
-        <div>LOGIN</div>
-        <p class="text-purple-700 text-opacity-100">The quick brown fox ...</p>
-        <p class="text-purple-700 text-opacity-75">The quick brown fox ...</p>
-        <p class="text-purple-700 text-opacity-50">The quick brown fox ...</p>
-        <p class="text-purple-700 text-opacity-25">The quick brown fox ...</p>
-        <p class="text-purple-700 text-opacity-0">The quick brown fox ...</p>
-      </header>
+      {/* <NavBar token={token} setToken={setToken} /> */}
+      <Switch>
+      {/* <Route exact path='/register' render={(...props) => <Register {...props} />} /> */}
+      {/* <Route exact path='/'render={(...props) => token && user ? <Redirect to='/dashboard' /> : <Redirect to='/login' /> } */}
+      </Switch>
     </div>
   );
 }
