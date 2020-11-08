@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import {sendRegistrationDetails} from '../actions/index';
+
 
 class Register extends Component{
   constructor(props) {
@@ -13,6 +16,16 @@ class Register extends Component{
   }
 
 onChange = (event) => this.setState({ [event.target.name]:event.target.value})
+onClick = () => {
+  if(this.state.first_name && 
+    this.state.last_name && 
+    this.state.email && 
+    this.state.password &&
+    this.state.check_password) {
+      console.log("CALLED", this.state.first_name, this.state.last_name, this.state.email, this.state.password)
+      this.props.sendRegistrationDetails(this.state.first_name, this.state.last_name, this.state.email, this.state.password)
+    }
+}
 
   render() {
     return(
@@ -118,134 +131,125 @@ onChange = (event) => this.setState({ [event.target.name]:event.target.value})
                   </div>
                 </div> */}
                 
-                
-              <div className="">
-                <form action="#" method="POST" className="flex">
-                  <div className="mt-6 mr-3 sm:mt-5 sm:pt-5">
-                    <label
-                      htmlFor="firstName"
-                      className="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"
-                    >
-                      Vorname
-                    </label>
-                    <div className="mt-1 sm:mt-0 sm:col-span-2">
-                      <div className = "max-w-lg rounded-md shadow-sm sm:max-w-xs">
-                        <input
-                          id="firstName"
-                          type="firstName"
-                          className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                          name = "first_name"
-                          value = {this.state.first_name}
-                          onChange = {this.onChange}
-                          autocomplete="off"
-                        />
-                        {console.log(this.state.first_name)}
-                      </div>
-                    </div>
-                  </div> 
-                  <div className ="mt-6 ml-3 sm:mt-5 sm:pt-5">
-                    <label
-                      htmlFor="LastName"
-                      className="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"
-                    >
-                      Nachname
-                    </label>
-                    <div className="mt-1 sm:mt-0 sm:col-span-2">
-                      <div className ="max-w-lg rounded-md shadow-sm sm:max-w-xs">
-                        <input
-                          id="LastName"
-                          type="LastName"
-                          required
-                          className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                          name = "last_name"
-                          value = {this.state.last_name}
-                          onChange = {this.onChange}
-                          autocomplete="off"
-                        />
-                      </div>
+              <div className="flex">
+                <div className="mt-6 mr-3 sm:mt-5 sm:pt-5">
+                  <label
+                    htmlFor="firstName"
+                    className="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Vorname
+                  </label>
+                  <div className="mt-1 sm:mt-0 sm:col-span-2">
+                    <div className = "max-w-lg rounded-md shadow-sm sm:max-w-xs">
+                      <input
+                        id="firstName"
+                        type="firstName"
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        name = "first_name"
+                        value = {this.state.first_name}
+                        onChange = {this.onChange}
+                        autoComplete="off"
+                      />
                     </div>
                   </div>
-                </form>
+                </div> 
+                <div className ="mt-6 ml-3 sm:mt-5 sm:pt-5">
+                  <label
+                    htmlFor="LastName"
+                    className="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Nachname
+                  </label>
+                  <div className="mt-1 sm:mt-0 sm:col-span-2">
+                    <div className ="max-w-lg rounded-md shadow-sm sm:max-w-xs">
+                      <input
+                        id="LastName"
+                        type="LastName"
+                        required
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        name = "last_name"
+                        value = {this.state.last_name}
+                        onChange = {this.onChange}
+                        autoComplete="off"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>  
 
-
-
-              <div className="mt-6">
-                <form action="#" method="POST" className="space-y-6">
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium leading-5 text-gray-700"
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium leading-5 text-gray-700"
+                  >
+                    Email address
+                  </label>
+                  <div className="mt-1 rounded-md shadow-sm">
+                    <input
+                      id="email"
+                      type="email"
+                      required
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                      name = "email"
+                      value = {this.state.email}
+                      onChange = {this.onChange}
+                      autoComplete="off"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium leading-5 text-gray-700"
+                  >
+                    Password
+                  </label>
+                  <div className="mt-1 rounded-md shadow-sm">
+                    <input
+                      id="password"
+                      type="password"
+                      required
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                      name = "password"
+                      value = {this.state.password}
+                      onChange = {this.onChange}
+                      autoComplete="off"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="check_password"
+                    className="block text-sm font-medium leading-5 text-gray-700"
+                  >
+                    Password wiederholen
+                  </label>
+                  <div className="mt-1 rounded-md shadow-sm">
+                    <input
+                      id="check_password"
+                      type="password"
+                      required
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                      name = "check_password"
+                      value = {this.state.check_password}
+                      onChange = {this.onChange}
+                      autoComplete="off"
+                    />
+                    {this.state.password && this.state.check_password && this.state.password !== this.state.check_password ? <span>Die beiden Passwörter stimmen nicht überein.</span> : <span>{this.state.password !== '' && this.state.check_password !== ''&& this.state.password === this.state.check_password ? <span>Perfekt!😍😍</span> : <span></span>}</span>}
+                    
+                  </div>
+                </div>
+                <div>
+                  <span className="block w-full rounded-md shadow-sm">
+                    <button
+                      type="button"
+                      onClick = {this.onClick}
+                      className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
                     >
-                      Email address
-                    </label>
-                    <div className="mt-1 rounded-md shadow-sm">
-                      <input
-                        id="email"
-                        type="email"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                        name = "email"
-                        value = {this.state.email}
-                        onChange = {this.onChange}
-                        autocomplete="off"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="password"
-                      className="block text-sm font-medium leading-5 text-gray-700"
-                    >
-                      Password
-                    </label>
-                    <div className="mt-1 rounded-md shadow-sm">
-                      <input
-                        id="password"
-                        type="password"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                        name = "password"
-                        value = {this.state.password}
-                        onChange = {this.onChange}
-                        autocomplete="off"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="check_password"
-                      className="block text-sm font-medium leading-5 text-gray-700"
-                    >
-                      Password wiederholen
-                    </label>
-                    <div className="mt-1 rounded-md shadow-sm">
-                      <input
-                        id="check_password"
-                        type="password"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                        name = "check_password"
-                        value = {this.state.check_password}
-                        onChange = {this.onChange}
-                        autocomplete="off"
-                      />
-                      {this.state.password && this.state.check_password && this.state.password !== this.state.check_password ? <span>Password ist falsch brudi</span> : <span>{this.state.password !== '' && this.state.check_password !== ''&& this.state.password === this.state.check_password ? <span>😍😍</span> : <span></span>}</span>}
-                      
-                    </div>
-                  </div>
-                  <div>
-                    <span className="block w-full rounded-md shadow-sm">
-                      <button
-                        type="submit"
-                        className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-                      >
-                        Jetzt registrieren
-                      </button>
-                    </span>
-                  </div>
-                </form>
-              </div>
+                      Jetzt registrieren
+                    </button>
+                  </span>
+                </div>
               {/* </div> */}
             </div>
           </div>
@@ -253,7 +257,7 @@ onChange = (event) => this.setState({ [event.target.name]:event.target.value})
             <img
               className="absolute inset-0 h-full w-full object-cover"
               src="https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
-              alt
+              alt="Haus"
             />
           </div>
         </div>;
@@ -262,4 +266,11 @@ onChange = (event) => this.setState({ [event.target.name]:event.target.value})
     )
   }
 }
-export default Register
+
+const mapStateToProps = (state) => {
+  return {
+    /* user: state.userReducer.users, */
+  };
+};
+
+export default connect(mapStateToProps, {sendRegistrationDetails})(Register);

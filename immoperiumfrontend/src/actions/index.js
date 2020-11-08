@@ -11,7 +11,7 @@ export const getUsers = () => dispatch => {
     type: GET_USERS_FETCHING,
   });
   axios
-    .get(`${url}v1/users`)
+    .get(`${url}/v1/users`)
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
@@ -25,3 +25,51 @@ export const getUsers = () => dispatch => {
       });
     });
 };
+
+export const REGISTER_FETCHING = 'REGISTER_FETCHING';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAILURE = 'REGISTER_FAILURE';
+
+export const sendRegistrationDetails = (first_name, last_name, email, password) => dispatch => {
+  console.log("ACTION TRIGGERED", first_name, last_name, email, password)
+  dispatch({
+    type: REGISTER_FETCHING,
+  });
+  axios
+    .post(`${url}/v1/users/register`, {
+      "firstname": first_name,
+      "lastname": last_name,
+      "email_address": email,
+      "password": password,
+      "company": "",
+      "phonenumber": "",
+      "street": "",
+      "streetnumber": "",
+      "city": "",
+      "zip": "",
+      "country": "",
+      "favorite_advertisements": "",
+      "website": ""
+    })
+    .then(res => {
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      console.log("ERROR", err)
+      dispatch({
+        type: REGISTER_FAILURE,
+        payload: err,
+      });
+    });
+  };
+
+
+
+
+
+
+
+
