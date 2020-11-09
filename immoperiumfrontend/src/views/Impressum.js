@@ -34,96 +34,73 @@ class Impressum extends React.Component {
               <div class="relative md:bg-white md:p-6">
                 <div class="lg:grid lg:grid-cols-2 lg:gap-6 mb-8">
                   <div class="prose prose-lg text-gray-500 mb-6 lg:max-w-none lg:mb-0">
-                    <p>Ultrices ultricies a in odio consequat egestas rutrum. Ut vitae aliquam in ipsum. Duis nullam placerat cursus risus ultrices nisi, vitae tellus in. Qui non fugiat aut minus aut rerum. Perspiciatis iusto mollitia iste minima soluta id.</p>
-                    <p>Erat pellentesque dictumst ligula porttitor risus eget et eget. Ultricies tellus felis id dignissim eget. Est augue <a href="#">maecenas</a> risus nulla ultrices congue nunc tortor. Eu leo risus porta integer suspendisse sed sit ligula elit.</p>
-                    <ol>
-                      <li>Integer varius imperdiet sed interdum felis cras in nec nunc.</li>
-                      <li>Quam malesuada odio ut sit egestas. Elementum at porta vitae.</li>
-                    </ol>
-                    <p>Amet, eu nulla id molestie quis tortor. Auctor erat justo, sed pellentesque scelerisque interdum blandit lectus. Nec viverra amet ac facilisis vestibulum. Vestibulum purus nibh ac ultricies congue.</p>
+                    <p>Diensteanbieter: Immoperium</p>
+                    <br></br>
+                    <p> Kontaktmöglichkeiten: {" "}
+                    <a href="mailto:gregor.jaap@stud.leuphana.de">gregor.jaap@stud.leuphana.de
+                    </a>
+                    </p>
+                    <br></br>
+                    <p>Haftungs- und Urheberrechtshinweise: Die Inhalte dieses Onlineangebotes
+                      wurden sorgfältig und nach unserem aktuellen Kenntnisstand erstellt, dienen
+                      jedoch nur der Information und entfalten keine rechtlich bindende Wirkung,
+                      sofern es sich nicht um gesetzlich verpflichtende Informationen (z.B. das
+                      Impressum, die Datenschutzerklärung, AGB oder verpflichtende Belehrungen von
+                      Verbrauchern) handelt. Wir behalten uns vor, die Inhalte vollständig oder
+                      teilweise zu ändern oder zu löschen, soweit vertragliche Verpflichtungen
+                      unberührt bleiben. Alle Angebote sind freibleibend und unverbindlich.{" "}
+                    </p>
+                    <br></br>
+                    <p>
+                      Links auf fremde Webseiten: Inhalte fremder Webseiten, auf
+                      die wir direkt oder indirekt verweisen, liegen außerhalb unseres
+                      Verantwortungsbereiches und machen wir uns nicht zu Eigen. Für alle Inhalte
+                      und insbesondere für Schäden, die aus der Nutzung der in den verlinkten
+                      Webseiten aufrufbaren Informationen entstehen, haftet allein der Anbieter
+                      der verlinkten Webseiten.
+                    </p>
                   </div>
                   <div class="prose prose-lg text-gray-500">
-                    <p>Erat pellentesque dictumst ligula porttitor risus eget et eget. Ultricies tellus felis id dignissim eget. Est augue maecenas risus nulla ultrices congue nunc tortor.</p>
-                    <p>Eu leo risus porta integer suspendisse sed sit ligula elit. Elit egestas lacinia sagittis pellentesque neque dignissim vulputate sodales. Diam sed mauris felis risus, ultricies mauris netus tincidunt. Mauris sit eu ac tellus nibh non eget sed accumsan. Viverra ac sed venenatis pulvinar elit. Cras diam quis tincidunt lectus. Non mi vitae, scelerisque felis nisi, netus amet nisl.</p>
-                    <p>Eu eu mauris bibendum scelerisque adipiscing et. Justo, elementum consectetur morbi eros, posuere ipsum tortor. Eget cursus massa sed velit feugiat sed ut. Faucibus eros mauris morbi aliquam nullam. Scelerisque elementum sit magna ullamcorper dignissim pretium.</p>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <p>
+                      Urheberrechte und Markenrechte: Alle auf dieser Website
+                      dargestellten Inhalte, wie Texte, Fotografien, Grafiken, Marken und
+                      Warenzeichen sind durch die jeweiligen Schutzrechte (Urheberrechte,
+                      Markenrechte) geschützt. Die Verwendung, Vervielfältigung usw. unterliegen
+                      unseren Rechten oder den Rechten der jeweiligen Urheber bzw.
+                      Rechteverwalter.
+                    </p>
+                    <br></br>
+                    <p>
+                      Hinweise auf Rechtsverstöße: Sollten Sie innerhalb unseres
+                      Internetauftritts Rechtsverstöße bemerken, bitten wir Sie uns auf diese
+                      hinzuweisen. Wir werden rechtswidrige Inhalte und Links nach Kenntnisnahme
+                      unverzüglich entfernen.
+                    </p>
+                    <br></br>
+                    <p className="seal">
+                      <a
+                        href="https://datenschutz-generator.de/?l=de"
+                        title="Rechtstext von Dr. Schwenke - für weitere Informationen bitte anklicken."
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                      >
+                        Erstellt mit kostenlosem Datenschutz-Generator.de von Dr. Thomas Schwenke
+                      </a>
+                    </p>
                   </div>
                 </div>
                 <div class="inline-flex rounded-md shadow">
-                  <a href="#" class="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-orange-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out">
-                    Uns Kontaktieren
+                  <a href="mailto:gregor.jaap@stud.leuphana.de" class="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out">
+                    Kontakt aufnehmen
                   </a>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div>
-          <h1>Impressum</h1>
-          <h2 id="m46">Diensteanbieter</h2>
-          <p> Immoperium</p>
-          <h2 id="m56">Kontaktmöglichkeiten</h2>
-          <p>
-            <strong>E-Mail-Adresse</strong>:{" "}
-            <a href="mailto:gregor.jaap@stud.leuphana.de">gregor.jaap@stud.leuphana.de</a>
-          </p>
-          <h2 id="m65">Haftungs- und Urheberrechtshinweise</h2>
-          <p>
-            <strong>Haftungsausschluss</strong>: Die Inhalte dieses Onlineangebotes
-            wurden sorgfältig und nach unserem aktuellen Kenntnisstand erstellt, dienen
-            jedoch nur der Information und entfalten keine rechtlich bindende Wirkung,
-            sofern es sich nicht um gesetzlich verpflichtende Informationen (z.B. das
-            Impressum, die Datenschutzerklärung, AGB oder verpflichtende Belehrungen von
-            Verbrauchern) handelt. Wir behalten uns vor, die Inhalte vollständig oder
-            teilweise zu ändern oder zu löschen, soweit vertragliche Verpflichtungen
-            unberührt bleiben. Alle Angebote sind freibleibend und unverbindlich.{" "}
-          </p>
-          <p>
-            <strong>Links auf fremde Webseiten</strong>: Inhalte fremder Webseiten, auf
-            die wir direkt oder indirekt verweisen, liegen außerhalb unseres
-            Verantwortungsbereiches und machen wir uns nicht zu Eigen. Für alle Inhalte
-            und insbesondere für Schäden, die aus der Nutzung der in den verlinkten
-            Webseiten aufrufbaren Informationen entstehen, haftet allein der Anbieter
-            der verlinkten Webseiten.
-          </p>
-          <p>
-            <strong>Urheberrechte und Markenrechte</strong>: Alle auf dieser Website
-            dargestellten Inhalte, wie Texte, Fotografien, Grafiken, Marken und
-            Warenzeichen sind durch die jeweiligen Schutzrechte (Urheberrechte,
-            Markenrechte) geschützt. Die Verwendung, Vervielfältigung usw. unterliegen
-            unseren Rechten oder den Rechten der jeweiligen Urheber bzw.
-            Rechteverwalter.
-          </p>
-          <p>
-            <strong>Hinweise auf Rechtsverstöße</strong>: Sollten Sie innerhalb unseres
-            Internetauftritts Rechtsverstöße bemerken, bitten wir Sie uns auf diese
-            hinzuweisen. Wir werden rechtswidrige Inhalte und Links nach Kenntnisnahme
-            unverzüglich entfernen.
-          </p>
-          <p className="seal">
-            <a
-              href="https://datenschutz-generator.de/?l=de"
-              title="Rechtstext von Dr. Schwenke - für weitere Informationen bitte anklicken."
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-            >
-              Erstellt mit kostenlosem Datenschutz-Generator.de von Dr. Thomas Schwenke
-            </a>
-          </p>
         </div>
       </div>
     );
