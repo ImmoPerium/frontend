@@ -2,7 +2,7 @@
 import React from "react";
 import { Redirect } from "react-router";
 
-class Loggout extends React.Component {
+class Logout extends React.Component {
   componentDidMount() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -13,4 +13,4 @@ class Loggout extends React.Component {
   }
 }
 
-export default Loggout;
+export default Logout;
