@@ -1,5 +1,4 @@
 [build]
-base = "immoperiumfrontend/"
 publish = "immoperiumfrontend/build/"
 command = "yarn build"
 
