@@ -1,6 +1,6 @@
 [build]
 base = "immoperiumfrontend/"
-publish = "immoperiumfrontend/build/"
+publish = "build/"
 command = "yarn build"
 
 [[redirects]]
