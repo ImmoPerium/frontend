@@ -29,10 +29,10 @@ onClick = () => {
 
   render() {
     return(
-      <div id="container">
+      <div id="container-register">
         
         <div className="min-h-screen bg-white flex">
-          <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+          <div className="flex-1 flex flex-col justify-center pt-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="mx-auto w-full max-w-sm lg:w-96">
               <div align="center">
                 <img
@@ -140,7 +140,7 @@ onClick = () => {
                     Vorname
                   </label>
                   <div className="mt-1 sm:mt-0 sm:col-span-2">
-                    <div className = "max-w-lg rounded-md shadow-sm sm:max-w-xs">
+                    <div className = "max-w-lg rounded-md shadow-sm sm:max-w-xs mt-1">
                       <input
                         id="firstName"
                         type="firstName"
@@ -161,7 +161,7 @@ onClick = () => {
                     Nachname
                   </label>
                   <div className="mt-1 sm:mt-0 sm:col-span-2">
-                    <div className ="max-w-lg rounded-md shadow-sm sm:max-w-xs">
+                    <div className ="max-w-lg rounded-md shadow-sm sm:max-w-xs mt-1">
                       <input
                         id="LastName"
                         type="LastName"
@@ -180,7 +180,7 @@ onClick = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium leading-5 text-gray-700"
+                    className="block text-sm font-medium leading-5 text-gray-700 pt-4"
                   >
                     Email address
                   </label>
@@ -200,7 +200,7 @@ onClick = () => {
                 <div>
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium leading-5 text-gray-700"
+                    className="block text-sm font-medium leading-5 text-gray-700 pt-4"
                   >
                     Password
                   </label>
@@ -220,7 +220,7 @@ onClick = () => {
                 <div>
                   <label
                     htmlFor="check_password"
-                    className="block text-sm font-medium leading-5 text-gray-700"
+                    className="block text-sm font-medium leading-5 text-gray-700 pt-4"
                   >
                     Password wiederholen
                   </label>
@@ -240,7 +240,7 @@ onClick = () => {
                   </div>
                 </div>
                 <div>
-                  <span className="block w-full rounded-md shadow-sm">
+                  <span className="block w-full rounded-md shadow-sm pt-4">
                     <button
                       type="button"
                       onClick = {this.onClick}
