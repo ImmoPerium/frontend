@@ -1,13 +1,32 @@
 import React from "react";
-class Footer extends React.Component {
+import { Redirect }  from "react-router-dom";
 
+class Footer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirectToImpressum: false,
+    };
+  }
 /* React Class functions here */
+
+  redirectTo = (view_name) => {
+    console.log("REDIRECTED", view_name)
+    switch (view_name) {
+      case "impressum":
+        return this.setState({ redirectToImpressum: true }, this.setState({ redirectToImpressum: false }));
+      default:
+        return "";
+    }
+
+  }
 
 /* Rendered JSX here */
   render() {
     return (
     <div className="container-footer">
-
+      {this.state.redirectToImpressum ? 
+          <Redirect to='/impressum' /> : ""}
       <footer className="bg-gray-800">
         <div className="mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">
@@ -41,7 +60,7 @@ class Footer extends React.Component {
                   </h4>
                   <ul className="mt-4 space-y-4">
                     <li>
-                      <a href="#" className="text-base leading-6 text-gray-300 hover:text-white">
+                      <a href="#" onClick={() => this.redirectTo("impressum")} className="text-base leading-6 text-gray-300 hover:text-white">
                         Impressum
                       </a>
                     </li>
