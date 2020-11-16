@@ -1,8 +1,9 @@
 import './tailwind.output.css';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Register from './views/Register.js';
 import Logout from './views/Logout.js'
 import Impressum from './views/Impressum.js'
+import Footer from './components/Footer.js'
 
 function App() {
 /*   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -16,6 +17,7 @@ function App() {
       <Route exact path='/register' render={(...props) => <Register {...props} />} />
       {/* <Route exact path='/'render={(...props) => token && user ? <Redirect to='/dashboard' /> : <Redirect to='/login' /> } */}
       </Switch>
+      <Footer/>
     </div>
   );
 }
