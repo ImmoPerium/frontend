@@ -8,10 +8,8 @@ class Footer extends React.Component {
       redirectToImpressum: false,
     };
   }
-/* React Class functions here */
 
   redirectTo = (view_name) => {
-    console.log("REDIRECTED", view_name)
     switch (view_name) {
       case "impressum":
         return this.setState({ redirectToImpressum: true }, this.setState({ redirectToImpressum: false }));
@@ -21,7 +19,6 @@ class Footer extends React.Component {
 
   }
 
-/* Rendered JSX here */
   render() {
     return (
     <div className="container-footer">
@@ -116,7 +113,7 @@ class Footer extends React.Component {
                 <label htmlFor="emailAddress" className="sr-only">Email address</label>
                 <input type="email" id="emailAddress" autoComplete="off" required className="appearance-none min-w-0 w-full bg-white border border-transparent rounded-md py-2 px-4 text-base leading-6 text-gray-900 placeholder-gray-500 focus:outline-none focus:shadow-outline-gray focus:placeholder-gray-400 transition duration-150 ease-in-out" placeholder="Email-Adresse eingeben" />
                 <div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                  <button type="submit" className="w-full bg-indigo-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base leading-6 font-medium text-white hover:bg-indigo-400 focus:outline-none focus:border-indigo-600 focus:shadow-outline-indigo active:bg-indigo-600 transition duration-150 ease-in-out">
+                  <button type="submit" className="w-full bg-orange-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base leading-6 font-medium text-white hover:bg-orange-400 focus:outline-none focus:border-orange-400 focus:shadow-outline-orange active:bg-orange-400 transition duration-150 ease-in-out">
                     Abonnieren
                   </button>
                 </div>
