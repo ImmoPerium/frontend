@@ -107,7 +107,7 @@ class SearchFilters extends React.Component {
                 <img class="aktiv h-5 w-5" style={{ opacity: 1, transform: "translate(150%, 50%) scale(1.4)" }} src="./pictures/icons/house_and_couch2.svg"/>
                 <img class="normal h-5 w-5" style={{ opacity: 0 }} src="./pictures/icons/house_and_couch2.svg"/>
             </button>
-            <div id="slider" class="menu-slider-bg" style={{ position: "absolute", top: "0.5rem", left: "0.5rem", zIndex: 1, width: "4rem", height: "2.5rem", borderRadius: "5rem", backgroundColor: "#252f3f", transform: "translate(5%, -5%)", transition: "all 250ms" }}></div>
+            <div id="slider" class="menu-slider-bg" style={{ position: "absolute", top: "0.5rem", left: "0.5rem", zIndex: 1, width: "4rem", height: "2.5rem", borderRadius: "3rem", backgroundColor: "#252f3f", transform: "translate(5%, -5%)", transition: "all 250ms" }}></div>
             </div>
             <div className="flex flex-wrap -mx-2">
               <label className="block w-1/2 px-2 sm:w-1/4 lg:w-1/2">

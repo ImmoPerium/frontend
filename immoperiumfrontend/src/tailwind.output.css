@@ -1874,6 +1874,10 @@ img {
   letter-spacing: 0.05em;
 }
 
+.select-none {
+  user-select: none;
+}
+
 .align-bottom {
   vertical-align: bottom;
 }
