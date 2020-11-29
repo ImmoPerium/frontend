@@ -36,7 +36,7 @@ onClick = () => {
             <div className="mx-auto w-full max-w-sm lg:w-96">
               <div align="center">
                 <img
-                  className="h-12 w-auto"
+                  className="h-16"
                   src="./pictures/immoperium_logo.png"
                   alt="Immoperium Logo"
                 />
@@ -244,7 +244,7 @@ onClick = () => {
                     <button
                       type="button"
                       onClick = {this.onClick}
-                      className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                      className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-orange-400 focus:shadow-outline-orange active:bg-orange-400 transition duration-150 ease-in-out"
                     >
                       Jetzt registrieren
                     </button>
@@ -253,10 +253,10 @@ onClick = () => {
               {/* </div> */}
             </div>
           </div>
-          <div className="hidden lg:block relative w-0 flex-1">
+          <div className="hidden lg:block relative w-0 flex-1 bg-white">
             <img
               className="absolute inset-0 h-full w-full object-cover"
-              src="https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
+              src="./pictures/signup-side-image7.png"
               alt="Haus"
             />
           </div>
