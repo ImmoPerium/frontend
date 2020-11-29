@@ -1,36 +1,51 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import {sendRegistrationDetails} from '../actions/index';
+import { Redirect } from "react-router-dom";
 
+import { sendRegistrationDetails } from "../actions/index";
 
-class Register extends Component{
+class Register extends Component {
   constructor(props) {
     super(props);
-    this.state={
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: '',
-      check_password: ''
-    }
+    this.state = {
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      check_password: "",
+    };
   }
 
-onChange = (event) => this.setState({ [event.target.name]:event.target.value})
-onClick = () => {
-  if(this.state.first_name && 
-    this.state.last_name && 
-    this.state.email && 
-    this.state.password &&
-    this.state.check_password) {
-      console.log("CALLED", this.state.first_name, this.state.last_name, this.state.email, this.state.password)
-      this.props.sendRegistrationDetails(this.state.first_name, this.state.last_name, this.state.email, this.state.password)
+  onChange = (event) =>
+    this.setState({ [event.target.name]: event.target.value });
+  onClick = () => {
+    if (
+      this.state.first_name &&
+      this.state.last_name &&
+      this.state.email &&
+      this.state.password &&
+      this.state.check_password
+    ) {
+      console.log(
+        "CALLED",
+        this.state.first_name,
+        this.state.last_name,
+        this.state.email,
+        this.state.password
+      );
+      this.props.sendRegistrationDetails(
+        this.state.first_name,
+        this.state.last_name,
+        this.state.email,
+        this.state.password
+      );
     }
-}
+  };
 
   render() {
-    return(
+    return (
       <div id="container-register">
-        
+        {this.props.user.users.id ? <Redirect to="/" /> : ""}
         <div className="min-h-screen bg-white flex">
           <div className="flex-1 flex flex-col justify-center pt-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="mx-auto w-full max-w-sm lg:w-96">
@@ -44,11 +59,7 @@ onClick = () => {
                   Neu registrieren
                 </h2>
                 <p className="mt-2 text-sm leading-5 text-gray-600 max-w">
-                  <a
-                    className="font"
-                  >
-                    und werde ein Teil des Immoperiums!
-                  </a>
+                  <a className="font">und werde ein Teil des Immoperiums!</a>
                 </p>
               </div>
               {/*               <div className="mt-8">
@@ -130,7 +141,7 @@ onClick = () => {
                     </div>
                   </div>
                 </div> */}
-                
+
               <div className="flex">
                 <div className="mt-6 mr-3 sm:mt-5 sm:pt-5">
                   <label
@@ -140,20 +151,20 @@ onClick = () => {
                     Vorname
                   </label>
                   <div className="mt-1 sm:mt-0 sm:col-span-2">
-                    <div className = "max-w-lg rounded-md shadow-sm sm:max-w-xs mt-1">
+                    <div className="max-w-lg rounded-md shadow-sm sm:max-w-xs mt-1">
                       <input
                         id="firstName"
                         type="firstName"
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                        name = "first_name"
-                        value = {this.state.first_name}
-                        onChange = {this.onChange}
+                        name="first_name"
+                        value={this.state.first_name}
+                        onChange={this.onChange}
                         autoComplete="off"
                       />
                     </div>
                   </div>
-                </div> 
-                <div className ="mt-6 ml-3 sm:mt-5 sm:pt-5">
+                </div>
+                <div className="mt-6 ml-3 sm:mt-5 sm:pt-5">
                   <label
                     htmlFor="LastName"
                     className="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"
@@ -161,95 +172,108 @@ onClick = () => {
                     Nachname
                   </label>
                   <div className="mt-1 sm:mt-0 sm:col-span-2">
-                    <div className ="max-w-lg rounded-md shadow-sm sm:max-w-xs mt-1">
+                    <div className="max-w-lg rounded-md shadow-sm sm:max-w-xs mt-1">
                       <input
                         id="LastName"
                         type="LastName"
                         required
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                        name = "last_name"
-                        value = {this.state.last_name}
-                        onChange = {this.onChange}
+                        name="last_name"
+                        value={this.state.last_name}
+                        onChange={this.onChange}
                         autoComplete="off"
                       />
                     </div>
                   </div>
                 </div>
-              </div>  
+              </div>
 
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium leading-5 text-gray-700 pt-4"
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-5 text-gray-700 pt-4"
+                >
+                  Email address
+                </label>
+                <div className="mt-1 rounded-md shadow-sm">
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.onChange}
+                    autoComplete="off"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-5 text-gray-700 pt-4"
+                >
+                  Password
+                </label>
+                <div className="mt-1 rounded-md shadow-sm">
+                  <input
+                    id="password"
+                    type="password"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                    autoComplete="off"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="check_password"
+                  className="block text-sm font-medium leading-5 text-gray-700 pt-4"
+                >
+                  Password wiederholen
+                </label>
+                <div className="mt-1 rounded-md shadow-sm">
+                  <input
+                    id="check_password"
+                    type="password"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                    name="check_password"
+                    value={this.state.check_password}
+                    onChange={this.onChange}
+                    autoComplete="off"
+                  />
+                  {this.state.password &&
+                  this.state.check_password &&
+                  this.state.password !== this.state.check_password ? (
+                    <span>Die beiden Passwörter stimmen nicht überein.</span>
+                  ) : (
+                    <span>
+                      {this.state.password !== "" &&
+                      this.state.check_password !== "" &&
+                      this.state.password === this.state.check_password ? (
+                        <span>Perfekt!😍😍</span>
+                      ) : (
+                        <span></span>
+                      )}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div>
+                <span className="block w-full rounded-md shadow-sm pt-4">
+                  <button
+                    type="button"
+                    onClick={this.onClick}
+                    className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-orange-400 focus:shadow-outline-orange active:bg-orange-400 transition duration-150 ease-in-out"
                   >
-                    Email address
-                  </label>
-                  <div className="mt-1 rounded-md shadow-sm">
-                    <input
-                      id="email"
-                      type="email"
-                      required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                      name = "email"
-                      value = {this.state.email}
-                      onChange = {this.onChange}
-                      autoComplete="off"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-5 text-gray-700 pt-4"
-                  >
-                    Password
-                  </label>
-                  <div className="mt-1 rounded-md shadow-sm">
-                    <input
-                      id="password"
-                      type="password"
-                      required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                      name = "password"
-                      value = {this.state.password}
-                      onChange = {this.onChange}
-                      autoComplete="off"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="check_password"
-                    className="block text-sm font-medium leading-5 text-gray-700 pt-4"
-                  >
-                    Password wiederholen
-                  </label>
-                  <div className="mt-1 rounded-md shadow-sm">
-                    <input
-                      id="check_password"
-                      type="password"
-                      required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                      name = "check_password"
-                      value = {this.state.check_password}
-                      onChange = {this.onChange}
-                      autoComplete="off"
-                    />
-                    {this.state.password && this.state.check_password && this.state.password !== this.state.check_password ? <span>Die beiden Passwörter stimmen nicht überein.</span> : <span>{this.state.password !== '' && this.state.check_password !== ''&& this.state.password === this.state.check_password ? <span>Perfekt!😍😍</span> : <span></span>}</span>}
-                    
-                  </div>
-                </div>
-                <div>
-                  <span className="block w-full rounded-md shadow-sm pt-4">
-                    <button
-                      type="button"
-                      onClick = {this.onClick}
-                      className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-orange-400 focus:shadow-outline-orange active:bg-orange-400 transition duration-150 ease-in-out"
-                    >
-                      Jetzt registrieren
-                    </button>
-                  </span>
-                </div>
+                    Jetzt registrieren
+                  </button>
+                </span>
+              </div>
               {/* </div> */}
             </div>
           </div>
@@ -260,17 +284,17 @@ onClick = () => {
               alt="Haus"
             />
           </div>
-        </div>;
-
+        </div>
+        ;
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    /* user: state.userReducer.users, */
+    user: state.usersReducer,
   };
 };
 
-export default connect(mapStateToProps, {sendRegistrationDetails})(Register);
+export default connect(mapStateToProps, { sendRegistrationDetails })(Register);
