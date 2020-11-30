@@ -261,7 +261,7 @@ template {
  * Removes the default spacing and border for appropriate elements.
  */
 
-
+blockquote,
 dl,
 dd,
 h1,
@@ -613,6 +613,26 @@ img {
   left: 0.25em;
 }
 
+.prose blockquote {
+  font-weight: 500;
+  font-style: italic;
+  color: #161e2e;
+  border-left-width: 0.25rem;
+  border-left-color: #e5e7eb;
+  quotes: "\201C""\201D""\2018""\2019";
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  padding-left: 1em;
+}
+
+.prose blockquote p:first-of-type::before {
+  content: open-quote;
+}
+
+.prose blockquote p:last-of-type::after {
+  content: close-quote;
+}
+
 .prose h1 {
   color: #1a202c;
   font-weight: 800;
@@ -752,6 +772,12 @@ img {
   line-height: 1.4545455;
   margin-top: 1.0909091em;
   margin-bottom: 1.0909091em;
+}
+
+.prose-lg blockquote {
+  margin-top: 1.6666667em;
+  margin-bottom: 1.6666667em;
+  padding-left: 1em;
 }
 
 .prose-lg h1 {
@@ -961,12 +987,6 @@ img {
   --bg-opacity: 1;
   background-color: #ff5a1f;
   background-color: rgba(255, 90, 31, var(--bg-opacity));
-}
-
-.bg-orange-600 {
-  --bg-opacity: 1;
-  background-color: #d03801;
-  background-color: rgba(208, 56, 1, var(--bg-opacity));
 }
 
 .bg-yellow-200 {
@@ -1331,8 +1351,16 @@ img {
   height: 5rem;
 }
 
+.h-36 {
+  height: 9rem;
+}
+
 .h-56 {
   height: 14rem;
+}
+
+.h-64 {
+  height: 16rem;
 }
 
 .h-full {
@@ -1361,6 +1389,10 @@ img {
 
 .text-xl {
   font-size: 1.25rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
 }
 
 .text-3xl {
@@ -1533,6 +1565,10 @@ img {
   max-width: 56rem;
 }
 
+.max-w-7xl {
+  max-width: 80rem;
+}
+
 .max-w-max-content {
   max-width: max-content;
 }
@@ -1559,6 +1595,10 @@ img {
 
 .opacity-0 {
   opacity: 0;
+}
+
+.opacity-50 {
+  opacity: 0.5;
 }
 
 .opacity-75 {
@@ -1700,8 +1740,16 @@ img {
   padding-top: 3rem;
 }
 
+.pb-12 {
+  padding-bottom: 3rem;
+}
+
 .pb-16 {
   padding-bottom: 4rem;
+}
+
+.pt-20 {
+  padding-top: 5rem;
 }
 
 .pb-20 {
@@ -1768,6 +1816,18 @@ img {
 
 .left-0 {
   left: 0;
+}
+
+.top-1\/2 {
+  top: 50%;
+}
+
+.top-full {
+  top: 100%;
+}
+
+.right-full {
+  right: 100%;
 }
 
 .shadow-sm {
@@ -1918,6 +1978,12 @@ img {
   color: rgba(6, 148, 162, var(--text-opacity));
 }
 
+.text-indigo-200 {
+  --text-opacity: 1;
+  color: #cddbfe;
+  color: rgba(205, 219, 254, var(--text-opacity));
+}
+
 .text-indigo-500 {
   --text-opacity: 1;
   color: #6875f5;
@@ -2057,8 +2123,16 @@ img {
   width: 4rem;
 }
 
+.w-36 {
+  width: 9rem;
+}
+
 .w-48 {
   width: 12rem;
+}
+
+.w-64 {
+  width: 16rem;
 }
 
 .w-auto {
@@ -2128,6 +2202,26 @@ img {
 
 .translate-x-5 {
   --transform-translate-x: 1.25rem;
+}
+
+.translate-x-80 {
+  --transform-translate-x: 20rem;
+}
+
+.translate-x-1\/2 {
+  --transform-translate-x: 50%;
+}
+
+.-translate-x-8 {
+  --transform-translate-x: -2rem;
+}
+
+.-translate-y-24 {
+  --transform-translate-y: -6rem;
+}
+
+.-translate-y-1\/2 {
+  --transform-translate-y: -50%;
 }
 
 .transition-all {
@@ -2317,10 +2411,6 @@ img {
 
   .sm\:mt-5 {
     margin-top: 1.25rem;
-  }
-
-  .sm\:ml-auto {
-    margin-left: auto;
   }
 
   .sm\:mt-px {
@@ -2550,8 +2640,16 @@ img {
     display: none;
   }
 
+  .lg\:items-center {
+    align-items: center;
+  }
+
   .lg\:flex-none {
     flex: none;
+  }
+
+  .lg\:flex-shrink-0 {
+    flex-shrink: 0;
   }
 
   .lg\:h-full {
@@ -2578,6 +2676,10 @@ img {
 
   .lg\:mt-4 {
     margin-top: 1rem;
+  }
+
+  .lg\:ml-10 {
+    margin-left: 2.5rem;
   }
 
   .lg\:mt-12 {
@@ -2765,6 +2867,10 @@ img {
     flex: 1 1 0%;
   }
 
+  .xl\:h-80 {
+    height: 20rem;
+  }
+
   .xl\:h-full {
     height: 100%;
   }
@@ -2833,6 +2939,10 @@ img {
 
   .xl\:w-72 {
     width: 18rem;
+  }
+
+  .xl\:w-80 {
+    width: 20rem;
   }
 
   .xl\:w-full {
