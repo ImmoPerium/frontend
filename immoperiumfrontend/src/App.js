@@ -7,6 +7,7 @@ import Footer from "./components/Footer.js";
 import Explore from "./views/Explore.js";
 import Home from "./views/Home.js";
 import ViewProfilePage from "./views/ViewProfilePage.js";
+import Credo from "./views/Credo.js";
 import Navbar from "./components/navbar/Navbar";
 
 function App() {
@@ -42,6 +43,11 @@ function App() {
           exact
           path="/profile"
           render={(...props) => <ViewProfilePage {...props} />}
+        />
+        <Route
+          exact
+          path="/credo"
+          render={(...props) => <Credo {...props} />}
         />
         {/* <Route exact path='/'render={(...props) => token && user ? <Redirect to='/dashboard' /> : <Redirect to='/login' /> } */}
       </Switch>
