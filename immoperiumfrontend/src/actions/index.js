@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const url = process.env.REACT_APP_BACKEND_BASE_URL;
+
+// USERS
+
 export const GET_USERS_FETCHING = "GET_USERS_FETCHING";
 export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";
 export const GET_USERS_FAILURE = "GET_USERS_FAILURE";
-
-const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
 export const getUsers = () => (dispatch) => {
   dispatch({
@@ -70,3 +72,40 @@ export const sendRegistrationDetails = (
       });
     });
 };
+
+// ADVERTISEMENTS
+
+export const GET_ALL_ADVERTISEMENTS_FETCHING =
+  "GET_ALL_ADVERTISEMENTS_FETCHING";
+export const GET_ALL_ADVERTISEMENTS_SUCCESS = "GET_ALL_ADVERTISEMENTS_SUCCESS";
+export const GET_ALL_ADVERTISEMENTS_FAILURE = "GET_ALL_ADVERTISEMENTS_FAILURE";
+
+export const getAllAdvertisements = () => (dispatch) => {
+  dispatch({
+    type: GET_ALL_ADVERTISEMENTS_FETCHING,
+  });
+  axios
+    .get(`${url}/v1/realestate/public`)
+    .then((res) => {
+      console.log("ADVERTISEMENT RES", res.data.real_estate_advertisements);
+      dispatch({
+        type: GET_ALL_ADVERTISEMENTS_SUCCESS,
+        payload: res.data.real_estate_advertisements,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_ALL_ADVERTISEMENTS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+/* axios
+    .get(`${url}/v1/advertisements`, {
+      headers: {
+        Authorization:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo4LCJlbWFpbF9hZGRyZXNzIjoiMjIyMmZha2VtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTYwNjY2NjA5OSwiZXhwIjoxNjA2NzA5Mjk5fQ.HUyiaxi8Df-WDcWCeMSohAl_ffd5hFHQqDOxema8ZHk",
+      },
+    })
+*/

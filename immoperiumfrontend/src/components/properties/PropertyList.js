@@ -6,7 +6,10 @@ export default class PropertyList extends React.Component {
   render() {
     return (
       <div className="mt-6">
-        <PropertyHeader title={this.props.title} description={this.props.description} />
+        <PropertyHeader
+          title={this.props.title}
+          description={this.props.description}
+        />
 
         <div className="mt-6 sm:overflow-x-auto sm:overflow-y-hidden">
           <div className="px-4 sm:inline-flex sm:pt-2 sm:pb-8 xl:px-8">
@@ -14,13 +17,14 @@ export default class PropertyList extends React.Component {
               <PropertyCard
                 key={index}
                 index={index}
-                imageUrl={property.imageUrl}
-                rooms={property.rooms}
-                house_area={property.house_area}
-                title={property.title}
-                price={property.price}
-                viewCount={property.viewCount}
-                favoriteCount={property.favoriteCount}
+                propertyiD={property.id}
+                imageUrl={property.other_description}
+                rooms={parseInt(property.rooms)}
+                house_area={parseInt(property.house_area)}
+                title={property.advertisement_purpose}
+                price={property.rental_price_total}
+                viewCount={property.view_count}
+                favoriteCount={property.favorite_count}
               />
             ))}
           </div>
