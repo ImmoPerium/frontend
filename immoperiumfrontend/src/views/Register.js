@@ -193,7 +193,7 @@ class Register extends Component {
                   htmlFor="email"
                   className="block text-sm font-medium leading-5 text-gray-700 pt-4"
                 >
-                  Email address
+                  E-Mail-Adresse
                 </label>
                 <div className="mt-1 rounded-md shadow-sm">
                   <input
@@ -213,7 +213,7 @@ class Register extends Component {
                   htmlFor="password"
                   className="block text-sm font-medium leading-5 text-gray-700 pt-4"
                 >
-                  Password
+                  Passwort
                 </label>
                 <div className="mt-1 rounded-md shadow-sm">
                   <input
@@ -233,7 +233,7 @@ class Register extends Component {
                   htmlFor="check_password"
                   className="block text-sm font-medium leading-5 text-gray-700 pt-4"
                 >
-                  Password wiederholen
+                  Passwort wiederholen
                 </label>
                 <div className="mt-1 rounded-md shadow-sm">
                   <input

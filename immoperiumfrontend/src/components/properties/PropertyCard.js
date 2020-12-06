@@ -13,11 +13,13 @@ export default class PropertyCard extends React.Component {
       >
         <div>
           <div className="relative pb-5/6">
-            <img
-              className="absolute inset-0 h-full w-full rounded-lg shadow-md object-cover"
-              src={this.props.imageUrl}
-              alt=""
-            />
+            <a href={`/immobilie/${this.props.propertyiD}`}>
+              <img
+                className="absolute inset-0 h-full w-full rounded-lg shadow-md object-cover"
+                src={this.props.imageUrl}
+                alt=""
+              />
+            </a>
           </div>
           <div className="relative px-4 -mt-16">
             <div className="bg-white rounded-lg px-4 py-4 shadow-lg">
@@ -35,7 +37,7 @@ export default class PropertyCard extends React.Component {
                     : ` ${this.props.house_area} Quadratmeter`}
                 </div>
               </div>
-              <a href={`/immobilie/${this.props.propertyiD}`} className="test">
+              <a href={`/immobilie/${this.props.propertyiD}`}>
                 <h4 className="mt-1 text-gray-900 font-semibold text-lg">
                   {this.props.title}
                 </h4>
