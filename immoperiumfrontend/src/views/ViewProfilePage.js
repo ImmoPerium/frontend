@@ -21,7 +21,7 @@ class ViewProfilePage extends React.Component {
               <div className="pt-10 pb-16">
                 <div className="px-4 sm:px-6 md:px-0">
                   <h1 className="text-3xl font-extrabold text-gray-900">
-                    Hallo <span className="text-orange-500">Vorname!</span>
+                    Hallo <span className="text-orange-500">{JSON.parse(localStorage.getItem('user')).firstname}!</span>
                   </h1>
                 </div>
                 <div className="px-4 sm:px-6 md:px-0">

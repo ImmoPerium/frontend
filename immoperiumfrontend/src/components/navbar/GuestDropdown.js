@@ -5,16 +5,13 @@ export default class GuestDropdown extends React.Component {
     return (
       <div className="relative px-5 py-5 sm:py-0 sm:ml-4 sm:px-0 select-none">
         <div className="flex items-center sm:hidden select-none">
-          <a href="/profile">
+          <a href="#">
             <img
               className="h-10 w-10 object-cover rounded-full border-2 border-gray-600 select-none"
               src="./pictures/guest_avatar.png"
               alt=""
             />
           </a>
-          <span className="ml-4 font-semibold text-gray-200 sm:hidden select-none">
-            Isla Schoger
-          </span>
         </div>
         <div className="hidden sm:block">
           <div className="relative">
@@ -29,7 +26,7 @@ export default class GuestDropdown extends React.Component {
                     : "border-gray-600 xl:border-gray-300"
                 }`}
               >
-                <a href="/profile">
+                <a href="#">
                   <img
                     className="h-full w-full object-cover select-none"
                     src="./pictures/guest_avatar.png"

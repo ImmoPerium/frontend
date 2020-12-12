@@ -13,9 +13,6 @@ export default class NavbarMenuGuest extends React.Component {
   }
 
   redirectTo = (view_name) => {
-    console.log("REDIRECTED", view_name)
-    console.log(this.state.redirectToSignUp)
-    console.log(this.state.redirectToExplore)
     switch (view_name) {
       case "signup":
         return this.setState({ redirectToSignUp: true }, () => this.setState({ redirectToSignUp: false }));
@@ -28,7 +25,6 @@ export default class NavbarMenuGuest extends React.Component {
       default:
         return "";
     }
-
   }
 
   render() {

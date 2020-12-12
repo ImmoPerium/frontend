@@ -1,9 +1,33 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
 export default class UserDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirectToSettings: "",
+      redirectToLogout: ""
+    };
+  }
+
+  redirectTo = (view_name) => {
+    switch (view_name) {
+      case "settings":
+        return this.setState({ redirectToSettings: true }, () => this.setState({ redirectToSettings: false }));
+      case "logout":
+        return this.setState({ redirectToLogout: true }, () => this.setState({ redirectToLogout: false }));
+      default:
+        return "";
+    }
+  }
+
   render() {
     return (
       <div className="relative px-5 py-5 sm:py-0 sm:ml-4 sm:px-0">
+        {this.state.redirectToSettings ? 
+          <Redirect to='/profile' /> : <></>}
+        {this.state.redirectToLogout ? 
+          <Redirect to='/logout' /> : <></>}
         <div className="flex items-center sm:hidden">
           <a href="/profile">
             <img
@@ -12,26 +36,29 @@ export default class UserDropdown extends React.Component {
               alt=""
             />
           </a>
-          <span className="ml-4 font-semibold text-gray-200 sm:hidden">
-            Isla Schoger
-          </span>
         </div>
         <div className="mt-5 sm:hidden">
-          <a href="#account" className="block text-gray-400 hover:text-white">
-            Account settings
-          </a>
-          <a
-            href="#support"
-            className="mt-3 block text-gray-400 hover:text-white"
-          >
-            Support
-          </a>
-          <a
+        <div
+          onClick={() => this.redirectTo("settings")}
+          className="block text-gray-400 hover:text-white"
+        >
+          Einstellungen
+        </div>
+          {/* <a href="#account" className="block text-gray-400 hover:text-white">
+            Einstellungen
+          </a> */}
+    {/*       <a
             href="#sign-out"
             className="mt-3 block text-gray-400 hover:text-white"
           >
-            Sign out
-          </a>
+            Ausloggen
+          </a> */}
+          <div
+          onClick={() => this.redirectTo("logout")}
+          className="block text-gray-400 hover:text-white"
+          > 
+          Ausloggen
+        </div>
         </div>
         <div className="hidden sm:block">
           <div className="relative">
@@ -66,24 +93,18 @@ export default class UserDropdown extends React.Component {
                     this.props.open ? "block" : "hidden"
                   }`}
                 >
-                  <a
-                    href="#account"
-                    className="block hover:text-white text-gray-800 px-4 py-2 hover:bg-indigo-500"
+                  <div
+                    onClick={() => this.redirectTo("settings")}
+                    className="block hover:text-white text-gray-800 px-4 py-2 hover:bg-indigo-500 cursor-pointer"
                   >
-                    Account settings
-                  </a>
-                  <a
-                    href="#support"
-                    className="block hover:text-white text-gray-800 mt-0 px-4 py-2 hover:bg-indigo-500"
-                  >
-                    Support
-                  </a>
-                  <a
-                    href="#sign-out"
-                    className="block hover:text-white text-gray-800 mt-0 px-4 py-2 hover:bg-indigo-500"
-                  >
-                    Sign out
-                  </a>
+                    Einstellungen
+                  </div>
+                  <div
+                    onClick={() => this.redirectTo("logout")}
+                    className="block hover:text-white text-gray-800 px-4 py-2 hover:bg-indigo-500 cursor-pointer"
+                    > 
+                    Ausloggen
+                  </div>
                 </div>
               </div>
             </div>

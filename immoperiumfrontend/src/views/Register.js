@@ -45,7 +45,7 @@ class Register extends Component {
   render() {
     return (
       <div id="container-register">
-        {this.props.user.users.id ? <Redirect to="/" /> : ""}
+        {JSON.parse(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user')).id ? <Redirect to="/" /> : ""}
         <div className="min-h-screen bg-white flex">
           <div className="flex-1 flex flex-col justify-center pt-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="mx-auto w-full max-w-sm lg:w-96">

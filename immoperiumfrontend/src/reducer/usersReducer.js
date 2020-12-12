@@ -5,6 +5,9 @@ import {
   REGISTER_FETCHING,
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
+  LOGIN_FETCHING,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -13,6 +16,10 @@ const initialState = {
   fetchingUsersError: "",
   fetchingRegister: false,
   fetchingRegisterError: "",
+  LoggedInUser: {},
+  LoggedInToken: "",
+  fetchingLogIn: false,
+  fetchingLogInError: ""
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -55,6 +62,26 @@ const usersReducer = (state = initialState, action) => {
         fetchingRegister: false,
         fetchingRegisterError: action.payload,
       };
+      case LOGIN_FETCHING:
+        return {
+          ...state,
+          fetchingLogIn: true,
+          fetchingLogInError: "",
+        };
+      case LOGIN_SUCCESS:
+        return {
+          ...state,
+          LoggedInUser: action.payload.user,
+          LoggedInToken: action.payload.token,
+          fetchingLogIn: false,
+          fetchingLogInError: "",
+        };
+      case LOGIN_FAILURE:
+        return {
+          ...state,
+          fetchingLogIn: false,
+          fetchingLogInError: action.payload,
+        };
     default:
       return state;
   }
