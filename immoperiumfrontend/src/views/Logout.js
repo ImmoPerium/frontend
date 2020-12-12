@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class Logout extends React.Component {
   constructor(props) {
@@ -29,11 +29,14 @@ class Logout extends React.Component {
 
   render() {
     setTimeout(() => this.setLogout(), 1500);
+    if (this.state.loggedOut) {
+      this.props.history.push('/');
+    }
 
     return (
       <div>
         {this.state.loggedOut ? 
-          <Redirect to='/' /> : <div>
+          "" : <div>
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end justify-center sm:min-h-0 md:min-h-screen lg:min-h-screen xl:min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
               <div className="fixed inset-0 transition-opacity">

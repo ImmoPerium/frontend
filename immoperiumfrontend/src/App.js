@@ -1,6 +1,10 @@
-import "./tailwind.output.css";
+import { createBrowserHistory } from 'history';
 import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import "./tailwind.output.css";
 import Register from "./views/Register.js";
+import Login  from "./views/Login.js";
 import Logout from "./views/Logout.js";
 import Impressum from "./views/Impressum.js";
 import Footer from "./components/Footer.js";
@@ -10,14 +14,16 @@ import ViewProfilePage from "./views/ViewProfilePage.js";
 import Credo from "./views/Credo.js";
 import Navbar from "./components/navbar/Navbar";
 
+const history = createBrowserHistory();
+
 function App() {
-  const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user");
+/*   const token = localStorage.getItem("token");
+  const user = localStorage.getItem("user"); */
 
   return (
     <div className="App">
-      <Navbar token={token} user={user} />
-      <Switch>
+      <Router history={history}>
+      <Navbar /* token={token} user={user} */ />
         <Route
           exact
           path="/explore"
@@ -32,8 +38,7 @@ function App() {
         <Route
           exact
           path="/logout"
-          render={(...props) => <Logout {...props} />}
-        />
+          component={Logout} />
         <Route
           exact
           path="/impressum"
@@ -49,8 +54,13 @@ function App() {
           path="/credo"
           render={(...props) => <Credo {...props} />}
         />
+        <Route
+          exact
+          path="/login"
+          render={(...props) => <Login {...props} />}
+        />
         {/* <Route exact path='/'render={(...props) => token && user ? <Redirect to='/dashboard' /> : <Redirect to='/login' /> } */}
-      </Switch>
+      </Router>
       <Footer />
     </div>
   );

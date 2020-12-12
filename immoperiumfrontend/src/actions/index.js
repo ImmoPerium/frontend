@@ -38,7 +38,6 @@ export const sendRegistrationDetails = (
   email,
   password
 ) => (dispatch) => {
-  console.log("ACTION TRIGGERED", first_name, last_name, email, password);
   dispatch({
     type: REGISTER_FETCHING,
   });
@@ -109,3 +108,37 @@ export const getAllAdvertisements = () => (dispatch) => {
       },
     })
 */
+
+export const LOGIN_FETCHING = "LOGIN_FETCHING";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
+
+export const sendLogin = (
+  email,
+  password
+) => (dispatch) => {
+  console.log("ACTION TRIGGERED", email, password);
+  dispatch({
+    type: LOGIN_FETCHING,
+  });
+  axios
+    .post(`${url}/v1/users/login`, {
+      email_address: email,
+      password: password
+    })
+    .then((res) => {
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+      localStorage.setItem('token', res.data.token);
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: LOGIN_FAILURE,
+        payload: err,
+      });
+    });
+};
