@@ -2,27 +2,29 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Route } from "react-router-dom";
+
 import NewOfferComponent from "../components/offers/NewOfferComponent";
 import OfferComponent from "../components/offers/OfferComponent";
+import { getRealEstateById } from "../actions/index";
 
-/* import {
-  getAllTours,
-  getSingleUserById,
-  getSingleGuidesTours,
-} from "../actions"; */
-
-/* A template for a more complex React component  */
 class Offers extends React.Component {
-  /* React Class state */
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  /* React Class functions here */
+  componentDidMount() {
+    if (
+      JSON.parse(localStorage.getItem("user")) &&
+      localStorage.getItem("token")
+    )
+      return this.props.getRealEstateById(
+        JSON.parse(localStorage.getItem("user")).id,
+        localStorage.getItem("token")
+      );
+  }
 
   render() {
-    /* Functions and code for usage in or before JSX here */
     return (
       <div className="relative pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
         <div className="absolute inset-0">
@@ -34,27 +36,38 @@ class Offers extends React.Component {
               Deine Immobilienangebote
             </h2>
             <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-              Hier findest du eine Übersicht über alle deiner angebotenen
+              Hier findest du eine Übersicht über alle deine angebotenen
               Immobilien.
             </p>
           </div>
           <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-            {/* HERE REAL ESTATE COMPONENTS */}
-            {/* ADD NEW COMPONENT */}
             <NewOfferComponent />
             {/* FOR EACH OFFER A NEW PROPERTY COMPONENT */}
-            <OfferComponent
-              title={"Title"}
-              description={"description"}
-              profilePicture={
-                "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              }
-              firstname={"Vorname"}
-              lastname={"Nachname"}
-              viewCount={3}
-              favoriteCount={4}
-              createdAt={25}
-            />
+            {this.props.offers
+              ? console.log("HERE IS YOUR DATA", this.props.offers)
+              : ""}
+            {this.props.offers
+              ? this.props.offers.map((offer) => (
+                  <OfferComponent
+                    title={offer.advertisement_title}
+                    description={offer.advertisement_description}
+                    profilePicture={
+                      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    }
+                    firstname={
+                      JSON.parse(localStorage.getItem("user")).firstname
+                    }
+                    lastname={
+                      JSON.parse(localStorage.getItem("user")).firstname
+                    }
+                    viewCount={offer.view_count}
+                    favoriteCount={offer.favorite_count}
+                    createdAt={offer.created_at}
+                    thumbnail={offer.other_description}
+                    adId={offer.id}
+                  />
+                ))
+              : console.log("NOTHING TO DISPLAY")}
           </div>
         </div>
       </div>
@@ -62,15 +75,8 @@ class Offers extends React.Component {
   }
 }
 
-/* Import Redux State to props here */
 const mapStateToProps = (state) => ({
-  /*   tourProps: state.tourReducer.tours,
-  currentUser: state.userReducer.currentUser, */
+  offers: state.usersReducer.realEstateOffersOfUser,
 });
 
-/* Import Action methods here  */
-export default connect(mapStateToProps, {
-  /*   getAllTours,
-  getSingleUserById,
-  getSingleGuidesTours, */
-})(Offers);
+export default connect(mapStateToProps, { getRealEstateById })(Offers);

@@ -37,7 +37,7 @@ class Footer extends React.Component {
                     <ul className="mt-4 space-y-4">
                       <li>
                         <a
-                          href="#"
+                          href="/team"
                           className="text-base leading-6 text-gray-300 hover:text-white"
                         >
                           Über uns

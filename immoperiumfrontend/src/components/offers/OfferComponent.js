@@ -1,39 +1,32 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { Route } from "react-router-dom";
+import { toDate, differenceInDays } from "date-fns";
 
-/* import {
-  getAllTours,
-  getSingleUserById,
-  getSingleGuidesTours,
-} from "../actions"; */
-
-/* A template for a more complex React component  */
 class OfferComponent extends React.Component {
-  /* React Class state */
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  /* React Class functions here */
-
   render() {
-    /* Functions and code for usage in or before JSX here */
     return (
       <div className="flex flex-col rounded-lg shadow-lg overflow-hidden">
         <div className="flex-shrink-0">
-          <img
-            className="h-48 w-full object-cover"
-            src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
-            alt
-          />
+          <a href={`immobilie/${this.props.adId}`}>
+            <img
+              className="h-48 w-full object-cover"
+              src={this.props.thumbnail}
+              alt
+            />
+          </a>
         </div>
         <div className="flex-1 bg-white p-6 flex flex-col justify-between">
           <div className="flex-1">
             <p className="text-sm font-medium text-orange-600">
-              {this.props.createdAt <= 30 ? (
+              {differenceInDays(
+                toDate(new Date()),
+                toDate(new Date(this.props.createdAt))
+              ) <= 30 ? (
                 <span className="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs mr-2 ">
                   Neu
                 </span>
@@ -48,7 +41,7 @@ class OfferComponent extends React.Component {
                 Neu
               </a> */}
             </p>
-            <a href="#" className="block mt-2">
+            <a href={`immobilie/${this.props.adId}`} className="block mt-2">
               <p className="text-xl font-semibold text-gray-900">
                 {this.props.title}
               </p>
@@ -59,7 +52,7 @@ class OfferComponent extends React.Component {
           </div>
           <div className="mt-6 flex items-center">
             <div className="flex-shrink-0">
-              <a href="#">
+              <a href={`#`}>
                 <span className="sr-only">Daniela Metz</span>
                 <img
                   className="h-10 w-10 rounded-full"
@@ -70,9 +63,7 @@ class OfferComponent extends React.Component {
             </div>
             <div className="ml-3">
               <p className="text-sm font-medium text-gray-900">
-                <a href="#" className="hover:underline">
-                  {this.props.firstname + " " + this.props.lastname}
-                </a>
+                <span>{this.props.firstname + " " + this.props.lastname}</span>
               </p>
               <div className="flex space-x-1 text-sm text-gray-500">
                 <svg
@@ -86,13 +77,13 @@ class OfferComponent extends React.Component {
                     d="m64 104c-41.873 0-62.633-36.504-63.496-38.057-.672-1.209-.672-2.678 0-3.887.863-1.552 21.623-38.056 63.496-38.056s62.633 36.504 63.496 38.057c.672 1.209.672 2.678 0 3.887-.863 1.552-21.623 38.056-63.496 38.056zm-55.293-40.006c4.758 7.211 23.439 32.006 55.293 32.006 31.955 0 50.553-24.775 55.293-31.994-4.758-7.211-23.439-32.006-55.293-32.006-31.955 0-50.553 24.775-55.293 31.994zm55.293 24.006c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z"
                   />
                 </svg>
-                <span className="ml-2 mr-3">
+                <span className="ml-2 mr-4">
                   {this.props.viewCount} Beobachter{" "}
                 </span>
 
-                <span aria-hidden="true">·</span>
+                {/* <span aria-hidden="true">·</span> */}
                 <svg
-                  className="h-5 w-5"
+                  className="ml-4 h-5 w-5"
                   viewBox="0 0 32 32"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -119,10 +110,6 @@ class OfferComponent extends React.Component {
   }
 }
 
-/* Import Redux State to props here */
-const mapStateToProps = (state) => ({
-  /* currentUser: state.userReducer.currentUser */
-});
+const mapStateToProps = (state) => ({});
 
-/* Import Action methods here  */
 export default connect(mapStateToProps, {})(OfferComponent);

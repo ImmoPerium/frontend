@@ -7,7 +7,10 @@ import {
   REGISTER_FAILURE,
   LOGIN_FETCHING,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  GET_REALESTATE_BY_USER_FETCHING,
+  GET_REALESTATE_BY_USER_SUCCESS,
+  GET_REALESTATE_BY_USER_FAILURE,
 } from "../actions";
 
 const initialState = {
@@ -19,7 +22,10 @@ const initialState = {
   LoggedInUser: {},
   LoggedInToken: "",
   fetchingLogIn: false,
-  fetchingLogInError: ""
+  fetchingLogInError: "",
+  realEstateOffersOfUser: [],
+  fetchingRealEstateOffersOfUser: false,
+  fetchingRealEstateOffersOfUserError: "",
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -62,26 +68,45 @@ const usersReducer = (state = initialState, action) => {
         fetchingRegister: false,
         fetchingRegisterError: action.payload,
       };
-      case LOGIN_FETCHING:
-        return {
-          ...state,
-          fetchingLogIn: true,
-          fetchingLogInError: "",
-        };
-      case LOGIN_SUCCESS:
-        return {
-          ...state,
-          LoggedInUser: action.payload.user,
-          LoggedInToken: action.payload.token,
-          fetchingLogIn: false,
-          fetchingLogInError: "",
-        };
-      case LOGIN_FAILURE:
-        return {
-          ...state,
-          fetchingLogIn: false,
-          fetchingLogInError: action.payload,
-        };
+    case LOGIN_FETCHING:
+      return {
+        ...state,
+        fetchingLogIn: true,
+        fetchingLogInError: "",
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        LoggedInUser: action.payload.user,
+        LoggedInToken: action.payload.token,
+        fetchingLogIn: false,
+        fetchingLogInError: "",
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        fetchingLogIn: false,
+        fetchingLogInError: action.payload,
+      };
+    case GET_REALESTATE_BY_USER_FETCHING:
+      return {
+        ...state,
+        fetchingRealEstateOffersOfUser: true,
+        fetchingRealEstateOffersOfUserError: "",
+      };
+    case GET_REALESTATE_BY_USER_SUCCESS:
+      return {
+        ...state,
+        realEstateOffersOfUser: action.payload,
+        fetchingRealEstateOffersOfUser: false,
+        fetchingRealEstateOffersOfUserError: "",
+      };
+    case GET_REALESTATE_BY_USER_FAILURE:
+      return {
+        ...state,
+        fetchingRealEstateOffersOfUser: false,
+        fetchingRealEstateOffersOfUserError: action.payload,
+      };
     default:
       return state;
   }

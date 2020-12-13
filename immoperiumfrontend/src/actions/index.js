@@ -113,10 +113,7 @@ export const LOGIN_FETCHING = "LOGIN_FETCHING";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export const sendLogin = (
-  email,
-  password
-) => (dispatch) => {
+export const sendLogin = (email, password) => (dispatch) => {
   console.log("ACTION TRIGGERED", email, password);
   dispatch({
     type: LOGIN_FETCHING,
@@ -124,11 +121,11 @@ export const sendLogin = (
   axios
     .post(`${url}/v1/users/login`, {
       email_address: email,
-      password: password
+      password: password,
     })
     .then((res) => {
-      localStorage.setItem('user', JSON.stringify(res.data.user));
-      localStorage.setItem('token', res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("token", res.data.token);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,
@@ -138,6 +135,36 @@ export const sendLogin = (
       console.log("ERROR", err);
       dispatch({
         type: LOGIN_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const GET_REALESTATE_BY_USER_FETCHING =
+  "GET_REALESTATE_BY_USER_FETCHING";
+export const GET_REALESTATE_BY_USER_SUCCESS = "GET_REALESTATE_BY_USER_SUCCESS";
+export const GET_REALESTATE_BY_USER_FAILURE = "GET_REALESTATE_BY_USER_FAILURE";
+
+export const getRealEstateById = (user_id, token) => (dispatch) => {
+  console.log("ACTION TRIGGERED", user_id);
+  console.log("Token TRIGGERED", token);
+  dispatch({
+    type: GET_REALESTATE_BY_USER_FETCHING,
+  });
+  axios
+    .get(`${url}/v1/users/${user_id}/realestate`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      dispatch({
+        type: GET_REALESTATE_BY_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: GET_REALESTATE_BY_USER_FAILURE,
         payload: err,
       });
     });

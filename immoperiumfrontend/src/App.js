@@ -3,18 +3,19 @@ import { Route, Switch } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import "./tailwind.output.css";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/Footer.js";
+import Impressum from "./views/Impressum.js";
+import Team from "./sections/Team.js";
 import Register from "./views/Register.js";
 import Login from "./views/Login.js";
 import Logout from "./views/Logout.js";
-import Impressum from "./views/Impressum.js";
-import Footer from "./components/Footer.js";
 import Explore from "./views/Explore.js";
 import NewOffer from "./views/NewOffer.js";
 import Offers from "./views/Offers.js";
 import Home from "./views/Home.js";
 import ViewProfilePage from "./views/ViewProfilePage.js";
 import Credo from "./views/Credo.js";
-import Navbar from "./components/navbar/Navbar";
 
 const history = createBrowserHistory();
 
@@ -72,6 +73,11 @@ function App() {
             exact
             path="/login"
             render={(...props) => <Login {...props} />}
+          />
+          <Route
+            exact
+            path="/team"
+            render={(...props) => <Team {...props} />}
           />
         </div>
         {/* <Route exact path='/'render={(...props) => token && user ? <Redirect to='/dashboard' /> : <Redirect to='/login' /> } */}
