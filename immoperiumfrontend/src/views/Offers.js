@@ -5,7 +5,7 @@ import { Route } from "react-router-dom";
 
 import NewOfferComponent from "../components/offers/NewOfferComponent";
 import OfferComponent from "../components/offers/OfferComponent";
-import { getRealEstateById } from "../actions/index";
+import { getRealEstateById, deleteOffer } from "../actions/index";
 
 class Offers extends React.Component {
   constructor(props) {
@@ -23,6 +23,13 @@ class Offers extends React.Component {
         localStorage.getItem("token")
       );
   }
+
+  deleteOffer = (offer_id) => {
+    console.log("RECEIVED", offer_id);
+    if (offer_id) {
+      this.props.deleteOffer(offer_id, localStorage.getItem("token"));
+    }
+  };
 
   render() {
     return (
@@ -49,7 +56,7 @@ class Offers extends React.Component {
             {this.props.offers
               ? this.props.offers.map((offer) => (
                   <OfferComponent
-                    title={offer.advertisement_title}
+                    title={offer.advertisement_purpose}
                     description={offer.advertisement_description}
                     profilePicture={
                       "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -64,6 +71,15 @@ class Offers extends React.Component {
                     favoriteCount={offer.favorite_count}
                     createdAt={offer.created_at}
                     thumbnail={offer.other_description}
+                    deleteOfferCallback={(offer_id) =>
+                      this.deleteOffer(offer_id)
+                    }
+                    refreshOffersCallback={() =>
+                      this.props.getRealEstateById(
+                        JSON.parse(localStorage.getItem("user")).id,
+                        localStorage.getItem("token")
+                      )
+                    }
                     adId={offer.id}
                   />
                 ))
@@ -79,4 +95,6 @@ const mapStateToProps = (state) => ({
   offers: state.usersReducer.realEstateOffersOfUser,
 });
 
-export default connect(mapStateToProps, { getRealEstateById })(Offers);
+export default connect(mapStateToProps, { getRealEstateById, deleteOffer })(
+  Offers
+);

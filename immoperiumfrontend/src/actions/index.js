@@ -146,8 +146,6 @@ export const GET_REALESTATE_BY_USER_SUCCESS = "GET_REALESTATE_BY_USER_SUCCESS";
 export const GET_REALESTATE_BY_USER_FAILURE = "GET_REALESTATE_BY_USER_FAILURE";
 
 export const getRealEstateById = (user_id, token) => (dispatch) => {
-  console.log("ACTION TRIGGERED", user_id);
-  console.log("Token TRIGGERED", token);
   dispatch({
     type: GET_REALESTATE_BY_USER_FETCHING,
   });
@@ -165,6 +163,33 @@ export const getRealEstateById = (user_id, token) => (dispatch) => {
       console.log("ERROR", err);
       dispatch({
         type: GET_REALESTATE_BY_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const DELETE_OFFER_FETCHING = "DELETE_OFFER_FETCHING";
+export const DELETE_OFFER_SUCCESS = "DELETE_OFFER_SUCCESS";
+export const DELETE_OFFER_FAILURE = "DELETE_OFFER_FAILURE";
+
+export const deleteOffer = (offer_id, token) => (dispatch) => {
+  dispatch({
+    type: DELETE_OFFER_FETCHING,
+  });
+  axios
+    .delete(`${url}/v1/realestate/${offer_id}`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      dispatch({
+        type: DELETE_OFFER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: DELETE_OFFER_FAILURE,
         payload: err,
       });
     });
