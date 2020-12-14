@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from 'react-router-dom'
+/* import { useLocation } from 'react-router-dom' */
 import { connect } from "react-redux";
 
 import MenuToggle from "./MenuToggle";
@@ -19,7 +19,7 @@ class Navbar extends React.Component {
 
   menuHandler() {
     this.setState({
-      isMenuOpen: !this.state.isMenuOpen
+      isMenuOpen: !this.state.isMenuOpen,
     });
   }
 
@@ -44,18 +44,22 @@ class Navbar extends React.Component {
         >
           <NavbarSearch location={url_route} />
           <div className="sm:flex sm:items-center">
-            {!localStorage.getItem("token") || !localStorage.getItem("user") ? <NavbarMenuGuest /> : <NavbarMenuUser user={JSON.parse(localStorage.getItem("user"))}  />}
-            {!localStorage.getItem("token") || !localStorage.getItem("user") ?
+            {!localStorage.getItem("token") || !localStorage.getItem("user") ? (
+              <NavbarMenuGuest />
+            ) : (
+              <NavbarMenuUser user={JSON.parse(localStorage.getItem("user"))} />
+            )}
+            {!localStorage.getItem("token") || !localStorage.getItem("user") ? (
               <GuestDropdown
-              open={this.state.isMenuOpen}
-              action={this.menuHandler}
+                open={this.state.isMenuOpen}
+                action={this.menuHandler}
               />
-            : 
+            ) : (
               <UserDropdown
-              open={this.state.isMenuOpen}
-              action={this.menuHandler}
+                open={this.state.isMenuOpen}
+                action={this.menuHandler}
               />
-            }
+            )}
           </div>
         </nav>
       </header>
@@ -63,11 +67,10 @@ class Navbar extends React.Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
     user: state.usersReducer,
   };
 };
 
-export default connect(mapStateToProps, { })(Navbar);
+export default connect(mapStateToProps, {})(Navbar);

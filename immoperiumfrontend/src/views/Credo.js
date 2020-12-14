@@ -79,7 +79,7 @@ class Credo extends React.Component {
               <img
                 className="h-64 w-64 rounded-full xl:h-80 xl:w-80"
                 src="./pictures/preview_default_home.png"
-                alt
+                alt="lovely home"
               />
             </div>
             <div className="relative lg:ml-10">

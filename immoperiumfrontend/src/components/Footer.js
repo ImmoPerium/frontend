@@ -45,7 +45,7 @@ class Footer extends React.Component {
                       </li>
                       <li>
                         <a
-                          href="#"
+                          href="!#"
                           className="text-base leading-6 text-gray-300 hover:text-white"
                         >
                           Kunde werden
@@ -53,7 +53,7 @@ class Footer extends React.Component {
                       </li>
                       <li>
                         <a
-                          href="#"
+                          href="!#"
                           className="text-base leading-6 text-gray-300 hover:text-white"
                         >
                           Newsletter abonnieren
@@ -68,7 +68,7 @@ class Footer extends React.Component {
                     <ul className="mt-4 space-y-4">
                       <li>
                         <a
-                          href="#"
+                          href="!#"
                           onClick={() => this.redirectTo("impressum")}
                           className="text-base leading-6 text-gray-300 hover:text-white"
                         >
@@ -77,7 +77,7 @@ class Footer extends React.Component {
                       </li>
                       <li>
                         <a
-                          href="#"
+                          href="!#"
                           className="text-base leading-6 text-gray-300 hover:text-white"
                         >
                           Datenschutz
@@ -109,7 +109,7 @@ class Footer extends React.Component {
                     <ul className="mt-4 space-y-4">
                       <li>
                         <a
-                          href="#"
+                          href="!#"
                           className="text-base leading-6 text-gray-300 hover:text-white"
                         >
                           Blog
@@ -159,7 +159,7 @@ class Footer extends React.Component {
             </div>
             <div className="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
               <div className="flex space-x-6 md:order-2">
-                <a href="#" className="text-gray-400 hover:text-gray-300">
+                <a href="!#" className="text-gray-400 hover:text-gray-300">
                   <span className="sr-only">Facebook</span>
                   <svg
                     className="h-6 w-6"
@@ -173,7 +173,7 @@ class Footer extends React.Component {
                     />
                   </svg>
                 </a>
-                <a href="#" className="text-gray-400 hover:text-gray-300">
+                <a href="!#" className="text-gray-400 hover:text-gray-300">
                   <span className="sr-only">Instagram</span>
                   <svg
                     className="h-6 w-6"
@@ -213,6 +213,7 @@ class Footer extends React.Component {
                 <a
                   href="https://github.com/ImmoPerium"
                   target="_blank"
+                  rel="noreferrer"
                   className="text-gray-400 hover:text-gray-300"
                 >
                   <span className="sr-only">GitHub</span>

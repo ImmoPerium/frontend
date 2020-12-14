@@ -1,5 +1,4 @@
 import React from "react";
-import ReviewRating from "./ReviewRating";
 
 export default class PropertyCard extends React.Component {
   render() {

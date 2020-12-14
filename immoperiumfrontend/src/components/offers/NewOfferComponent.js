@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+/* import { Redirect } from "react-router-dom"; */
 
 /* A template for a simple React component */
 class Example extends React.Component {
@@ -27,14 +27,14 @@ class Example extends React.Component {
             <img
               className="h-48 w-full object-cover"
               src="./pictures/add_new_home4.png"
-              alt
+              alt="a template home"
             />
           </a>
         </div>
         <div className="flex-1 bg-white p-6 flex flex-col justify-between">
           <div className="flex-1">
             <p className="text-sm font-medium text-indigo-600">
-              <a href="#" className="hover:underline invisible">
+              <a href="!#" className="hover:underline invisible">
                 Case Study
               </a>
             </p>

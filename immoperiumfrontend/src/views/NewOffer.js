@@ -1,15 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { Route } from "react-router-dom";
+/* import { Redirect } from "react-router-dom";
+import { Route } from "react-router-dom"; */
 
-/* import {
-  getAllTours,
-  getSingleUserById,
-  getSingleGuidesTours,
-} from "../actions"; */
-
-/* A template for a more complex React component  */
 class NewOffer extends React.Component {
   /* React Class state */
   constructor(props) {
@@ -17,10 +10,7 @@ class NewOffer extends React.Component {
     this.state = {};
   }
 
-  /* React Class functions here */
-
   render() {
-    /* Functions and code for usage in or before JSX here */
     return (
       <div className="bg-gray-200 pt-8 pb-12">
         <div className="mt-4">
@@ -456,10 +446,6 @@ class NewOffer extends React.Component {
   }
 }
 
-/* Import Redux State to props here */
-const mapStateToProps = (state) => ({
-  /* currentUser: state.userReducer.currentUser */
-});
+const mapStateToProps = (state) => ({});
 
-/* Import Action methods here  */
 export default connect(mapStateToProps, {})(NewOffer);

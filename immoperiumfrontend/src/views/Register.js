@@ -64,7 +64,9 @@ class Register extends Component {
                   Neu registrieren
                 </h2>
                 <p className="mt-2 text-sm leading-5 text-gray-600 max-w">
-                  <a className="font">und werde ein Teil des Immoperiums!</a>
+                  <a href="!#" className="font">
+                    und werde ein Teil des Immoperiums!
+                  </a>
                 </p>
               </div>
               {/*               <div className="mt-8">

@@ -50,7 +50,9 @@ class Login extends Component {
                   Logge dich ein
                 </h2>
                 <p className="mt-2 text-sm leading-5 text-gray-600 max-w">
-                  <a className="font">und werde ein Teil des Immoperiums!</a>
+                  <a href="!#" className="font">
+                    und werde ein Teil des Immoperiums!
+                  </a>
                 </p>
               </div>
 

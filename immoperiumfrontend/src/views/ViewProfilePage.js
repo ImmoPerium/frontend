@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { deleteAccount, getUserById } from "../actions/index";
+import { deleteAccount, getUserById, updateAccount } from "../actions/index";
 
 class ViewProfilePage extends React.Component {
   constructor(props) {
@@ -73,9 +73,9 @@ class ViewProfilePage extends React.Component {
     }
   };
 
-  _handleKeyDown = (e) => {
+  _handleKeyDown = (e, change_input) => {
     if (e.key === "Enter") {
-      this.onClick();
+      this.updateAccount(change_input);
     }
   };
 
@@ -95,8 +95,80 @@ class ViewProfilePage extends React.Component {
     }
   };
 
+  updateAccount = (change_input) => {
+    const userData = this.props.userByID;
+    const tokenData = localStorage.getItem("token");
+    switch (change_input) {
+      case "name":
+        let updatedFirstname = "";
+        let updatedLastname = "";
+        if (
+          this.state.firstnameInput !== userData.firstname ||
+          this.state.lastnameInput !== userData.lastname
+        ) {
+          if (this.state.firstnameInput !== userData.firstname) {
+            updatedFirstname = this.state.firstnameInput;
+          }
+          if (this.state.lastnameInput !== userData.lastname) {
+            updatedLastname = this.state.lastnameInput;
+          }
+          if (updatedFirstname && updatedLastname) {
+            this.props.updateAccount(
+              userData.id,
+              { firstname: updatedFirstname, lastname: updatedLastname },
+              tokenData
+            );
+            this.props.getUserById(
+              JSON.parse(localStorage.getItem("user")).id,
+              localStorage.getItem("token")
+            );
+            window.location.reload();
+          } else if (updatedFirstname && !updatedLastname) {
+            this.props.updateAccount(
+              userData.id,
+              { firstname: updatedFirstname },
+              tokenData
+            );
+            this.props.getUserById(
+              JSON.parse(localStorage.getItem("user")).id,
+              localStorage.getItem("token")
+            );
+            window.location.reload();
+          } else if (!updatedFirstname && updatedLastname) {
+            this.props.updateAccount(
+              userData.id,
+              { lastname: updatedLastname },
+              tokenData
+            );
+            this.props.getUserById(
+              JSON.parse(localStorage.getItem("user")).id,
+              localStorage.getItem("token")
+            );
+            window.location.reload();
+          }
+        }
+        this.onClick("name");
+        break;
+      case "photo":
+        return this.setState({ photoInput: "" }, () => {
+          this.onClick("photo");
+        });
+      case "email":
+        return this.setState({ emailInput: "" }, () => {
+          this.onClick("email");
+        });
+      case "phone":
+        return this.setState({ phoneInput: "" }, () => {
+          this.onClick("phone");
+        });
+      default:
+        return "";
+    }
+  };
+
   render() {
     const userData = JSON.parse(localStorage.getItem("user"));
+    const getUserByIdData = this.props.userByID;
     return (
       <div className="h-screen bg-white overflow-hidden flex">
         {localStorage.getItem("token") === null &&
@@ -187,9 +259,9 @@ class ViewProfilePage extends React.Component {
           ""
         )}
         <div className="md:hidden">
-          <div className="fixed inset-0 z-40 flex">
+          {/* <div className="fixed inset-0 z-40 flex">
             <div className="flex-shrink-0 w-14" aria-hidden="true"></div>
-          </div>
+          </div> */}
         </div>
         <div className="flex-1 flex flex-col">
           <main
@@ -203,7 +275,7 @@ class ViewProfilePage extends React.Component {
                     Hallo{" "}
                     <span className="text-orange-500">
                       {JSON.parse(localStorage.getItem("user"))
-                        ? JSON.parse(localStorage.getItem("user")).firstname
+                        ? getUserByIdData.firstname
                         : ""}
                       !
                     </span>
@@ -221,7 +293,7 @@ class ViewProfilePage extends React.Component {
                         name="selected-tab"
                         className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm rounded-md"
                       >
-                        <option selected>Allgemein</option>
+                        <option defaultValue>Allgemein</option>
                         <option>Sicherheit</option>
                         <option>Benachrichtungen</option>
                         <option>Zahlungen</option>
@@ -231,25 +303,25 @@ class ViewProfilePage extends React.Component {
                       <div className="border-b border-gray-200">
                         <nav className="-mb-px flex">
                           <a
-                            href="#"
+                            href="!#"
                             className="whitespace-nowrap py-4 px-1 border-b-2 border-orange-500 font-medium text-sm text-orange-600"
                           >
                             Allgemein
                           </a>
                           <a
-                            href="#"
+                            href="!#"
                             className="whitespace-nowrap ml-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
                           >
                             Sicherheit
                           </a>
                           <a
-                            href="#"
+                            href="!#"
                             className="whitespace-nowrap ml-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
                           >
                             Benachrichtungen
                           </a>
                           <a
-                            href="#"
+                            href="!#"
                             className="whitespace-nowrap ml-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
                           >
                             Zahlungen
@@ -291,10 +363,12 @@ class ViewProfilePage extends React.Component {
                                         required
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         name="firstnameInput"
-                                        placeholder={userData.firstname}
-                                        value={this.state.firstnameInput}
+                                        placeholder={getUserByIdData.firstname}
+                                        defaultValue={this.state.firstnameInput}
                                         onChange={this.onChange}
-                                        onKeyDown={this._handleKeyDown}
+                                        onKeyDown={(event) =>
+                                          this._handleKeyDown(event, "name")
+                                        }
                                         autoComplete="off"
                                       />
                                     </div>
@@ -311,10 +385,12 @@ class ViewProfilePage extends React.Component {
                                         required
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                                         name="lastnameInput"
-                                        placeholder={userData.lastname}
-                                        value={this.state.lastnameInput}
+                                        placeholder={getUserByIdData.lastname}
+                                        defaultValue={this.state.lastnameInput}
                                         onChange={this.onChange}
-                                        onKeyDown={this._handleKeyDown}
+                                        onKeyDown={(event) =>
+                                          this._handleKeyDown(event, "name")
+                                        }
                                         autoComplete="off"
                                       />
                                     </div>
@@ -336,6 +412,7 @@ class ViewProfilePage extends React.Component {
                                   </span>
                                   <button
                                     type="button"
+                                    onClick={() => this.updateAccount("name")}
                                     className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                                   >
                                     Speichern
@@ -346,9 +423,9 @@ class ViewProfilePage extends React.Component {
                               <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                 <span className="flex-grow">
                                   {userData
-                                    ? userData.firstname +
+                                    ? getUserByIdData.firstname +
                                       " " +
-                                      userData.lastname
+                                      getUserByIdData.lastname
                                     : ""}
                                 </span>
                                 <span className="ml-4 flex-shrink-0">
@@ -372,7 +449,7 @@ class ViewProfilePage extends React.Component {
                                 <img
                                   className="h-8 w-8 rounded-full"
                                   src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                  alt
+                                  alt="avatar"
                                 />
                               </span>
                               <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
@@ -454,8 +531,11 @@ class ViewProfilePage extends React.Component {
 
 const mapStateToProps = (state) => ({
   accountDeletion: state.usersReducer.accountDeletion,
+  userByID: state.usersReducer.userByID,
 });
 
-export default connect(mapStateToProps, { deleteAccount, getUserById })(
-  ViewProfilePage
-);
+export default connect(mapStateToProps, {
+  deleteAccount,
+  getUserById,
+  updateAccount,
+})(ViewProfilePage);

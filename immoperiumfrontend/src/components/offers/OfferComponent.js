@@ -107,7 +107,7 @@ class OfferComponent extends React.Component {
             <img
               className="h-48 w-full object-cover"
               src={this.props.thumbnail}
-              alt
+              alt="thumnail of the real estate offer"
             />
           </a>
         </div>
@@ -143,12 +143,12 @@ class OfferComponent extends React.Component {
           </div>
           <div className="mt-6 flex items-center">
             <div className="flex-shrink-0">
-              <a href={`#`}>
+              <a href={`!#`}>
                 {/* <span className="sr-only">Daniela Metz</span> */}
                 <img
                   className="h-10 w-10 rounded-full"
                   src={this.props.profilePicture}
-                  alt
+                  alt="profile of user"
                 />
               </a>
             </div>
@@ -198,7 +198,7 @@ class OfferComponent extends React.Component {
                       <img
                         className="h-6 w-6 cursor-pointer"
                         src="./pictures/icons/edit.png"
-                        alt
+                        alt="edit offer"
                       />
                     </a>
                     <svg

@@ -252,3 +252,33 @@ export const deleteAccount = (account_id, token) => (dispatch) => {
       });
     });
 };
+
+export const UPDATE_ACCOUNT_FETCHING = "UPDATE_ACCOUNT_FETCHING";
+export const UPDATE_ACCOUNT_SUCCESS = "UPDATE_ACCOUNT_SUCCESS";
+export const UPDATE_ACCOUNT_FAILURE = "UPDATE_ACCOUNT_FAILURE";
+
+export const updateAccount = (account_id, changes, token) => (dispatch) => {
+  console.log("UPDATING", account_id);
+  console.log("UPDATING", changes);
+  console.log("UPDATING", token);
+  dispatch({
+    type: UPDATE_ACCOUNT_FETCHING,
+  });
+  axios
+    .put(`${url}/v1/users/${account_id}`, changes, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      dispatch({
+        type: UPDATE_ACCOUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: UPDATE_ACCOUNT_FAILURE,
+        payload: err,
+      });
+    });
+};
