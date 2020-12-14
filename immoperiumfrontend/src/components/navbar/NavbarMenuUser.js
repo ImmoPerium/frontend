@@ -64,7 +64,7 @@ class NavbarMenuUser extends React.Component {
         >
           {this.props && this.props.userByID.firstname
             ? `Moin, ${this.props.userByID.firstname}`
-            : "Moin"}
+            : `Moin, ${JSON.parse(localStorage.getItem("user")).firstname}`}
         </a>
       </div>
     );
