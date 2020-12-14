@@ -34,7 +34,7 @@ export default class UserDropdown extends React.Component {
           <a href="/profile">
             <img
               className="h-10 w-10 object-cover rounded-full border-2 border-gray-600"
-              src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&q=80"
+              src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2527&q=80"
               alt=""
             />
           </a>
@@ -78,7 +78,7 @@ export default class UserDropdown extends React.Component {
               >
                 <img
                   className="h-full w-full object-cover"
-                  src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&q=80"
+                  src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2527&q=80"
                   alt=""
                 />
               </span>

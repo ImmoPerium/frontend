@@ -127,6 +127,36 @@ export const getAllAdvertisements = () => (dispatch) => {
     });
 };
 
+export const GET_SINGLE_ADVERTISEMENT_FETCHING =
+  "GET_SINGLE_ADVERTISEMENT_FETCHING";
+export const GET_SINGLE_ADVERTISEMENT_SUCCESS =
+  "GET_SINGLE_ADVERTISEMENT_SUCCESS";
+export const GET_SINGLE_ADVERTISEMENT_FAILURE =
+  "GET_SINGLE_ADVERTISEMENT_FAILURE";
+
+export const getSingleAdvertisement = (offer_id, token) => (dispatch) => {
+  console.log("ACCEPTED ", offer_id);
+  dispatch({
+    type: GET_SINGLE_ADVERTISEMENT_FETCHING,
+  });
+  axios
+    .get(`${url}/v1/realestate/${offer_id}`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      dispatch({
+        type: GET_SINGLE_ADVERTISEMENT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_SINGLE_ADVERTISEMENT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 /* axios
     .get(`${url}/v1/advertisements`, {
       headers: {

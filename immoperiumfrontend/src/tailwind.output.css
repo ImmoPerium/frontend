@@ -1220,19 +1220,6 @@ img {
   background-color: rgba(180, 52, 3, var(--bg-opacity));
 }
 
-.bg-gradient-to-b {
-  background-image: linear-gradient(to bottom, var(--gradient-color-stops));
-}
-
-.from-white {
-  --gradient-from-color: #ffffff;
-  --gradient-color-stops: var(--gradient-from-color), var(--gradient-to-color, rgba(255, 255, 255, 0));
-}
-
-.to-orange-200 {
-  --gradient-to-color: #fcd9bd;
-}
-
 .bg-center {
   background-position: center;
 }
@@ -1979,10 +1966,6 @@ img {
 
 .pb-20 {
   padding-bottom: 5rem;
-}
-
-.pt-24 {
-  padding-top: 6rem;
 }
 
 .pr-24 {

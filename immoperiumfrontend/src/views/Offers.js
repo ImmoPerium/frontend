@@ -58,7 +58,7 @@ class Offers extends React.Component {
                     title={offer.advertisement_purpose}
                     description={offer.advertisement_description}
                     profilePicture={
-                      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2527&q=80"
                     }
                     firstname={
                       JSON.parse(localStorage.getItem("user")).firstname

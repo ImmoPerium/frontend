@@ -489,7 +489,7 @@ class ViewProfilePage extends React.Component {
                               <span className="flex-grow">
                                 <img
                                   className="h-8 w-8 rounded-full"
-                                  src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                  src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2527&q=80"
                                   alt="avatar"
                                 />
                               </span>

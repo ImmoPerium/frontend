@@ -47,7 +47,7 @@ function App() {
           />
           <Route
             exact
-            path="/immobilie/:id"
+            path="/immobilie/:offer_id"
             render={(...props) => <ViewOffer {...props} />}
           />
           <Route exact path="/" render={(...props) => <Home {...props} />} />

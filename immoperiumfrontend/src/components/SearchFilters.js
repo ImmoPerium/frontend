@@ -87,24 +87,24 @@ class SearchFilters extends React.Component {
 
             <div className="flex flex-wrap -mx-2">
               <label className="block w-1/2 px-2 sm:w-1/4 lg:w-1/2">
-                <span className="text-sm font-semibold text-gray-500">
-                  Bedrooms
+                <span className="text-sm font-semibold text-gray-400">
+                  Schlafzimmer
                 </span>
                 <select className="mt-1 form-select block w-full text-white shadow focus:bg-gray-600">
                   <option>4</option>
                 </select>
               </label>
               <label className="block w-1/2 px-2 sm:w-1/4 lg:w-1/2">
-                <span className="text-sm font-semibold text-gray-500">
-                  Bathrooms
+                <span className="text-sm font-semibold text-gray-400">
+                  Badezimmer
                 </span>
                 <select className="mt-1 form-select block w-full text-white shadow focus:bg-gray-600">
                   <option>2</option>
                 </select>
               </label>
               <label className="mt-4 block w-full px-2 sm:mt-0 sm:w-1/2 lg:mt-4 lg:w-full">
-                <span className="text-sm font-semibold text-gray-500">
-                  Price Range
+                <span className="text-sm font-semibold text-gray-400">
+                  Preisspanne
                 </span>
                 <select className="mt-1 form-select block w-full text-white shadow focus:bg-gray-600">
                   <option>Up to $2,000/wk</option>
