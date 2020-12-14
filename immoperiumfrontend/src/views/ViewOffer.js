@@ -32,12 +32,6 @@ class ViewOffer extends React.Component {
     const getUserByIdData = this.props.userByID;
     return (
       <div className="h-screen bg-white overflow-hidden flex">
-        {localStorage.getItem("token") === null &&
-        JSON.parse(localStorage.getItem("user")) === null ? (
-          <Redirect to="/login" />
-        ) : (
-          ""
-        )}
         {this.props.accountDeletion ? <Redirect to="/login" /> : ""}
         {this.state.showDeleteDialog ? (
           <div className="fixed z-10 inset-0 overflow-y-auto">
