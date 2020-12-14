@@ -6,15 +6,19 @@ class Footer extends React.Component {
     super(props);
     this.state = {
       redirectToImpressum: false,
+      redirectToTeam: false,
     };
   }
 
   redirectTo = (view_name) => {
     switch (view_name) {
       case "impressum":
-        return this.setState(
-          { redirectToImpressum: true },
+        return this.setState({ redirectToImpressum: true }, () =>
           this.setState({ redirectToImpressum: false })
+        );
+      case "team":
+        return this.setState({ redirectToTeam: true }, () =>
+          this.setState({ redirectToTeam: false })
         );
       default:
         return "";
@@ -25,6 +29,7 @@ class Footer extends React.Component {
     return (
       <div className="container-footer">
         {this.state.redirectToImpressum ? <Redirect to="/impressum" /> : ""}
+        {this.state.redirectToTeam ? <Redirect to="/team" /> : ""}
         <footer className="bg-gray-800">
           <div className="mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
             <div className="xl:grid xl:grid-cols-3 xl:gap-8">
@@ -37,8 +42,8 @@ class Footer extends React.Component {
                     <ul className="mt-4 space-y-4">
                       <li>
                         <a
-                          href="/team"
-                          className="text-base leading-6 text-gray-300 hover:text-white"
+                          onClick={() => this.redirectTo("team")}
+                          className="text-base leading-6 text-gray-300 hover:text-white cursor-pointer"
                         >
                           Über uns
                         </a>
@@ -68,9 +73,8 @@ class Footer extends React.Component {
                     <ul className="mt-4 space-y-4">
                       <li>
                         <a
-                          href="!#"
                           onClick={() => this.redirectTo("impressum")}
-                          className="text-base leading-6 text-gray-300 hover:text-white"
+                          className="text-base leading-6 text-gray-300 hover:text-white cursor-pointer"
                         >
                           Impressum
                         </a>

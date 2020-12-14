@@ -191,7 +191,6 @@ class Dashboard extends React.Component {
     advertisement_data[0].properties = [...best_advertisement_data];
     advertisement_data[1].properties = [...closest_advertisement_data];
     advertisement_data[2].properties = [...newest_advertisement_data];
-    console.log("ADVERTISEMENT_DATA_ALTERED", advertisement_data);
     return advertisement_data;
   }
 
@@ -244,9 +243,6 @@ class Dashboard extends React.Component {
             />
           </section>
           <main className="py-6 xl:flex-1 xl:overflow-x-hidden">
-            {this.props.allAdvertisements
-              ? console.log("THIS IS THE ACCESS", this.props.allAdvertisements)
-              : "NOT HERE"}
             {this.props.allAdvertisements.length > 0 ? (
               this.addAllAdvertisementsToData(
                 this.props.allAdvertisements.slice(0, 3),

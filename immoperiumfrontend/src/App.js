@@ -44,6 +44,7 @@ function App() {
             render={(...props) => <Offers {...props} />}
           />
           <Route exact path="/" render={(...props) => <Home {...props} />} />
+          <Route exact path="/!#" render={(...props) => <Home {...props} />} />
           <Route
             exact
             path="/register"

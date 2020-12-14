@@ -63,9 +63,7 @@ class Offers extends React.Component {
                     firstname={
                       JSON.parse(localStorage.getItem("user")).firstname
                     }
-                    lastname={
-                      JSON.parse(localStorage.getItem("user")).firstname
-                    }
+                    lastname={JSON.parse(localStorage.getItem("user")).lastname}
                     viewCount={offer.view_count}
                     favoriteCount={offer.favorite_count}
                     createdAt={offer.created_at}

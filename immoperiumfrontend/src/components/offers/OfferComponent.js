@@ -153,7 +153,7 @@ class OfferComponent extends React.Component {
               </a>
             </div>
             <div className="ml-3">
-              <p className="text-sm font-medium text-gray-900">
+              <p className="text-sm font-medium text-gray-900 pb-1">
                 <span>{this.props.firstname + " " + this.props.lastname}</span>
               </p>
               <div className="flex space-x-1 text-sm text-gray-500 max-w-full relative">

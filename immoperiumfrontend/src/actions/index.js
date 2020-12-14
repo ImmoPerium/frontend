@@ -115,7 +115,6 @@ export const getAllAdvertisements = () => (dispatch) => {
   axios
     .get(`${url}/v1/realestate/public`)
     .then((res) => {
-      console.log("ADVERTISEMENT RES", res.data.real_estate_advertisements);
       dispatch({
         type: GET_ALL_ADVERTISEMENTS_SUCCESS,
         payload: res.data.real_estate_advertisements,
@@ -143,7 +142,6 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const sendLogin = (email, password) => (dispatch) => {
-  console.log("ACTION TRIGGERED", email, password);
   dispatch({
     type: LOGIN_FETCHING,
   });
