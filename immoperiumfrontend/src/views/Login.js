@@ -9,33 +9,34 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
     };
   }
 
   onChange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
+
   onClick = () => {
-    if (
-      this.state.email &&
-      this.state.password
-    ) {
-      console.log(
-        "CALLED",
-        this.state.email,
-        this.state.password
-      );
-      this.props.sendLogin(
-        this.state.email,
-        this.state.password
-      );
+    if (this.state.email && this.state.password) {
+      this.props.sendLogin(this.state.email, this.state.password);
+    }
+  };
+
+  _handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      this.onClick();
     }
   };
 
   render() {
     return (
       <div id="container-register">
-        {JSON.parse(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user')).id ? <Redirect to="/" /> : ""}
+        {localStorage.getItem("token") &&
+        JSON.parse(localStorage.getItem("user")).id ? (
+          <Redirect to="/" />
+        ) : (
+          ""
+        )}
         <div className="min-h-screen bg-white flex">
           <div className="flex-1 flex flex-col justify-center pt-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="mx-auto w-full max-w-sm lg:w-96">
@@ -49,7 +50,9 @@ class Login extends Component {
                   Logge dich ein
                 </h2>
                 <p className="mt-2 text-sm leading-5 text-gray-600 max-w">
-                  <a className="font">und werde ein Teil des Immoperiums!</a>
+                  <a href="!#" className="font">
+                    und werde ein Teil des Immoperiums!
+                  </a>
                 </p>
               </div>
 
@@ -89,12 +92,12 @@ class Login extends Component {
                     name="password"
                     value={this.state.password}
                     onChange={this.onChange}
+                    onKeyDown={this._handleKeyDown}
                     autoComplete="off"
                   />
                 </div>
               </div>
-              <div>
-              </div>
+              <div></div>
               <div>
                 <span className="block w-full rounded-md shadow-sm pt-4">
                   <button

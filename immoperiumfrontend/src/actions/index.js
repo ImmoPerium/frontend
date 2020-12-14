@@ -28,6 +28,33 @@ export const getUsers = () => (dispatch) => {
     });
 };
 
+export const GET_USERS_BY_ID_FETCHING = "GET_USERS_BY_ID_FETCHING";
+export const GET_USERS_BY_ID_SUCCESS = "GET_USERS_BY_ID_SUCCESS";
+export const GET_USERS_BY_ID_FAILURE = "GET_USERS_BY_ID_FAILURE";
+
+export const getUserById = (user_id, token) => (dispatch) => {
+  dispatch({
+    type: GET_USERS_BY_ID_FETCHING,
+  });
+  axios
+    .get(`${url}/v1/users/${user_id}`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      console.log("GOT SINGLE USER", res.data);
+      dispatch({
+        type: GET_USERS_BY_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_USERS_BY_ID_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const REGISTER_FETCHING = "REGISTER_FETCHING";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
@@ -58,6 +85,8 @@ export const sendRegistrationDetails = (
       website: "",
     })
     .then((res) => {
+      console.log("HELLO HERE I AM:", JSON.stringify(res.data));
+      localStorage.setItem("user", JSON.stringify(res.data));
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
@@ -113,10 +142,7 @@ export const LOGIN_FETCHING = "LOGIN_FETCHING";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export const sendLogin = (
-  email,
-  password
-) => (dispatch) => {
+export const sendLogin = (email, password) => (dispatch) => {
   console.log("ACTION TRIGGERED", email, password);
   dispatch({
     type: LOGIN_FETCHING,
@@ -124,11 +150,11 @@ export const sendLogin = (
   axios
     .post(`${url}/v1/users/login`, {
       email_address: email,
-      password: password
+      password: password,
     })
     .then((res) => {
-      localStorage.setItem('user', JSON.stringify(res.data.user));
-      localStorage.setItem('token', res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("token", res.data.token);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,
@@ -138,6 +164,120 @@ export const sendLogin = (
       console.log("ERROR", err);
       dispatch({
         type: LOGIN_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const GET_REALESTATE_BY_USER_FETCHING =
+  "GET_REALESTATE_BY_USER_FETCHING";
+export const GET_REALESTATE_BY_USER_SUCCESS = "GET_REALESTATE_BY_USER_SUCCESS";
+export const GET_REALESTATE_BY_USER_FAILURE = "GET_REALESTATE_BY_USER_FAILURE";
+
+export const getRealEstateById = (user_id, token) => (dispatch) => {
+  dispatch({
+    type: GET_REALESTATE_BY_USER_FETCHING,
+  });
+  axios
+    .get(`${url}/v1/users/${user_id}/realestate`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      dispatch({
+        type: GET_REALESTATE_BY_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: GET_REALESTATE_BY_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const DELETE_OFFER_FETCHING = "DELETE_OFFER_FETCHING";
+export const DELETE_OFFER_SUCCESS = "DELETE_OFFER_SUCCESS";
+export const DELETE_OFFER_FAILURE = "DELETE_OFFER_FAILURE";
+
+export const deleteOffer = (offer_id, token) => (dispatch) => {
+  dispatch({
+    type: DELETE_OFFER_FETCHING,
+  });
+  axios
+    .delete(`${url}/v1/realestate/${offer_id}`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      dispatch({
+        type: DELETE_OFFER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: DELETE_OFFER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const DELETE_ACCOUNT_FETCHING = "DELETE_ACCOUNT_FETCHING";
+export const DELETE_ACCOUNT_SUCCESS = "DELETE_ACCOUNT_SUCCESS";
+export const DELETE_ACCOUNT_FAILURE = "DELETE_ACCOUNT_FAILURE";
+
+export const deleteAccount = (account_id, token) => (dispatch) => {
+  dispatch({
+    type: DELETE_ACCOUNT_FETCHING,
+  });
+  axios
+    .delete(`${url}/v1/users/${account_id}`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      dispatch({
+        type: DELETE_ACCOUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: DELETE_ACCOUNT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const UPDATE_ACCOUNT_FETCHING = "UPDATE_ACCOUNT_FETCHING";
+export const UPDATE_ACCOUNT_SUCCESS = "UPDATE_ACCOUNT_SUCCESS";
+export const UPDATE_ACCOUNT_FAILURE = "UPDATE_ACCOUNT_FAILURE";
+
+export const updateAccount = (account_id, changes, token) => (dispatch) => {
+  console.log("UPDATING", account_id);
+  console.log("UPDATING", changes);
+  console.log("UPDATING", token);
+  dispatch({
+    type: UPDATE_ACCOUNT_FETCHING,
+  });
+  axios
+    .put(`${url}/v1/users/${account_id}`, changes, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      dispatch({
+        type: UPDATE_ACCOUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: UPDATE_ACCOUNT_FAILURE,
         payload: err,
       });
     });

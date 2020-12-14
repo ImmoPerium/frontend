@@ -6,28 +6,30 @@ export default class UserDropdown extends React.Component {
     super(props);
     this.state = {
       redirectToSettings: "",
-      redirectToLogout: ""
+      redirectToLogout: "",
     };
   }
 
   redirectTo = (view_name) => {
     switch (view_name) {
       case "settings":
-        return this.setState({ redirectToSettings: true }, () => this.setState({ redirectToSettings: false }));
+        return this.setState({ redirectToSettings: true }, () =>
+          this.setState({ redirectToSettings: false })
+        );
       case "logout":
-        return this.setState({ redirectToLogout: true }, () => this.setState({ redirectToLogout: false }));
+        return this.setState({ redirectToLogout: true }, () =>
+          this.setState({ redirectToLogout: false })
+        );
       default:
         return "";
     }
-  }
+  };
 
   render() {
     return (
       <div className="relative px-5 py-5 sm:py-0 sm:ml-4 sm:px-0">
-        {this.state.redirectToSettings ? 
-          <Redirect to='/profile' /> : <></>}
-        {this.state.redirectToLogout ? 
-          <Redirect to='/logout' /> : <></>}
+        {this.state.redirectToSettings ? <Redirect to="/profile" /> : <></>}
+        {this.state.redirectToLogout ? <Redirect to="/logout" /> : <></>}
         <div className="flex items-center sm:hidden">
           <a href="/profile">
             <img
@@ -38,27 +40,27 @@ export default class UserDropdown extends React.Component {
           </a>
         </div>
         <div className="mt-5 sm:hidden">
-        <div
-          onClick={() => this.redirectTo("settings")}
-          className="block text-gray-400 hover:text-white"
-        >
-          Einstellungen
-        </div>
+          <div
+            onClick={() => this.redirectTo("settings")}
+            className="block text-gray-400 hover:text-white"
+          >
+            Einstellungen
+          </div>
           {/* <a href="#account" className="block text-gray-400 hover:text-white">
             Einstellungen
           </a> */}
-    {/*       <a
+          {/*       <a
             href="#sign-out"
             className="mt-3 block text-gray-400 hover:text-white"
           >
             Ausloggen
           </a> */}
           <div
-          onClick={() => this.redirectTo("logout")}
-          className="block text-gray-400 hover:text-white"
-          > 
-          Ausloggen
-        </div>
+            onClick={() => this.redirectTo("logout")}
+            className="block text-gray-400 hover:text-white"
+          >
+            Ausloggen
+          </div>
         </div>
         <div className="hidden sm:block">
           <div className="relative">
@@ -70,8 +72,8 @@ export default class UserDropdown extends React.Component {
               <span
                 className={`block h-8 w-8 overflow-hidden rounded-full border-2 ${
                   this.props.open
-                    ? "border-white xl:border-indigo-500"
-                    : "border-gray-600 xl:border-gray-300"
+                    ? "border-white xl:border-orange-400"
+                    : "border-gray-600 xl:border-orange-200"
                 }`}
               >
                 <img
@@ -95,14 +97,14 @@ export default class UserDropdown extends React.Component {
                 >
                   <div
                     onClick={() => this.redirectTo("settings")}
-                    className="block hover:text-white text-gray-800 px-4 py-2 hover:bg-indigo-500 cursor-pointer"
+                    className="block hover:text-white text-gray-800 px-4 py-2 hover:bg-orange-400 cursor-pointer"
                   >
                     Einstellungen
                   </div>
                   <div
                     onClick={() => this.redirectTo("logout")}
-                    className="block hover:text-white text-gray-800 px-4 py-2 hover:bg-indigo-500 cursor-pointer"
-                    > 
+                    className="block hover:text-white text-gray-800 px-4 py-2 hover:bg-orange-400 cursor-pointer"
+                  >
                     Ausloggen
                   </div>
                 </div>

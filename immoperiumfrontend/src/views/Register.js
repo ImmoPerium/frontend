@@ -18,6 +18,7 @@ class Register extends Component {
 
   onChange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
+
   onClick = () => {
     if (
       this.state.first_name &&
@@ -26,13 +27,6 @@ class Register extends Component {
       this.state.password &&
       this.state.check_password
     ) {
-      console.log(
-        "CALLED",
-        this.state.first_name,
-        this.state.last_name,
-        this.state.email,
-        this.state.password
-      );
       this.props.sendRegistrationDetails(
         this.state.first_name,
         this.state.last_name,
@@ -42,10 +36,21 @@ class Register extends Component {
     }
   };
 
+  _handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      this.onClick();
+    }
+  };
+
   render() {
     return (
       <div id="container-register">
-        {JSON.parse(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user')).id ? <Redirect to="/" /> : ""}
+        {JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).id ? (
+          <Redirect to="/login" />
+        ) : (
+          ""
+        )}
         <div className="min-h-screen bg-white flex">
           <div className="flex-1 flex flex-col justify-center pt-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="mx-auto w-full max-w-sm lg:w-96">
@@ -59,7 +64,9 @@ class Register extends Component {
                   Neu registrieren
                 </h2>
                 <p className="mt-2 text-sm leading-5 text-gray-600 max-w">
-                  <a className="font">und werde ein Teil des Immoperiums!</a>
+                  <a href="!#" className="font">
+                    und werde ein Teil des Immoperiums!
+                  </a>
                 </p>
               </div>
               {/*               <div className="mt-8">
@@ -244,6 +251,7 @@ class Register extends Component {
                     name="check_password"
                     value={this.state.check_password}
                     onChange={this.onChange}
+                    onKeyDown={this._handleKeyDown}
                     autoComplete="off"
                   />
                   {this.state.password &&
