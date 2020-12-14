@@ -15,8 +15,8 @@ class FavoriteOfferComponent extends React.Component {
     this.setState({ showDeleteDialog: !this.state.showDeleteDialog });
   };
 
-  deleteOffer = () => {
-    this.props.deleteOfferCallback(this.props.adId);
+  deleteFavorite = () => {
+    this.props.deleteFavoriteCallback(this.props.adId);
     this.toggleDeleteDialog();
     this.props.refreshOffersCallback();
   };
@@ -47,9 +47,7 @@ class FavoriteOfferComponent extends React.Component {
               <span
                 className="hidden sm:inline-block sm:align-middle sm:h-screen"
                 aria-hidden="true"
-              >
-                ​
-              </span>
+              ></span>
               <div
                 className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
                 role="dialog"
@@ -79,13 +77,13 @@ class FavoriteOfferComponent extends React.Component {
                       className="text-lg leading-6 font-medium text-gray-900"
                       id="modal-headline"
                     >
-                      Immobilienanzeige löschen
+                      Immobilie Defavorisieren
                     </h3>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Bist du sicher, dass diese Anzeige gelöscht werden soll?
-                        Sie kann nicht wiederhergestellt werden und wird anderen
-                        Nutzern nicht mehr angezeigt werden.
+                        Bist du sicher, dass dieser Anzeige nicht mehr folgen
+                        willst? Sie wird dir nicht mehr angezeigt werden und du
+                        musst sie erneut auf der Plattform entdecken.
                       </p>
                     </div>
                   </div>
@@ -93,7 +91,7 @@ class FavoriteOfferComponent extends React.Component {
                 <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                   <button
                     type="button"
-                    onClick={() => this.deleteOffer()}
+                    onClick={() => this.deleteFavorite()}
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                   >
                     Löschen
@@ -113,14 +111,15 @@ class FavoriteOfferComponent extends React.Component {
           ""
         )}
         <div className="flex-shrink-0">
-          <a href={`immobilie/${this.props.adId}`} className="relative">
+          <div className="relative cursor-pointer">
             <svg
               className="absolute top-0 right-0 float-left z-10 ml-6 h-8 w-8"
-              style={{ top: "1rem", left: "50%" }}
+              style={{ top: "10%", left: "80%" }}
               viewBox="0 0 32 32"
               xmlns="http://www.w3.org/2000/svg"
               onMouseEnter={this.handleMouseEnter}
               onMouseLeave={this.handleMouseLeave}
+              onClick={() => this.deleteFavorite()}
             >
               <g id="Love">
                 <path
@@ -138,9 +137,9 @@ class FavoriteOfferComponent extends React.Component {
             <img
               className="h-48 w-full object-cover"
               src={this.props.thumbnail}
-              alt="thumnail of the real estate offer"
+              alt="thumbnail of the real estate offer"
             />
-          </a>
+          </div>
         </div>
         <div className="flex-1 bg-white p-6 flex flex-col justify-between">
           <div className="flex-1">

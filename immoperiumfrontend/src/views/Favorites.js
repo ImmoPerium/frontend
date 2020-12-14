@@ -27,24 +27,29 @@ class Favorites extends React.Component {
     }
   }
 
-  unfavoriteOffer = (offer_id) => {
+  unfavoriteOffer = async (offer_id) => {
     console.log("RECEIVED", offer_id);
     if (offer_id) {
-      this.props.removeFavoriteOffer(
+      this.unfavoriteOfferAsync(
         JSON.parse(localStorage.getItem("user")).id,
         offer_id,
         localStorage.getItem("token")
+      ).then(() =>
+        setTimeout(() => {
+          this.props.getUserById(
+            JSON.parse(localStorage.getItem("user")).id,
+            localStorage.getItem("token")
+          );
+        }, 800)
       );
     }
   };
 
+  unfavoriteOfferAsync = async (user_id, offer_id, token) => {
+    await this.props.removeFavoriteOffer(user_id, offer_id, token);
+  };
+
   render() {
-    /* const favoriteOfferIdArray = this.props.userByID.favorite_advertisements.split(
-      "-"
-    ); */
-    /*     const filteredFavoriteOffers = this.props.userByID.favorite_advertisements
-      .split("-")
-      .includes("10"); */
     return (
       <div className="relative pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8 min-h-screen">
         <div className="absolute inset-0 bg-gray-200">
@@ -59,12 +64,6 @@ class Favorites extends React.Component {
               Behalte deine Favoriten im Auge bevor sie jemand anders schnappt!
             </p>
           </div>
-          {/* {console.log("CHECK ", filteredFavoriteOffers)} */}
-          {/*       {console.log(
-            "FAVOR",
-            this.props.userByID.favorite_advertisements.split("-")
-          )} */}
-          {/* {console.log("FILTERED", filteredFavoriteOffers)} */}
           <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none w-full">
             {this.props.offers && this.props.userByID.favorite_advertisements
               ? this.props.offers
@@ -91,7 +90,7 @@ class Favorites extends React.Component {
                       createdAt={offer.created_at}
                       thumbnail={offer.other_description}
                       deleteFavoriteCallback={(offer_id) =>
-                        this.deleteOffer(offer_id)
+                        this.unfavoriteOffer(offer_id)
                       }
                       refreshOffersCallback={() =>
                         this.props.getRealEstateById(

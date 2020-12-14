@@ -299,7 +299,7 @@ export const removeFavoriteOffer = (user_id, favorite_id, token) => (
     type: REMOVE_USER_FAVORITE_FETCHING,
   });
   axios
-    .put(`${url}/v1/users/${user_id}/removefavorite/${favorite_id}`, {
+    .get(`${url}/v1/users/${user_id}/removefavorite/${favorite_id}`, {
       headers: { Authorization: token },
     })
     .then((res) => {
