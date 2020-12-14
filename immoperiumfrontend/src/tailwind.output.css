@@ -178,25 +178,12 @@ button:-moz-focusring,
  * Correct the padding in Firefox.
  */
 
-fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
 /**
  * 1. Correct the text wrapping in Edge and IE.
  * 2. Correct the color inheritance from `fieldset` elements in IE.
  * 3. Remove the padding so developers are not caught out when they zero out
  *    `fieldset` elements in all browsers.
  */
-
-legend {
-  box-sizing: border-box; /* 1 */
-  color: inherit; /* 2 */
-  display: table; /* 1 */
-  max-width: 100%; /* 1 */
-  padding: 0; /* 3 */
-  white-space: normal; /* 1 */
-}
 
 /**
  * Add the correct vertical alignment in Chrome, Firefox, and Opera.
@@ -303,11 +290,6 @@ button {
 button:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
-}
-
-fieldset {
-  margin: 0;
-  padding: 0;
 }
 
 
@@ -1176,12 +1158,6 @@ img {
   --bg-opacity: 1;
   background-color: #b43403;
   background-color: rgba(180, 52, 3, var(--bg-opacity));
-}
-
-.hover\:bg-indigo-700:hover {
-  --bg-opacity: 1;
-  background-color: #5145cd;
-  background-color: rgba(81, 69, 205, var(--bg-opacity));
 }
 
 .focus\:bg-white:focus {
