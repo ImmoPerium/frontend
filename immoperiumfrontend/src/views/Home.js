@@ -1,7 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
-import women from "./beach-work.jpg";
-import { Link } from "react-router-dom";
 import "../index.css";
 import Searchbar from "../components/SearchBar";
 
@@ -28,6 +25,7 @@ export default class Home extends React.Component {
           <img
             src="./pictures/landing-bg2.jpg"
             className="object-cover bg-center max-w-screen z-0"
+            alt="landing screen"
           />
         </div>
       </div>
