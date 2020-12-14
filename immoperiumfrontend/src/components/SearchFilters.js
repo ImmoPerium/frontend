@@ -150,11 +150,13 @@ class SearchFilters extends React.Component {
                     transform: "translate(150%, 40%) scale(1.2)",
                   }}
                   src="./pictures/icons/house.svg"
+                  alt="house"
                 />
                 <img
                   class="normal h-5 w-5"
                   style={{ opacity: 0 }}
                   src="./pictures/icons/house.svg"
+                  alt="house"
                 />
               </button>
               <button
@@ -179,11 +181,13 @@ class SearchFilters extends React.Component {
                     transform: "translate(150%, 55%) scale(1.7)",
                   }}
                   src="./pictures/icons/couch.svg"
+                  alt="couch svg"
                 />
                 <img
                   class="normal h-5 w-5"
                   style={{ opacity: 0 }}
                   src="./pictures/icons/couch.svg"
+                  alt="couch"
                 />
               </button>
               <button
@@ -208,11 +212,13 @@ class SearchFilters extends React.Component {
                     transform: "translate(150%, 50%) scale(1.4)",
                   }}
                   src="./pictures/icons/house_and_couch2.svg"
+                  alt="couch2"
                 />
                 <img
                   class="normal h-5 w-5"
                   style={{ opacity: 0 }}
                   src="./pictures/icons/house_and_couch2.svg"
+                  alt="house and couch2"
                 />
               </button>
               <div

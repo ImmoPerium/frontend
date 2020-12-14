@@ -257,7 +257,10 @@ export const UPDATE_ACCOUNT_FETCHING = "UPDATE_ACCOUNT_FETCHING";
 export const UPDATE_ACCOUNT_SUCCESS = "UPDATE_ACCOUNT_SUCCESS";
 export const UPDATE_ACCOUNT_FAILURE = "UPDATE_ACCOUNT_FAILURE";
 
-export const updateAccount = (account_id, changes, token) => (dispatch) => {
+export const updateAccount = (account_id, changes, token) => (
+  dispatch,
+  getState
+) => {
   console.log("UPDATING", account_id);
   console.log("UPDATING", changes);
   console.log("UPDATING", token);
@@ -281,4 +284,9 @@ export const updateAccount = (account_id, changes, token) => (dispatch) => {
         payload: err,
       });
     });
+  /* const value = getState().fetchingUserByID;
+  while (!value) {
+    console.log("WAS TRUE");
+  }
+  return true; */
 };

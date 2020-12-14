@@ -43,11 +43,7 @@ function App() {
             path="/offers"
             render={(...props) => <Offers {...props} />}
           />
-          <Route
-            exact
-            path="/home"
-            render={(...props) => <Home {...props} />}
-          />
+          <Route exact path="/" render={(...props) => <Home {...props} />} />
           <Route
             exact
             path="/register"
