@@ -58,10 +58,7 @@ class NavbarMenuUser extends React.Component {
         >
           Favoriten
         </div>
-        <a
-          href="!#"
-          className="mt-1 block px-3 py-1 rounded font-semibold text-white sm:mt-0 sm:text-sm sm:px-2 sm:ml-2 xl:text-gray-900 cursor-default"
-        >
+        <a className="mt-1 block px-3 py-1 rounded font-semibold text-white sm:mt-0 sm:text-sm sm:px-2 sm:ml-2 xl:text-gray-900 cursor-default">
           {this.props && this.props.userByID.firstname
             ? `Moin, ${this.props.userByID.firstname}`
             : `Moin, ${JSON.parse(localStorage.getItem("user")).firstname}`}
