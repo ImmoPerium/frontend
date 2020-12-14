@@ -248,12 +248,12 @@ class Dashboard extends React.Component {
                 this.props.allAdvertisements.slice(0, 3),
                 this.props.allAdvertisements.slice(4, 7),
                 this.props.allAdvertisements.slice(8, 11)
-              ).map((segmnet) => (
+              ).map((segment) => (
                 <PropertyList
-                  key={segmnet.title}
-                  title={segmnet.title}
-                  description={segmnet.description}
-                  properties={segmnet.properties}
+                  key={segment.title}
+                  title={segment.title}
+                  description={segment.description}
+                  properties={segment.properties}
                 />
               ))
             ) : (

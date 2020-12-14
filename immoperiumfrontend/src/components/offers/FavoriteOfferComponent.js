@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { toDate, differenceInDays } from "date-fns";
+import { Redirect } from "react-router-dom";
 
 class FavoriteOfferComponent extends React.Component {
   constructor(props) {
@@ -8,10 +9,11 @@ class FavoriteOfferComponent extends React.Component {
     this.state = {
       showDeleteDialog: false,
       heartIsHovered: false,
+      redirectToOffer: false,
     };
   }
 
-  toggleDeleteDialog = () => {
+  toggleDeleteDialog = (event) => {
     this.setState({ showDeleteDialog: !this.state.showDeleteDialog });
   };
 
@@ -29,9 +31,20 @@ class FavoriteOfferComponent extends React.Component {
     this.setState({ heartIsHovered: false });
   };
 
+  handleRedirectToOffer = () => {
+    this.setState({ redirectToOffer: true }, () =>
+      this.setState({ redirectToOffer: false })
+    );
+  };
+
   render() {
     return (
       <div className="flex flex-col rounded-lg shadow-lg overflow-hidden">
+        {this.state.redirectToOffer ? (
+          <Redirect to={`/immobilie/${this.props.adId}`} />
+        ) : (
+          ""
+        )}
         {this.state.showDeleteDialog ? (
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -111,15 +124,21 @@ class FavoriteOfferComponent extends React.Component {
           ""
         )}
         <div className="flex-shrink-0">
-          <div className="relative cursor-pointer">
+          <div
+            className="relative cursor-pointer"
+            onClick={() => this.handleRedirectToOffer()}
+          >
             <svg
-              className="absolute top-0 right-0 float-left z-10 ml-6 h-8 w-8"
+              className="absolute top-0 right-0 float-left z-10 ml-6 h-8 w-8 cursor-pointer"
               style={{ top: "10%", left: "80%" }}
               viewBox="0 0 32 32"
               xmlns="http://www.w3.org/2000/svg"
               onMouseEnter={this.handleMouseEnter}
               onMouseLeave={this.handleMouseLeave}
-              onClick={() => this.deleteFavorite()}
+              onClick={(event) => {
+                event.stopPropagation();
+                this.toggleDeleteDialog();
+              }}
             >
               <g id="Love">
                 <path
