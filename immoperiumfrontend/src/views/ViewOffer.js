@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getUserById, getSingleAdvertisement } from "../actions/index";
+import PropertyCard from "../components/properties/PropertyCard";
 class ViewOffer extends React.Component {
   constructor(props) {
     super(props);
@@ -10,13 +11,10 @@ class ViewOffer extends React.Component {
 
   componentDidMount() {
     console.log(this.props);
-    let offer_id = "";
-    if (this.props.match) {
-      offer_id = this.props.match.offer_id;
-      this.props.getSingleAdvertisement(
-        offer_id,
-        localStorage.getItem("token")
-      );
+    let id = "";
+    if (this.props.match.params.id) {
+      id = this.props.match.params.id;
+      this.props.getSingleAdvertisement(id, localStorage.getItem("token"));
     }
     if (
       JSON.parse(localStorage.getItem("user")) &&
@@ -133,319 +131,196 @@ class ViewOffer extends React.Component {
           >
             <div className="relative max-w-4xl mx-auto md:px-8 xl:px-0">
               <div className="pt-10 pb-16">
-                <div className="px-4 sm:px-6 md:px-0">
+                <div className="px-4 sm:px-6 md:px-0 mb-4">
                   <h1 className="text-3xl font-extrabold text-gray-900">
                     <span className="text-orange-500">
-                      {this.props.singleOffer ? this.props.singleOffer.id : ""}!
+                      {this.props.singleOffer
+                        ? this.props.singleOffer.advertisement_purpose
+                        : ""}
                     </span>
                   </h1>
+                  <h2 className="text-xl text-gray-900">
+                    <span className="text-gray-500">
+                      {this.props.singleOffer
+                        ? this.props.singleOffer.advertisement_description
+                        : ""}
+                    </span>
+                  </h2>
                 </div>
+                <div></div>
+                <PropertyCard
+                  className="mt-4"
+                  key={this.props.singleOffer}
+                  index={this.props.singleOffer}
+                  propertyiD={this.props.singleOffer.id}
+                  imageUrl={this.props.singleOffer.other_description}
+                  rooms={parseInt(this.props.singleOffer.rooms)}
+                  house_area={parseInt(this.props.singleOffer.house_area)}
+                  title={this.props.singleOffer.advertisement_purpose}
+                  price={this.props.singleOffer.rental_price_total}
+                  viewCount={this.props.singleOffer.view_count}
+                  favoriteCount={this.props.singleOffer.favorite_count}
+                />
                 <div className="px-4 sm:px-6 md:px-0">
                   <div className="py-6">
                     {/* Description list with inline editing */}
                     <div className="mt-10 divide-y divide-gray-200">
                       <div className="space-y-1">
                         <h3 className="text-lg leading-6 font-medium text-gray-900">
-                          Profil
+                          Informationen zur Immobilie
                         </h3>
                         <p className="max-w-2xl text-sm text-gray-500">
-                          Diese Informationen werden öffentlich dargestellt.
+                          Bei Fragen kontaktieren Sie den Vermittler direkt.
                         </p>
                       </div>
                       <div className="mt-6">
                         <dl className="divide-y divide-gray-200">
                           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                             <dt className="text-sm font-medium text-gray-500">
-                              Name
-                            </dt>
-
-                            {this.state.showNameInputs ? (
-                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                <span className="flex-grow">
-                                  <div>
-                                    <label
-                                      htmlFor="password"
-                                      className="block text-sm font-medium leading-5 text-gray-700 pt-4"
-                                    >
-                                      Vorname
-                                    </label>
-                                    <div className="mt-1 rounded-md shadow-sm">
-                                      <input
-                                        id="firstname"
-                                        type="text"
-                                        required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                                        name="firstnameInput"
-                                        placeholder={getUserByIdData.firstname}
-                                        defaultValue={this.state.firstnameInput}
-                                        onChange={this.onChange}
-                                        onKeyDown={(event) =>
-                                          this._handleKeyDown(event, "name")
-                                        }
-                                        autoComplete="off"
-                                      />
-                                    </div>
-                                    <label
-                                      htmlFor="password"
-                                      className="block text-sm font-medium leading-5 text-gray-700 pt-4"
-                                    >
-                                      Nachname
-                                    </label>
-                                    <div className="mt-1 rounded-md shadow-sm">
-                                      <input
-                                        id="password"
-                                        type="text"
-                                        required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                                        name="lastnameInput"
-                                        placeholder={getUserByIdData.lastname}
-                                        defaultValue={this.state.lastnameInput}
-                                        onChange={this.onChange}
-                                        onKeyDown={(event) =>
-                                          this._handleKeyDown(event, "name")
-                                        }
-                                        autoComplete="off"
-                                      />
-                                    </div>
-                                  </div>
-                                </span>
-                                <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
-                                  <button
-                                    type="button"
-                                    onClick={() => this.resetInput("name")}
-                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                  >
-                                    Abbrechen
-                                  </button>
-                                  <span
-                                    className="text-gray-300"
-                                    aria-hidden="true"
-                                  >
-                                    |
-                                  </span>
-                                  <button
-                                    type="button"
-                                    onClick={() => this.updateAccount("name")}
-                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                  >
-                                    Speichern
-                                  </button>
-                                </span>
-                              </dd>
-                            ) : (
-                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                <span className="flex-grow">
-                                  {userData
-                                    ? getUserByIdData.firstname +
-                                      " " +
-                                      getUserByIdData.lastname
-                                    : ""}
-                                </span>
-                                <span className="ml-4 flex-shrink-0">
-                                  <button
-                                    type="button"
-                                    onClick={() => this.onClick("name")}
-                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                  >
-                                    Bearbeiten
-                                  </button>
-                                </span>
-                              </dd>
-                            )}
-                          </div>
-                          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
-                            <dt className="text-sm font-medium text-gray-500">
-                              Photo
+                              Adressse
                             </dt>
                             <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                               <span className="flex-grow">
-                                <img
-                                  className="h-8 w-8 rounded-full"
-                                  src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                  alt="avatar"
-                                />
+                                {this.props.singleOffer
+                                  ? this.props.singleOffer.street +
+                                    " " +
+                                    this.props.singleOffer.streetnumber
+                                  : ""}
                               </span>
-                              <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
-                                <button
-                                  type="button"
-                                  className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                >
-                                  Bearbeiten
-                                </button>
-                                <span
-                                  className="text-gray-300"
-                                  aria-hidden="true"
-                                >
-                                  |
-                                </span>
-                                <button
-                                  type="button"
-                                  className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                >
-                                  Entfernen
-                                </button>
+                            </dd>
+                            <dt className="text-sm font-medium text-gray-500"></dt>
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.singleOffer
+                                  ? this.props.singleOffer.zip +
+                                    this.props.singleOffer.city
+                                  : ""}
+                              </span>
+                            </dd>
+                            <dt className="text-sm font-medium text-gray-500"></dt>
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.singleOffer
+                                  ? this.props.singleOffer.country
+                                  : ""}
                               </span>
                             </dd>
                           </div>
+
                           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
                             <dt className="text-sm font-medium text-gray-500">
-                              Email
+                              Kosten
                             </dt>
 
-                            {this.state.showEmailInput ? (
-                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                <span className="flex-grow">
-                                  <div>
-                                    <label
-                                      htmlFor="password"
-                                      className="block text-sm font-medium leading-5 text-gray-700 pt-4"
-                                    >
-                                      E-Mail-Adresse
-                                    </label>
-                                    <div className="mt-1 rounded-md shadow-sm">
-                                      <input
-                                        id="email"
-                                        type="email"
-                                        required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                                        name="emailInput"
-                                        placeholder={
-                                          getUserByIdData.email_address
-                                        }
-                                        defaultValue={this.state.emailInput}
-                                        onChange={this.onChange}
-                                        onKeyDown={(event) =>
-                                          this._handleKeyDown(event, "email")
-                                        }
-                                        autoComplete="off"
-                                      />
-                                    </div>
-                                  </div>
-                                </span>
-                                <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
-                                  <button
-                                    type="button"
-                                    onClick={() => this.resetInput("email")}
-                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                  >
-                                    Abbrechen
-                                  </button>
-                                  <span
-                                    className="text-gray-300"
-                                    aria-hidden="true"
-                                  >
-                                    |
-                                  </span>
-                                  <button
-                                    type="button"
-                                    onClick={() => this.updateAccount("email")}
-                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                  >
-                                    Speichern
-                                  </button>
-                                </span>
-                              </dd>
-                            ) : (
-                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                <span className="flex-grow">
-                                  {userData
-                                    ? getUserByIdData.email_address
-                                    : ""}
-                                </span>
-                                <span className="ml-4 flex-shrink-0">
-                                  <button
-                                    type="button"
-                                    onClick={() => this.onClick("email")}
-                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                  >
-                                    Bearbeiten
-                                  </button>
-                                </span>
-                              </dd>
-                            )}
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {userData
+                                  ? this.props.singleOffer.rental_price_total +
+                                    " € Kaltmiete"
+                                  : ""}
+                              </span>
+                              <span className="ml-4 flex-shrink-0"></span>
+                            </dd>
+                            <dt className="text-sm font-medium text-gray-500"></dt>
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.singleOffer
+                                  ? this.props.singleOffer.street +
+                                    " " +
+                                    this.props.singleOffer.streetnumber
+                                  : ""}
+                              </span>
+                            </dd>
+                            <dt className="text-sm font-medium text-gray-500"></dt>
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.singleOffer
+                                  ? this.props.singleOffer.rental_deposit +
+                                    " € Kaution"
+                                  : ""}
+                              </span>
+                            </dd>
                           </div>
-                          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
+
+                          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
                             <dt className="text-sm font-medium text-gray-500">
-                              Telefonnummer
+                              Ausstattung
                             </dt>
 
-                            {this.state.showPhoneInput ? (
-                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                <span className="flex-grow">
-                                  <div>
-                                    <label
-                                      htmlFor="password"
-                                      className="block text-sm font-medium leading-5 text-gray-700 pt-4"
-                                    >
-                                      Telefonnummer
-                                    </label>
-                                    <div className="mt-1 rounded-md shadow-sm">
-                                      <input
-                                        id="phone"
-                                        type="text"
-                                        required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                                        name="phoneInput"
-                                        placeholder={
-                                          getUserByIdData.phonenumber
-                                        }
-                                        defaultValue={this.state.phoneInput}
-                                        onChange={this.onChange}
-                                        onKeyDown={(event) =>
-                                          this._handleKeyDown(event, "phone")
-                                        }
-                                        autoComplete="off"
-                                      />
-                                    </div>
-                                  </div>
-                                </span>
-                                <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
-                                  <button
-                                    type="button"
-                                    onClick={() => this.resetInput("phone")}
-                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                  >
-                                    Abbrechen
-                                  </button>
-                                  <span
-                                    className="text-gray-300"
-                                    aria-hidden="true"
-                                  >
-                                    |
-                                  </span>
-                                  <button
-                                    type="button"
-                                    onClick={() => this.updateAccount("phone")}
-                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                  >
-                                    Speichern
-                                  </button>
-                                </span>
-                              </dd>
-                            ) : (
-                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                <span className="flex-grow">
-                                  {userData ? getUserByIdData.phonenumber : ""}
-                                </span>
-                                <span className="ml-4 flex-shrink-0">
-                                  <button
-                                    type="button"
-                                    onClick={() => this.onClick("phone")}
-                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                  >
-                                    Bearbeiten
-                                  </button>
-                                </span>
-                              </dd>
-                            )}
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.singleOffer
+                                  ? this.props.singleOffer.heating
+                                  : ""}
+                              </span>
+                              <span className="ml-4 flex-shrink-0"></span>
+                            </dd>
+                            <dt className="text-sm font-medium text-gray-500"></dt>
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.singleOffer
+                                  ? this.props.singleOffer.house_area +
+                                    "m² Wohnfläche"
+                                  : ""}
+                              </span>
+                            </dd>
+                            <dt className="text-sm font-medium text-gray-500"></dt>
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.singleOffer
+                                  ? "Zustand: " +
+                                    this.props.singleOffer.overall_condition
+                                  : ""}
+                              </span>
+                            </dd>
+                            <dt className="text-sm font-medium text-gray-500"></dt>
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.singleOffer.basement
+                                  ? "Keller vorhanden "
+                                  : ""}
+                              </span>
+                            </dd>
                           </div>
-                          <button
-                            type="button"
-                            onClick={() => this.toggleDeleteDialog()}
-                            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-4"
-                          >
-                            Account löschen
-                          </button>
+
+                          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
+                            <dt className="text-sm font-medium text-gray-500">
+                              Besonderheiten
+                            </dt>
+
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.singleOffer.pets_allowed
+                                  ? "Haustiere erlaubt"
+                                  : ""}
+                              </span>
+                              <span className="ml-4 flex-shrink-0"></span>
+                            </dd>
+                            <dt className="text-sm font-medium text-gray-500"></dt>
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.barrier_free
+                                  ? "Barrierefreier Zugang"
+                                  : "Kein barrierefreier Zugang"}
+                              </span>
+                            </dd>
+                            <dt className="text-sm font-medium text-gray-500"></dt>
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.offstreet_parking
+                                  ? "Parkplatz vorhanden"
+                                  : "Kein Parkplatz vorhanden"}
+                              </span>
+                            </dd>
+                            <dt className="text-sm font-medium text-gray-500"></dt>
+                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <span className="flex-grow">
+                                {this.props.singleOffer.basement
+                                  ? "Keller vorhanden"
+                                  : "Kein Keller vorhanden"}
+                              </span>
+                            </dd>
+                          </div>
                         </dl>
                       </div>
                     </div>
@@ -461,8 +336,7 @@ class ViewOffer extends React.Component {
 }
 const mapStateToProps = (state) => ({
   userByID: state.usersReducer.userByID,
-  singleOffer:
-    state.advertisementsReducer.singleAdvertisement.real_estate_advertisements,
+  singleOffer: state.advertisementsReducer.singleAdvertisement,
 });
 
 export default connect(mapStateToProps, {

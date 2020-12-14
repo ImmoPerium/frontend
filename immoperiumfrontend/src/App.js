@@ -45,11 +45,7 @@ function App() {
             path="/offers"
             render={(...props) => <Offers {...props} />}
           />
-          <Route
-            exact
-            path="/immobilie/:offer_id"
-            render={(...props) => <ViewOffer {...props} />}
-          />
+          <Route exact path="/immobilie/:id" component={ViewOffer} />
           <Route exact path="/" render={(...props) => <Home {...props} />} />
           <Route exact path="/!#" render={(...props) => <Home {...props} />} />
           <Route
