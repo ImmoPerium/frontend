@@ -32,7 +32,6 @@ class ViewOffer extends React.Component {
     const getUserByIdData = this.props.userByID;
     return (
       <div className="h-screen bg-white overflow-hidden flex">
-        {this.props.accountDeletion ? <Redirect to="/login" /> : ""}
         {this.state.showDeleteDialog ? (
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
