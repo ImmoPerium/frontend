@@ -158,8 +158,8 @@ const data = [
     properties: [],
   },
   {
-    title: "Neue Immobilien",
-    description: "Entdecke die Immobilien als Erster.",
+    title: "",
+    description: "",
     properties: [],
   },
 ];

@@ -1246,12 +1246,6 @@ img {
   border-color: rgba(22, 30, 46, var(--border-opacity));
 }
 
-.border-orange-200 {
-  --border-opacity: 1;
-  border-color: #fcd9bd;
-  border-color: rgba(252, 217, 189, var(--border-opacity));
-}
-
 .border-orange-500 {
   --border-opacity: 1;
   border-color: #ff5a1f;
@@ -1268,6 +1262,12 @@ img {
   --border-opacity: 1;
   border-color: #d2d6dc;
   border-color: rgba(210, 214, 220, var(--border-opacity));
+}
+
+.focus\:border-gray-500:focus {
+  --border-opacity: 1;
+  border-color: #6b7280;
+  border-color: rgba(107, 114, 128, var(--border-opacity));
 }
 
 .focus\:border-orange-400:focus {
