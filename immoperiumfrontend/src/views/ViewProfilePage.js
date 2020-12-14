@@ -88,7 +88,7 @@ class ViewProfilePage extends React.Component {
       JSON.parse(localStorage.getItem("user")) &&
       localStorage.getItem("token")
     ) {
-      this.props.getUserById(
+      this.props.deleteAccount(
         JSON.parse(localStorage.getItem("user")).id,
         localStorage.getItem("token")
       );

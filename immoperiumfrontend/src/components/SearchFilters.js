@@ -49,22 +49,22 @@ class SearchFilters extends React.Component {
       >
         <div className="lg:flex xl:block xl:overflow-y-auto">
           <div className="px-4 py-4 border-t border-gray-900 lg:w-1/3 xl:border-t-0 xl:w-full">
-            <span class="relative z-0 inline-flex shadow-sm rounded-md">
+            <span className="relative z-0 inline-flex shadow-sm rounded-md">
               <button
                 type="button"
-                class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+                className="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
               >
                 Haus
               </button>
               <button
                 type="button"
-                class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+                className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
               >
                 Wohnung
               </button>
               <button
                 type="button"
-                class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+                className="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
               >
                 Beide
               </button>
@@ -117,7 +117,7 @@ class SearchFilters extends React.Component {
               Immobilienart
             </label>
             <div
-              class="menu-slider-container"
+              className="menu-slider-container"
               style={{
                 display: "flex",
                 width: "auto",
@@ -129,7 +129,7 @@ class SearchFilters extends React.Component {
               }}
             >
               <button
-                class="aktiv menu-slider-icon"
+                className="aktiv menu-slider-icon"
                 style={{
                   border: "none",
                   background: "transparent",
@@ -144,7 +144,7 @@ class SearchFilters extends React.Component {
                 }}
               >
                 <img
-                  class="aktiv h-5 w-5"
+                  className="aktiv h-5 w-5"
                   style={{
                     opacity: 1,
                     transform: "translate(150%, 40%) scale(1.2)",
@@ -153,14 +153,14 @@ class SearchFilters extends React.Component {
                   alt="house"
                 />
                 <img
-                  class="normal h-5 w-5"
+                  className="normal h-5 w-5"
                   style={{ opacity: 0 }}
                   src="./pictures/icons/house.svg"
                   alt="house"
                 />
               </button>
               <button
-                class="menu-slider-icon"
+                className="menu-slider-icon"
                 style={{
                   border: "none",
                   background: "transparent",
@@ -175,7 +175,7 @@ class SearchFilters extends React.Component {
                 }}
               >
                 <img
-                  class="aktiv h-5 w-5"
+                  className="aktiv h-5 w-5"
                   style={{
                     opacity: 1,
                     transform: "translate(150%, 55%) scale(1.7)",
@@ -184,14 +184,14 @@ class SearchFilters extends React.Component {
                   alt="couch svg"
                 />
                 <img
-                  class="normal h-5 w-5"
+                  className="normal h-5 w-5"
                   style={{ opacity: 0 }}
                   src="./pictures/icons/couch.svg"
                   alt="couch"
                 />
               </button>
               <button
-                class="menu-slider-icon"
+                className="menu-slider-icon"
                 style={{
                   border: "none",
                   background: "transparent",
@@ -206,7 +206,7 @@ class SearchFilters extends React.Component {
                 }}
               >
                 <img
-                  class="aktiv h-5 w-5"
+                  className="aktiv h-5 w-5"
                   style={{
                     opacity: 1,
                     transform: "translate(150%, 50%) scale(1.4)",
@@ -215,7 +215,7 @@ class SearchFilters extends React.Component {
                   alt="couch2"
                 />
                 <img
-                  class="normal h-5 w-5"
+                  className="normal h-5 w-5"
                   style={{ opacity: 0 }}
                   src="./pictures/icons/house_and_couch2.svg"
                   alt="house and couch2"
@@ -223,7 +223,7 @@ class SearchFilters extends React.Component {
               </button>
               <div
                 id="slider"
-                class="menu-slider-bg"
+                className="menu-slider-bg"
                 style={{
                   position: "absolute",
                   top: "0.5rem",

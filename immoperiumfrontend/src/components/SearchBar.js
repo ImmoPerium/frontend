@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
 class SearchBar extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.container = React.createRef();
     this.state = {
       location: "",
@@ -10,26 +10,27 @@ class SearchBar extends React.Component {
     };
   }
   setLocationValue = () => {
-    this.setState({
-
-    })
-  }
+    this.setState({});
+  };
   handleButtonClick = () => {
-    this.setState(state => {
+    this.setState((state) => {
       return {
         open: !state.open,
       };
     });
   };
   handleClickOutside = (event) => {
-    if (this.container.current && !this.container.current.contains(event.target)) {
+    if (
+      this.container.current &&
+      !this.container.current.contains(event.target)
+    ) {
       this.setState({
         open: false,
       });
     }
   };
   editSearchTerm = (e) => {
-    this.setState({searchTerm: e.target.value})
+    this.setState({ searchTerm: e.target.value });
   };
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
@@ -38,28 +39,58 @@ class SearchBar extends React.Component {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
-  render(){ 
+  render() {
     return (
       <div className="absolute inset-0 flex items-center justify-center z-10">
         <div className="relative flex rounded-md border-2 border-gray-300 bg-white text-left divide-x-2 divide-gray-200">
           <div className="absolute divide-x-0 border-transparent inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg className="text-gray-600 h-4 w-4 divide-x-0 border-transparent" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <svg
+              className="text-gray-600 h-4 w-4 divide-x-0 border-transparent"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
             </svg>
           </div>
-          <input className="py-2 w-50 pr-24 px-10 border-transparent text-xl focus:outline-none"
-          key="random1"
-          placeholder={"Traumort eingeben"}
-          style={{textIndent: "35px"}}
-          onChange={event => {this.editSearchTerm(event)}}
-          value={this.state.searchTerm}
+          <input
+            className="py-2 w-50 pr-24 px-10 border-transparent text-xl focus:outline-none"
+            key="random1"
+            placeholder={"Traumort eingeben"}
+            style={{ textIndent: "35px" }}
+            onChange={(event) => {
+              this.editSearchTerm(event);
+            }}
+            value={this.state.searchTerm}
           />
           <div className="container" ref={this.container.current}>
-            <button type="button" onClick={this.handleButtonClick} class="relative inline-flex justify-center w-full px-5 py-2 text-xl font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" 
-            id="options-menu" aria-haspopup="true" aria-expanded="true">
+            <button
+              type="button"
+              onClick={this.handleButtonClick}
+              className="relative inline-flex justify-center w-full px-5 py-2 text-xl font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+              id="options-menu"
+              aria-haspopup="true"
+              aria-expanded="true"
+            >
               Budget
-              <svg className="-mr-1 ml-2 h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              <svg
+                className="-mr-1 ml-2 h-8 w-8"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
               </svg>
             </button>
             {this.state.open && (
@@ -71,21 +102,36 @@ class SearchBar extends React.Component {
                         ab:
                       </span>
                     </div>
-                    <input type="text" name="company_website" id="company_website" className="block w-full h-full pl-16 sm:pl-14 sm:text-sm texl-l rounded-md focus:outline-none" placeholder="in Euro"/>
-                  </div> 
+                    <input
+                      type="text"
+                      name="company_website"
+                      id="company_website"
+                      className="block w-full h-full pl-16 sm:pl-14 sm:text-sm texl-l rounded-md focus:outline-none"
+                      placeholder="in Euro"
+                    />
+                  </div>
                   <div className="relative straight-md py-2">
                     <div className="absolute inset-y-2 left-0 pl-3 flex items-center">
-                      <span class="text-gray-500 sm:text-sm texl-l">
+                      <span className="text-gray-500 sm:text-sm texl-l">
                         bis:
                       </span>
                     </div>
-                    <input type="text" name="company_website" id="company_website" className="block w-full h-full pl-16 sm:pl-14 sm:text-sm texl-l rounded-md focus:outline-none" placeholder="in Euro"/>
+                    <input
+                      type="text"
+                      name="company_website"
+                      id="company_website"
+                      className="block w-full h-full pl-16 sm:pl-14 sm:text-sm texl-l rounded-md focus:outline-none"
+                      placeholder="in Euro"
+                    />
                   </div>
                 </div>
               </div>
             )}
           </div>
-          <button type="button" className="inline-flex divide-x-0 border-transparent items-center w-35 px-5 text-base font-medium rounded-md text-white bg-orange-500 hover:bg-orange-700 focus:outline-none">
+          <button
+            type="button"
+            className="inline-flex divide-x-0 border-transparent items-center w-35 px-5 text-base font-medium rounded-md text-white bg-orange-500 hover:bg-orange-700 focus:outline-none"
+          >
             Suchen
           </button>
         </div>
@@ -94,4 +140,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar
+export default SearchBar;

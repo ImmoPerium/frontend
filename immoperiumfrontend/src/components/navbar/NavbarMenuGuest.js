@@ -51,11 +51,11 @@ export default class NavbarMenuGuest extends React.Component {
         >
           Einloggen
         </div>
-        <span class="inline-flex rounded-md shadow-sm px-3">
+        <span className="inline-flex rounded-md shadow-sm px-3">
           <button
             onClick={() => this.redirectTo("signup")}
             type="button"
-            class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-orange-700 focus:shadow-outline-indigo active:bg-orange-700 transition ease-in-out duration-150 select-none"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-orange-700 focus:shadow-outline-indigo active:bg-orange-700 transition ease-in-out duration-150 select-none"
           >
             Neu? Jetzt anmelden
           </button>

@@ -85,7 +85,6 @@ export const sendRegistrationDetails = (
       website: "",
     })
     .then((res) => {
-      console.log("HELLO HERE I AM:", JSON.stringify(res.data));
       localStorage.setItem("user", JSON.stringify(res.data));
       dispatch({
         type: REGISTER_SUCCESS,
@@ -287,4 +286,33 @@ export const updateAccount = (account_id, changes, token) => (
     console.log("WAS TRUE");
   }
   return true; */
+};
+
+export const REMOVE_USER_FAVORITE_FETCHING = "REMOVE_USER_FAVORITE_FETCHING";
+export const REMOVE_USER_FAVORITE_SUCCESS = "REMOVE_USER_FAVORITE_SUCCESS";
+export const REMOVE_USER_FAVORITE_FAILURE = "REMOVE_USER_FAVORITE_FAILURE";
+
+export const removeFavoriteOffer = (user_id, favorite_id, token) => (
+  dispatch
+) => {
+  dispatch({
+    type: REMOVE_USER_FAVORITE_FETCHING,
+  });
+  axios
+    .put(`${url}/v1/users/${user_id}/removefavorite/${favorite_id}`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      dispatch({
+        type: REMOVE_USER_FAVORITE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: REMOVE_USER_FAVORITE_FAILURE,
+        payload: err,
+      });
+    });
 };

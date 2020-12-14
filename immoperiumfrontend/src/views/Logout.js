@@ -57,7 +57,7 @@ class Logout extends React.Component {
                       <div className="transition duration-500 ease-in-out transform">
                         <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
                           <svg
-                            class="h-6 w-6 text-green-600"
+                            className="h-6 w-6 text-green-600"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -89,7 +89,7 @@ class Logout extends React.Component {
                       <div className="transition duration-500 ease-in-out transform">
                         <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-200">
                           <svg
-                            class="h-5 w-5 text-yellow-500"
+                            className="h-5 w-5 text-yellow-500"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"

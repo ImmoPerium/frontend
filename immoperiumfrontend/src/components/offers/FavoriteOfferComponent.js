@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { toDate, differenceInDays } from "date-fns";
-class OfferComponent extends React.Component {
+
+class FavoriteOfferComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showDeleteDialog: false,
+      heartIsHovered: false,
     };
   }
 
@@ -17,6 +19,14 @@ class OfferComponent extends React.Component {
     this.props.deleteOfferCallback(this.props.adId);
     this.toggleDeleteDialog();
     this.props.refreshOffersCallback();
+  };
+
+  handleMouseEnter = () => {
+    this.setState({ heartIsHovered: true });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({ heartIsHovered: false });
   };
 
   render() {
@@ -103,7 +113,28 @@ class OfferComponent extends React.Component {
           ""
         )}
         <div className="flex-shrink-0">
-          <a href={`immobilie/${this.props.adId}`}>
+          <a href={`immobilie/${this.props.adId}`} className="relative">
+            <svg
+              className="absolute top-0 right-0 float-left z-10 ml-6 h-8 w-8"
+              style={{ top: "1rem", left: "50%" }}
+              viewBox="0 0 32 32"
+              xmlns="http://www.w3.org/2000/svg"
+              onMouseEnter={this.handleMouseEnter}
+              onMouseLeave={this.handleMouseLeave}
+            >
+              <g id="Love">
+                <path
+                  d="m4.3066 16.9048a8.3536 8.3536 0 0 1 0-11.5186 7.6887 7.6887 0 0 1 10.9922-.1462l.7012.69.7012-.69a7.6893 7.6893 0 0 1 10.9922.146 8.3542 8.3542 0 0 1 0 11.5191l-11.6934 12.0949z"
+                  fill={`${
+                    this.state.heartIsHovered ? "transparent" : "#f07575"
+                  }`}
+                />
+                <path
+                  d="m28.4121 4.6909a8.6884 8.6884 0 0 0 -12.4121-.164 8.6884 8.6884 0 0 0 -12.4121.164 9.3606 9.3606 0 0 0 0 12.9087l11.6934 12.0952a.9989.9989 0 0 0 1.4375 0l11.6933-12.0948a9.3612 9.3612 0 0 0 0-12.9091zm-1.4375 11.5191-10.9746 11.3515-10.9746-11.352a7.3471 7.3471 0 0 1 0-10.1289 6.6916 6.6916 0 0 1 9.6992.0005l.5567.5756a1.03 1.03 0 0 0 1.4375 0l.5566-.5761a6.6922 6.6922 0 0 1 9.6992 0 7.3477 7.3477 0 0 1 0 10.1294z"
+                  fill={`${this.state.heartIsHovered ? "#1d1e21" : "#1d1e21"}`}
+                />
+              </g>
+            </svg>
             <img
               className="h-48 w-full object-cover"
               src={this.props.thumbnail}
@@ -193,29 +224,7 @@ class OfferComponent extends React.Component {
                   {this.props.favoriteCount} Favoriten
                 </span>
                 <div className="w-24 pl-4 pb-2">
-                  <div className="interactions flex flex-row pl-4">
-                    <a href={`/immobilien/edit/${this.props.adId}`}>
-                      <img
-                        className="h-6 w-6 cursor-pointer"
-                        src="./pictures/icons/edit.png"
-                        alt="edit offer"
-                      />
-                    </a>
-                    <svg
-                      className="ml-4 cursor-pointer"
-                      height="24"
-                      width="24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      onClick={() => this.toggleDeleteDialog()}
-                    >
-                      <path d="m15.84 22.25h-7.68a3.05 3.05 0 0 1 -3-2.86l-.91-13.84a.76.76 0 0 1 .2-.55.77.77 0 0 1 .55-.25h14a.75.75 0 0 1 .75.8l-.87 13.84a3.05 3.05 0 0 1 -3.04 2.86zm-10-16 .77 13.05a1.55 1.55 0 0 0 1.55 1.45h7.68a1.56 1.56 0 0 0 1.55-1.45l.81-13z" />
-                      <path d="m21 6.25h-18a.75.75 0 0 1 0-1.5h18a.75.75 0 0 1 0 1.5z" />
-                      <path d="m15 6.25h-6a.76.76 0 0 1 -.75-.75v-1.8a2 2 0 0 1 1.95-1.95h3.6a2 2 0 0 1 1.95 2v1.75a.76.76 0 0 1 -.75.75zm-5.25-1.5h4.5v-1a.45.45 0 0 0 -.45-.45h-3.6a.45.45 0 0 0 -.45.45z" />
-                      <path d="m15 18.25a.76.76 0 0 1 -.75-.75v-8a.75.75 0 0 1 1.5 0v8a.76.76 0 0 1 -.75.75z" />
-                      <path d="m9 18.25a.76.76 0 0 1 -.75-.75v-8a.75.75 0 0 1 1.5 0v8a.76.76 0 0 1 -.75.75z" />
-                      <path d="m12 18.25a.76.76 0 0 1 -.75-.75v-8a.75.75 0 0 1 1.5 0v8a.76.76 0 0 1 -.75.75z" />
-                    </svg>
-                  </div>
+                  <div className="interactions flex flex-row pl-4"></div>
                 </div>
                 {/*             */}
               </div>
@@ -229,4 +238,4 @@ class OfferComponent extends React.Component {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, {})(OfferComponent);
+export default connect(mapStateToProps, {})(FavoriteOfferComponent);

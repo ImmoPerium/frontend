@@ -1,0 +1,122 @@
+import React from "react";
+import { connect } from "react-redux";
+
+import { getUserById, getRealEstateById } from "../actions/index";
+import FavoriteOfferComponent from "../components/offers/FavoriteOfferComponent";
+import { removeFavoriteOffer } from "../actions/index";
+
+class Favorites extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    if (
+      JSON.parse(localStorage.getItem("user")) &&
+      localStorage.getItem("token")
+    ) {
+      this.props.getRealEstateById(
+        JSON.parse(localStorage.getItem("user")).id,
+        localStorage.getItem("token")
+      );
+      this.props.getUserById(
+        JSON.parse(localStorage.getItem("user")).id,
+        localStorage.getItem("token")
+      );
+    }
+  }
+
+  unfavoriteOffer = (offer_id) => {
+    console.log("RECEIVED", offer_id);
+    if (offer_id) {
+      this.props.removeFavoriteOffer(
+        JSON.parse(localStorage.getItem("user")).id,
+        offer_id,
+        localStorage.getItem("token")
+      );
+    }
+  };
+
+  render() {
+    /* const favoriteOfferIdArray = this.props.userByID.favorite_advertisements.split(
+      "-"
+    ); */
+    /*     const filteredFavoriteOffers = this.props.userByID.favorite_advertisements
+      .split("-")
+      .includes("10"); */
+    return (
+      <div className="relative pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8 min-h-screen">
+        <div className="absolute inset-0 bg-gray-200">
+          <div className="h-1/3 sm:h-2/3" />
+        </div>
+        <div className="relative max-w-7xl mx-auto">
+          <div className="text-center">
+            <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
+              Deine Lieblingsimmobilie
+            </h2>
+            <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+              Behalte deine Favoriten im Auge bevor sie jemand anders schnappt!
+            </p>
+          </div>
+          {/* {console.log("CHECK ", filteredFavoriteOffers)} */}
+          {/*       {console.log(
+            "FAVOR",
+            this.props.userByID.favorite_advertisements.split("-")
+          )} */}
+          {/* {console.log("FILTERED", filteredFavoriteOffers)} */}
+          <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none w-full">
+            {this.props.offers && this.props.userByID.favorite_advertisements
+              ? this.props.offers
+                  .filter((offer) =>
+                    this.props.userByID.favorite_advertisements
+                      .split("-")
+                      .includes(offer.id.toString())
+                  )
+                  .map((offer) => (
+                    <FavoriteOfferComponent
+                      title={offer.advertisement_purpose}
+                      description={offer.advertisement_description}
+                      profilePicture={
+                        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      }
+                      firstname={
+                        JSON.parse(localStorage.getItem("user")).firstname
+                      }
+                      lastname={
+                        JSON.parse(localStorage.getItem("user")).lastname
+                      }
+                      viewCount={offer.view_count}
+                      favoriteCount={offer.favorite_count}
+                      createdAt={offer.created_at}
+                      thumbnail={offer.other_description}
+                      deleteFavoriteCallback={(offer_id) =>
+                        this.deleteOffer(offer_id)
+                      }
+                      refreshOffersCallback={() =>
+                        this.props.getRealEstateById(
+                          JSON.parse(localStorage.getItem("user")).id,
+                          localStorage.getItem("token")
+                        )
+                      }
+                      adId={offer.id}
+                    />
+                  ))
+              : console.log("NOTHING TO DISPLAY")}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  offers: state.usersReducer.realEstateOffersOfUser,
+  userByID: state.usersReducer.userByID,
+});
+
+export default connect(mapStateToProps, {
+  getRealEstateById,
+  getUserById,
+  removeFavoriteOffer,
+})(Favorites);

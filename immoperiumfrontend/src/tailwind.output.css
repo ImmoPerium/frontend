@@ -1481,6 +1481,10 @@ img {
   flex-shrink: 0;
 }
 
+.float-right {
+  float: right;
+}
+
 .font-medium {
   font-weight: 500;
 }
@@ -1669,6 +1673,10 @@ img {
 
 .mb-6 {
   margin-bottom: 1.5rem;
+}
+
+.ml-6 {
+  margin-left: 1.5rem;
 }
 
 .mt-8 {

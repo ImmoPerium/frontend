@@ -13,6 +13,7 @@ import Logout from "./views/Logout.js";
 import Explore from "./views/Explore.js";
 import NewOffer from "./views/NewOffer.js";
 import Offers from "./views/Offers.js";
+import Favorites from "./views/Favorites.js";
 import Home from "./views/Home.js";
 import ViewProfilePage from "./views/ViewProfilePage.js";
 import Credo from "./views/Credo.js";
@@ -55,6 +56,11 @@ function App() {
             exact
             path="/impressum"
             render={(...props) => <Impressum {...props} />}
+          />
+          <Route
+            exact
+            path="/favorites"
+            render={(...props) => <Favorites {...props} />}
           />
           <Route
             exact
