@@ -2,14 +2,82 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { deleteAccount } from "../actions/index";
+import { deleteAccount, getUserById } from "../actions/index";
+
 class ViewProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showDeleteDialog: false,
+      showNameInputs: false,
+      showPhotoInput: false,
+      showEmailInput: false,
+      showPhoneInput: false,
+      firstnameInput: "",
+      lastnameInput: "",
+      photoInput: "",
+      emailInput: "",
+      phoneInput: "",
     };
   }
+
+  componentDidMount() {
+    if (
+      JSON.parse(localStorage.getItem("user")) &&
+      localStorage.getItem("token")
+    )
+      return this.props.getUserById(
+        JSON.parse(localStorage.getItem("user")).id,
+        localStorage.getItem("token")
+      );
+  }
+
+  onChange = (event) =>
+    this.setState({ [event.target.name]: event.target.value });
+
+  onClick = (update_setting) => {
+    switch (update_setting) {
+      case "name":
+        return this.setState({ showNameInputs: !this.state.showNameInputs });
+      case "photo":
+        return this.setState({ showPhotoInput: !this.state.showPhotoInput });
+      case "email":
+        return this.setState({ showEmailInput: !this.state.showEmailInput });
+      case "phone":
+        return this.setState({ showPhoneInput: !this.state.showPhoneInput });
+      default:
+        return "";
+    }
+  };
+
+  resetInput = (input_name) => {
+    switch (input_name) {
+      case "name":
+        return this.setState({ firstnameInput: "", lastnameInput: "" }, () => {
+          this.onClick("name");
+        });
+      case "photo":
+        return this.setState({ photoInput: "" }, () => {
+          this.onClick("photo");
+        });
+      case "email":
+        return this.setState({ emailInput: "" }, () => {
+          this.onClick("email");
+        });
+      case "phone":
+        return this.setState({ phoneInput: "" }, () => {
+          this.onClick("phone");
+        });
+      default:
+        return "";
+    }
+  };
+
+  _handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      this.onClick();
+    }
+  };
 
   toggleDeleteDialog = () => {
     this.setState({ showDeleteDialog: !this.state.showDeleteDialog });
@@ -20,8 +88,7 @@ class ViewProfilePage extends React.Component {
       JSON.parse(localStorage.getItem("user")) &&
       localStorage.getItem("token")
     ) {
-      this.toggleDeleteDialog();
-      this.props.deleteAccount(
+      this.props.getUserById(
         JSON.parse(localStorage.getItem("user")).id,
         localStorage.getItem("token")
       );
@@ -29,6 +96,7 @@ class ViewProfilePage extends React.Component {
   };
 
   render() {
+    const userData = JSON.parse(localStorage.getItem("user"));
     return (
       <div className="h-screen bg-white overflow-hidden flex">
         {localStorage.getItem("token") === null &&
@@ -205,19 +273,95 @@ class ViewProfilePage extends React.Component {
                             <dt className="text-sm font-medium text-gray-500">
                               Name
                             </dt>
-                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                              <span className="flex-grow">
-                                Vorname Nachname
-                              </span>
-                              <span className="ml-4 flex-shrink-0">
-                                <button
-                                  type="button"
-                                  className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                >
-                                  Bearbeiten
-                                </button>
-                              </span>
-                            </dd>
+
+                            {this.state.showNameInputs ? (
+                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                <span className="flex-grow">
+                                  <div>
+                                    <label
+                                      htmlFor="password"
+                                      className="block text-sm font-medium leading-5 text-gray-700 pt-4"
+                                    >
+                                      Vorname
+                                    </label>
+                                    <div className="mt-1 rounded-md shadow-sm">
+                                      <input
+                                        id="firstname"
+                                        type="text"
+                                        required
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        name="firstnameInput"
+                                        placeholder={userData.firstname}
+                                        value={this.state.firstnameInput}
+                                        onChange={this.onChange}
+                                        onKeyDown={this._handleKeyDown}
+                                        autoComplete="off"
+                                      />
+                                    </div>
+                                    <label
+                                      htmlFor="password"
+                                      className="block text-sm font-medium leading-5 text-gray-700 pt-4"
+                                    >
+                                      Nachname
+                                    </label>
+                                    <div className="mt-1 rounded-md shadow-sm">
+                                      <input
+                                        id="password"
+                                        type="text"
+                                        required
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        name="lastnameInput"
+                                        placeholder={userData.lastname}
+                                        value={this.state.lastnameInput}
+                                        onChange={this.onChange}
+                                        onKeyDown={this._handleKeyDown}
+                                        autoComplete="off"
+                                      />
+                                    </div>
+                                  </div>
+                                </span>
+                                <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
+                                  <button
+                                    type="button"
+                                    onClick={() => this.resetInput("name")}
+                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                                  >
+                                    Abbrechen
+                                  </button>
+                                  <span
+                                    className="text-gray-300"
+                                    aria-hidden="true"
+                                  >
+                                    |
+                                  </span>
+                                  <button
+                                    type="button"
+                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                                  >
+                                    Speichern
+                                  </button>
+                                </span>
+                              </dd>
+                            ) : (
+                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                <span className="flex-grow">
+                                  {userData
+                                    ? userData.firstname +
+                                      " " +
+                                      userData.lastname
+                                    : ""}
+                                </span>
+                                <span className="ml-4 flex-shrink-0">
+                                  <button
+                                    type="button"
+                                    onClick={() => this.onClick("name")}
+                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                                  >
+                                    Bearbeiten
+                                  </button>
+                                </span>
+                              </dd>
+                            )}
                           </div>
                           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
                             <dt className="text-sm font-medium text-gray-500">
@@ -312,4 +456,6 @@ const mapStateToProps = (state) => ({
   accountDeletion: state.usersReducer.accountDeletion,
 });
 
-export default connect(mapStateToProps, { deleteAccount })(ViewProfilePage);
+export default connect(mapStateToProps, { deleteAccount, getUserById })(
+  ViewProfilePage
+);

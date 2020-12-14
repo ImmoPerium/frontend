@@ -12,6 +12,9 @@ import {
   GET_REALESTATE_BY_USER_SUCCESS,
   GET_REALESTATE_BY_USER_FAILURE,
   DELETE_ACCOUNT_SUCCESS,
+  GET_USERS_BY_ID_FETCHING,
+  GET_USERS_BY_ID_SUCCESS,
+  GET_USERS_BY_ID_FAILURE,
 } from "../actions";
 
 const initialState = {
@@ -28,6 +31,9 @@ const initialState = {
   fetchingRealEstateOffersOfUser: false,
   fetchingRealEstateOffersOfUserError: "",
   accountDeletion: false,
+  userByID: {},
+  fetchingUserByID: false,
+  fetchingUserByIDError: "",
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -113,6 +119,25 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         accountDeletion: true,
+      };
+    case GET_USERS_BY_ID_FETCHING:
+      return {
+        ...state,
+        fetchingUserByID: true,
+        fetchingUserByIDError: "",
+      };
+    case GET_USERS_BY_ID_SUCCESS:
+      return {
+        ...state,
+        userByID: action.payload,
+        fetchingUserByID: false,
+        fetchingUserByIDError: "",
+      };
+    case GET_USERS_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingUserByID: false,
+        fetchingUserByIDError: action.payload,
       };
     default:
       return state;

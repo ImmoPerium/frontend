@@ -28,6 +28,33 @@ export const getUsers = () => (dispatch) => {
     });
 };
 
+export const GET_USERS_BY_ID_FETCHING = "GET_USERS_BY_ID_FETCHING";
+export const GET_USERS_BY_ID_SUCCESS = "GET_USERS_BY_ID_SUCCESS";
+export const GET_USERS_BY_ID_FAILURE = "GET_USERS_BY_ID_FAILURE";
+
+export const getUserById = (user_id, token) => (dispatch) => {
+  dispatch({
+    type: GET_USERS_BY_ID_FETCHING,
+  });
+  axios
+    .get(`${url}/v1/users/${user_id}`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      console.log("GOT SINGLE USER", res.data);
+      dispatch({
+        type: GET_USERS_BY_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_USERS_BY_ID_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const REGISTER_FETCHING = "REGISTER_FETCHING";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
