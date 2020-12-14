@@ -58,6 +58,8 @@ export const sendRegistrationDetails = (
       website: "",
     })
     .then((res) => {
+      console.log("HELLO HERE I AM:", JSON.stringify(res.data));
+      localStorage.setItem("user", JSON.stringify(res.data));
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
@@ -190,6 +192,35 @@ export const deleteOffer = (offer_id, token) => (dispatch) => {
       console.log("ERROR", err);
       dispatch({
         type: DELETE_OFFER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const DELETE_ACCOUNT_FETCHING = "DELETE_ACCOUNT_FETCHING";
+export const DELETE_ACCOUNT_SUCCESS = "DELETE_ACCOUNT_SUCCESS";
+export const DELETE_ACCOUNT_FAILURE = "DELETE_ACCOUNT_FAILURE";
+
+export const deleteAccount = (account_id, token) => (dispatch) => {
+  dispatch({
+    type: DELETE_ACCOUNT_FETCHING,
+  });
+  axios
+    .delete(`${url}/v1/users/${account_id}`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      dispatch({
+        type: DELETE_ACCOUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: DELETE_ACCOUNT_FAILURE,
         payload: err,
       });
     });

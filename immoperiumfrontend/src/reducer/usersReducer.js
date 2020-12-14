@@ -11,6 +11,7 @@ import {
   GET_REALESTATE_BY_USER_FETCHING,
   GET_REALESTATE_BY_USER_SUCCESS,
   GET_REALESTATE_BY_USER_FAILURE,
+  DELETE_ACCOUNT_SUCCESS,
 } from "../actions";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   realEstateOffersOfUser: [],
   fetchingRealEstateOffersOfUser: false,
   fetchingRealEstateOffersOfUserError: "",
+  accountDeletion: false,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -106,6 +108,11 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         fetchingRealEstateOffersOfUser: false,
         fetchingRealEstateOffersOfUserError: action.payload,
+      };
+    case DELETE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        accountDeletion: true,
       };
     default:
       return state;

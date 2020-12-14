@@ -14,7 +14,6 @@ class OfferComponent extends React.Component {
   };
 
   deleteOffer = () => {
-    console.log("DELETION");
     this.props.deleteOfferCallback(this.props.adId);
     this.toggleDeleteDialog();
     this.props.refreshOffersCallback();

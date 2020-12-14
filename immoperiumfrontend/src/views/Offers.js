@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { Route } from "react-router-dom";
 
 import NewOfferComponent from "../components/offers/NewOfferComponent";
@@ -33,9 +32,9 @@ class Offers extends React.Component {
 
   render() {
     return (
-      <div className="relative pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
-        <div className="absolute inset-0">
-          <div className="bg-white h-1/3 sm:h-2/3" />
+      <div className="relative pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8 min-h-screen">
+        <div className="absolute inset-0 bg-gray-200">
+          <div className="h-1/3 sm:h-2/3" />
         </div>
         <div className="relative max-w-7xl mx-auto">
           <div className="text-center">
@@ -47,7 +46,7 @@ class Offers extends React.Component {
               Immobilien.
             </p>
           </div>
-          <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+          <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none w-full">
             <NewOfferComponent />
             {/* FOR EACH OFFER A NEW PROPERTY COMPONENT */}
             {this.props.offers
