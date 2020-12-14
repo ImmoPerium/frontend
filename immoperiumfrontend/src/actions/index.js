@@ -316,3 +316,30 @@ export const removeFavoriteOffer = (user_id, favorite_id, token) => (
       });
     });
 };
+
+export const ADD_USER_FAVORITE_FETCHING = "ADD_USER_FAVORITE_FETCHING";
+export const ADD_USER_FAVORITE_SUCCESS = "ADD_USER_FAVORITE_SUCCESS";
+export const ADD_USER_FAVORITE_FAILURE = "ADD_USER_FAVORITE_FAILURE";
+
+export const addFavoriteOffer = (user_id, favorite_id, token) => (dispatch) => {
+  dispatch({
+    type: ADD_USER_FAVORITE_FETCHING,
+  });
+  axios
+    .get(`${url}/v1/users/${user_id}/addfavorite/${favorite_id}`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      dispatch({
+        type: ADD_USER_FAVORITE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: ADD_USER_FAVORITE_FAILURE,
+        payload: err,
+      });
+    });
+};

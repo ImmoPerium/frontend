@@ -90,7 +90,7 @@ class FavoriteOfferComponent extends React.Component {
                       className="text-lg leading-6 font-medium text-gray-900"
                       id="modal-headline"
                     >
-                      Immobilie Defavorisieren
+                      Immobilie nicht mehr folgen?
                     </h3>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">

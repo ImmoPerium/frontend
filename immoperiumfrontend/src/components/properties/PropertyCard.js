@@ -1,7 +1,84 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+import {
+  addFavoriteOffer,
+  getRealEstateById,
+  getUserById,
+} from "../../actions";
+import { connect } from "react-redux";
 
-export default class PropertyCard extends React.Component {
+class PropertyCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirectToOffer: false,
+      heartIsHovered: false,
+    };
+  }
+
+  componentDidMount() {
+    if (
+      JSON.parse(localStorage.getItem("user")) &&
+      localStorage.getItem("token")
+    ) {
+      this.props.getRealEstateById(
+        JSON.parse(localStorage.getItem("user")).id,
+        localStorage.getItem("token")
+      );
+      this.props.getUserById(
+        JSON.parse(localStorage.getItem("user")).id,
+        localStorage.getItem("token")
+      );
+    }
+  }
+
+  handleRedirectToOffer = () => {
+    this.setState({ redirectToOffer: true }, () =>
+      this.setState({ redirectToOffer: false })
+    );
+  };
+
+  handleMouseEnter = () => {
+    this.setState({ heartIsHovered: true });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({ heartIsHovered: false });
+  };
+
+  handleFavorite = (offer_id) => {
+    if (offer_id) {
+      this.addFavoriteAsync(
+        JSON.parse(localStorage.getItem("user")).id,
+        offer_id,
+        localStorage.getItem("token")
+      ).then(() =>
+        setTimeout(() => {
+          this.props.getUserById(
+            JSON.parse(localStorage.getItem("user")).id,
+            localStorage.getItem("token")
+          );
+        }, 800)
+      );
+    }
+  };
+
+  addFavoriteAsync = async (user_id, offer_id, token) => {
+    await this.props.addFavoriteOffer(user_id, offer_id, token);
+  };
+
   render() {
+    let favoriteIdArray = [];
+    if (this.props.offers && this.props.userByID.favorite_advertisements) {
+      favoriteIdArray = this.props.offers
+        .filter((offer) =>
+          this.props.userByID.favorite_advertisements
+            .split("-")
+            .includes(offer.id.toString())
+        )
+        .map((offer) => offer.id);
+      console.log("favoriteIdArray", favoriteIdArray);
+    }
     return (
       <div
         className={`sm:mt-0 sm:w-80 sm:flex-shrink-0 ${
@@ -10,15 +87,52 @@ export default class PropertyCard extends React.Component {
             : ""
         }`}
       >
+        {this.state.redirectToOffer ? (
+          <Redirect to={`/immobilie/${this.props.propertyiD}`} />
+        ) : (
+          ""
+        )}
         <div>
           <div className="relative pb-5/6">
-            <a href={`/immobilie/${this.props.propertyiD}`}>
+            <div
+              className="cursor-pointer"
+              onClick={() => this.handleRedirectToOffer()}
+            >
+              <svg
+                className="absolute top-0 right-0 float-left z-20 ml-6 h-8 w-8 cursor-pointer"
+                style={{ top: "8%", left: "75%" }}
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg"
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  this.handleFavorite(this.props.propertyiD);
+                }}
+              >
+                <g id="Love">
+                  <path
+                    d="m4.3066 16.9048a8.3536 8.3536 0 0 1 0-11.5186 7.6887 7.6887 0 0 1 10.9922-.1462l.7012.69.7012-.69a7.6893 7.6893 0 0 1 10.9922.146 8.3542 8.3542 0 0 1 0 11.5191l-11.6934 12.0949z"
+                    fill={`${
+                      favoriteIdArray.includes(this.props.propertyiD)
+                        ? "#f07575"
+                        : "transparent"
+                    }`}
+                  />
+                  <path
+                    d="m28.4121 4.6909a8.6884 8.6884 0 0 0 -12.4121-.164 8.6884 8.6884 0 0 0 -12.4121.164 9.3606 9.3606 0 0 0 0 12.9087l11.6934 12.0952a.9989.9989 0 0 0 1.4375 0l11.6933-12.0948a9.3612 9.3612 0 0 0 0-12.9091zm-1.4375 11.5191-10.9746 11.3515-10.9746-11.352a7.3471 7.3471 0 0 1 0-10.1289 6.6916 6.6916 0 0 1 9.6992.0005l.5567.5756a1.03 1.03 0 0 0 1.4375 0l.5566-.5761a6.6922 6.6922 0 0 1 9.6992 0 7.3477 7.3477 0 0 1 0 10.1294z"
+                    fill={`${
+                      this.state.heartIsHovered ? "#1d1e21" : "#1d1e21"
+                    }`}
+                  />
+                </g>
+              </svg>
               <img
                 className="absolute inset-0 h-full w-full rounded-lg shadow-md object-cover"
                 src={this.props.imageUrl}
                 alt=""
               />
-            </a>
+            </div>
           </div>
           <div className="relative px-4 -mt-16">
             <div className="bg-white rounded-lg px-4 py-4 shadow-lg">
@@ -93,3 +207,16 @@ export default class PropertyCard extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    offers: state.usersReducer.realEstateOffersOfUser,
+    userByID: state.usersReducer.userByID,
+  };
+};
+
+export default connect(mapStateToProps, {
+  addFavoriteOffer,
+  getRealEstateById,
+  getUserById,
+})(PropertyCard);
