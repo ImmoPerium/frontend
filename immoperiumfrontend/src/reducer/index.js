@@ -1,6 +1,8 @@
-import { combineReducers } from 'redux';
-import getUsersReducer from './usersReducer';
+import { combineReducers } from "redux";
+import usersReducer from "./usersReducer";
+import advertisementsReducer from "./advertisementsReducer";
 
 export default combineReducers({
-  getUsersReducer
+  usersReducer,
+  advertisementsReducer,
 });

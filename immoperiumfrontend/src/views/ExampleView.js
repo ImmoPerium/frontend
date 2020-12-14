@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { Route } from "react-router-dom";
+/* import { Redirect } from "react-router-dom";
+import { Route } from "react-router-dom"; */
 
 /* import {
   getAllTours,
@@ -9,37 +9,31 @@ import { Route } from "react-router-dom";
   getSingleGuidesTours,
 } from "../actions"; */
 
-
 /* A template for a more complex React component  */
 class ExampleView extends React.Component {
   /* React Class state */
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   /* React Class functions here */
 
   render() {
     /* Functions and code for usage in or before JSX here */
-    return (
-      <div>
-        {/* JSX Code here */}
-      </div>
-    );
+    return <div>{/* JSX Code here */}</div>;
   }
 }
 
 /* Import Redux State to props here */
 const mapStateToProps = (state) => ({
-/*   tourProps: state.tourReducer.tours,
+  /*   tourProps: state.tourReducer.tours,
   currentUser: state.userReducer.currentUser, */
 });
 
 /* Import Action methods here  */
 export default connect(mapStateToProps, {
-/*   getAllTours,
+  /*   getAllTours,
   getSingleUserById,
   getSingleGuidesTours, */
 })(ExampleView);

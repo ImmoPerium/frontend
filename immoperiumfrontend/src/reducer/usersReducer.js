@@ -4,60 +4,144 @@ import {
   GET_USERS_FAILURE,
   REGISTER_FETCHING,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE
-} from '../actions';
+  REGISTER_FAILURE,
+  LOGIN_FETCHING,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  GET_REALESTATE_BY_USER_FETCHING,
+  GET_REALESTATE_BY_USER_SUCCESS,
+  GET_REALESTATE_BY_USER_FAILURE,
+  DELETE_ACCOUNT_SUCCESS,
+  GET_USERS_BY_ID_FETCHING,
+  GET_USERS_BY_ID_SUCCESS,
+  GET_USERS_BY_ID_FAILURE,
+} from "../actions";
 
 const initialState = {
-  users: [],  
+  users: {},
   fetchingUsers: false,
-  fetchingUsersError: '',
+  fetchingUsersError: "",
   fetchingRegister: false,
-  fetchingRegisterError: ''
+  fetchingRegisterError: "",
+  LoggedInUser: {},
+  LoggedInToken: "",
+  fetchingLogIn: false,
+  fetchingLogInError: "",
+  realEstateOffersOfUser: [],
+  fetchingRealEstateOffersOfUser: false,
+  fetchingRealEstateOffersOfUserError: "",
+  accountDeletion: false,
+  userByID: {},
+  fetchingUserByID: false,
+  fetchingUserByIDError: "",
 };
 
-const getUsersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS_FETCHING:
       return {
         ...state,
         fetchingUsers: true,
-        fetchingUsersError: '',
+        fetchingUsersError: "",
       };
-      case GET_USERS_SUCCESS:
+    case GET_USERS_SUCCESS:
       return {
         ...state,
         users: action.payload.users,
         fetchingUsers: false,
-        fetchingUsersError: '',
+        fetchingUsersError: "",
       };
-      case GET_USERS_FAILURE:
+    case GET_USERS_FAILURE:
       return {
         ...state,
         fetchingUsers: false,
         fetchingUsersError: action.payload,
-        };
-      case REGISTER_FETCHING:
+      };
+    case REGISTER_FETCHING:
       return {
         ...state,
         fetchingRegister: true,
-        fetchingRegisterError: '',
+        fetchingRegisterError: "",
       };
-      case REGISTER_SUCCESS:
+    case REGISTER_SUCCESS:
       return {
         ...state,
-        users: [...action.payload],
+        users: action.payload,
         fetchingRegister: false,
-        fetchingRegisterError: '',
+        fetchingRegisterError: "",
       };
-      case REGISTER_FAILURE:
+    case REGISTER_FAILURE:
       return {
         ...state,
         fetchingRegister: false,
         fetchingRegisterError: action.payload,
       };
+    case LOGIN_FETCHING:
+      return {
+        ...state,
+        fetchingLogIn: true,
+        fetchingLogInError: "",
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        LoggedInUser: action.payload.user,
+        LoggedInToken: action.payload.token,
+        fetchingLogIn: false,
+        fetchingLogInError: "",
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        fetchingLogIn: false,
+        fetchingLogInError: action.payload,
+      };
+    case GET_REALESTATE_BY_USER_FETCHING:
+      return {
+        ...state,
+        fetchingRealEstateOffersOfUser: true,
+        fetchingRealEstateOffersOfUserError: "",
+      };
+    case GET_REALESTATE_BY_USER_SUCCESS:
+      return {
+        ...state,
+        realEstateOffersOfUser: action.payload,
+        fetchingRealEstateOffersOfUser: false,
+        fetchingRealEstateOffersOfUserError: "",
+      };
+    case GET_REALESTATE_BY_USER_FAILURE:
+      return {
+        ...state,
+        fetchingRealEstateOffersOfUser: false,
+        fetchingRealEstateOffersOfUserError: action.payload,
+      };
+    case DELETE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        accountDeletion: true,
+      };
+    case GET_USERS_BY_ID_FETCHING:
+      return {
+        ...state,
+        fetchingUserByID: true,
+        fetchingUserByIDError: "",
+      };
+    case GET_USERS_BY_ID_SUCCESS:
+      return {
+        ...state,
+        userByID: action.payload,
+        fetchingUserByID: false,
+        fetchingUserByIDError: "",
+      };
+    case GET_USERS_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingUserByID: false,
+        fetchingUserByIDError: action.payload,
+      };
     default:
-    return state;
+      return state;
   }
 };
 
-export default getUsersReducer;
+export default usersReducer;
