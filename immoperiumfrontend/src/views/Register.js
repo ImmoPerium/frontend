@@ -18,6 +18,7 @@ class Register extends Component {
 
   onChange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
+
   onClick = () => {
     if (
       this.state.first_name &&
@@ -32,6 +33,12 @@ class Register extends Component {
         this.state.email,
         this.state.password
       );
+    }
+  };
+
+  _handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      this.onClick();
     }
   };
 
@@ -242,6 +249,7 @@ class Register extends Component {
                     name="check_password"
                     value={this.state.check_password}
                     onChange={this.onChange}
+                    onKeyDown={this._handleKeyDown}
                     autoComplete="off"
                   />
                   {this.state.password &&
