@@ -95,7 +95,7 @@ class ViewProfilePage extends React.Component {
     }
   };
 
-  updateAccount = (change_input) => {
+  updateAccount = async (change_input) => {
     const userData = this.props.userByID;
     const tokenData = localStorage.getItem("token");
     switch (change_input) {
@@ -112,39 +112,52 @@ class ViewProfilePage extends React.Component {
           if (this.state.lastnameInput !== userData.lastname) {
             updatedLastname = this.state.lastnameInput;
           }
-          if (updatedFirstname && updatedLastname) {
-            this.props.updateAccount(
+          if (updatedFirstname !== "" && updatedLastname !== "") {
+            this.calledUpdateAsync(
               userData.id,
               { firstname: updatedFirstname, lastname: updatedLastname },
               tokenData
+            ).then(() =>
+              setTimeout(() => {
+                this.props.getUserById(
+                  JSON.parse(localStorage.getItem("user")).id,
+                  localStorage.getItem("token")
+                );
+              }, 800)
             );
-            this.props.getUserById(
-              JSON.parse(localStorage.getItem("user")).id,
-              localStorage.getItem("token")
-            );
-            window.location.reload();
-          } else if (updatedFirstname && !updatedLastname) {
-            this.props.updateAccount(
+          } else if (updatedFirstname !== "" && updatedLastname === "") {
+            console.log("updatedFirstname", updatedFirstname);
+            console.log("updatedLastname", updatedLastname);
+            console.log("userData.firstname", userData.firstname);
+            console.log("userData.lastname", userData.lastname);
+            console.log("this.state.firstnameInput", this.state.firstnameInput);
+            console.log("this.state.firstnameInput", this.state.firstnameInput);
+
+            this.calledUpdateAsync(
               userData.id,
               { firstname: updatedFirstname },
               tokenData
+            ).then(() =>
+              setTimeout(() => {
+                this.props.getUserById(
+                  JSON.parse(localStorage.getItem("user")).id,
+                  localStorage.getItem("token")
+                );
+              }, 800)
             );
-            this.props.getUserById(
-              JSON.parse(localStorage.getItem("user")).id,
-              localStorage.getItem("token")
-            );
-            window.location.reload();
-          } else if (!updatedFirstname && updatedLastname) {
-            this.props.updateAccount(
+          } else if (updatedFirstname === "" && updatedLastname !== "") {
+            this.calledUpdateAsync(
               userData.id,
               { lastname: updatedLastname },
               tokenData
+            ).then(() =>
+              setTimeout(() => {
+                this.props.getUserById(
+                  JSON.parse(localStorage.getItem("user")).id,
+                  localStorage.getItem("token")
+                );
+              }, 800)
             );
-            this.props.getUserById(
-              JSON.parse(localStorage.getItem("user")).id,
-              localStorage.getItem("token")
-            );
-            window.location.reload();
           }
         }
         this.onClick("name");
@@ -154,21 +167,56 @@ class ViewProfilePage extends React.Component {
           this.onClick("photo");
         });
       case "email":
-        return this.setState({ emailInput: "" }, () => {
-          this.onClick("email");
-        });
+        let updatedEmail = "";
+        if (this.state.emailInput !== userData.email_address) {
+          updatedEmail = this.state.emailInput;
+          this.calledUpdateAsync(
+            userData.id,
+            { email_address: updatedEmail },
+            tokenData
+          ).then(() =>
+            setTimeout(() => {
+              this.props.getUserById(
+                JSON.parse(localStorage.getItem("user")).id,
+                localStorage.getItem("token")
+              );
+            }, 800)
+          );
+        }
+        this.onClick("email");
+        break;
       case "phone":
-        return this.setState({ phoneInput: "" }, () => {
-          this.onClick("phone");
-        });
+        let updatedPhone = "";
+        if (this.state.phoneInput !== userData.phonenumber) {
+          updatedPhone = this.state.phoneInput;
+          this.calledUpdateAsync(
+            userData.id,
+            { phonenumber: updatedPhone },
+            tokenData
+          ).then(() =>
+            setTimeout(() => {
+              this.props.getUserById(
+                JSON.parse(localStorage.getItem("user")).id,
+                localStorage.getItem("token")
+              );
+            }, 800)
+          );
+        }
+        this.onClick("phone");
+        break;
       default:
         return "";
     }
   };
 
+  calledUpdateAsync = async (userData_id, changeObject, token) => {
+    await this.props.updateAccount(userData_id, changeObject, token);
+  };
+
   render() {
     const userData = JSON.parse(localStorage.getItem("user"));
     const getUserByIdData = this.props.userByID;
+
     return (
       <div className="h-screen bg-white overflow-hidden flex">
         {localStorage.getItem("token") === null &&
@@ -478,35 +526,153 @@ class ViewProfilePage extends React.Component {
                             <dt className="text-sm font-medium text-gray-500">
                               Email
                             </dt>
-                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                              <span className="flex-grow">
-                                vorname.nachname@provider.com
-                              </span>
-                              <span className="ml-4 flex-shrink-0">
-                                <button
-                                  type="button"
-                                  className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                >
-                                  Bearbeiten
-                                </button>
-                              </span>
-                            </dd>
+
+                            {this.state.showEmailInput ? (
+                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                <span className="flex-grow">
+                                  <div>
+                                    <label
+                                      htmlFor="password"
+                                      className="block text-sm font-medium leading-5 text-gray-700 pt-4"
+                                    >
+                                      E-Mail-Adresse
+                                    </label>
+                                    <div className="mt-1 rounded-md shadow-sm">
+                                      <input
+                                        id="email"
+                                        type="email"
+                                        required
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        name="emailInput"
+                                        placeholder={
+                                          getUserByIdData.email_address
+                                        }
+                                        defaultValue={this.state.emailInput}
+                                        onChange={this.onChange}
+                                        onKeyDown={(event) =>
+                                          this._handleKeyDown(event, "email")
+                                        }
+                                        autoComplete="off"
+                                      />
+                                    </div>
+                                  </div>
+                                </span>
+                                <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
+                                  <button
+                                    type="button"
+                                    onClick={() => this.resetInput("email")}
+                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                                  >
+                                    Abbrechen
+                                  </button>
+                                  <span
+                                    className="text-gray-300"
+                                    aria-hidden="true"
+                                  >
+                                    |
+                                  </span>
+                                  <button
+                                    type="button"
+                                    onClick={() => this.updateAccount("email")}
+                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                                  >
+                                    Speichern
+                                  </button>
+                                </span>
+                              </dd>
+                            ) : (
+                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                <span className="flex-grow">
+                                  {userData
+                                    ? getUserByIdData.email_address
+                                    : ""}
+                                </span>
+                                <span className="ml-4 flex-shrink-0">
+                                  <button
+                                    type="button"
+                                    onClick={() => this.onClick("email")}
+                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                                  >
+                                    Bearbeiten
+                                  </button>
+                                </span>
+                              </dd>
+                            )}
                           </div>
                           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
                             <dt className="text-sm font-medium text-gray-500">
                               Telefonnummer
                             </dt>
-                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                              <span className="flex-grow">+49 1714825614</span>
-                              <span className="ml-4 flex-shrink-0">
-                                <button
-                                  type="button"
-                                  className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                                >
-                                  Bearbeiten
-                                </button>
-                              </span>
-                            </dd>
+
+                            {this.state.showPhoneInput ? (
+                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                <span className="flex-grow">
+                                  <div>
+                                    <label
+                                      htmlFor="password"
+                                      className="block text-sm font-medium leading-5 text-gray-700 pt-4"
+                                    >
+                                      Telefonnummer
+                                    </label>
+                                    <div className="mt-1 rounded-md shadow-sm">
+                                      <input
+                                        id="phone"
+                                        type="text"
+                                        required
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        name="phoneInput"
+                                        placeholder={
+                                          getUserByIdData.phonenumber
+                                        }
+                                        defaultValue={this.state.phoneInput}
+                                        onChange={this.onChange}
+                                        onKeyDown={(event) =>
+                                          this._handleKeyDown(event, "phone")
+                                        }
+                                        autoComplete="off"
+                                      />
+                                    </div>
+                                  </div>
+                                </span>
+                                <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
+                                  <button
+                                    type="button"
+                                    onClick={() => this.resetInput("phone")}
+                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                                  >
+                                    Abbrechen
+                                  </button>
+                                  <span
+                                    className="text-gray-300"
+                                    aria-hidden="true"
+                                  >
+                                    |
+                                  </span>
+                                  <button
+                                    type="button"
+                                    onClick={() => this.updateAccount("phone")}
+                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                                  >
+                                    Speichern
+                                  </button>
+                                </span>
+                              </dd>
+                            ) : (
+                              <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                <span className="flex-grow">
+                                  {userData ? getUserByIdData.phonenumber : ""}
+                                </span>
+                                <span className="ml-4 flex-shrink-0">
+                                  <button
+                                    type="button"
+                                    onClick={() => this.onClick("phone")}
+                                    className="bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                                  >
+                                    Bearbeiten
+                                  </button>
+                                </span>
+                              </dd>
+                            )}
                           </div>
                           <button
                             type="button"
