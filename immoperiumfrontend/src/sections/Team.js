@@ -147,6 +147,8 @@ class Team extends React.Component {
                         <a
                           href="https://github.com/LucMoH"
                           className="text-gray-400 hover:text-gray-300"
+                          target="_blank"
+                          rel="noreferrer"
                         >
                           <span className="sr-only">GitHub</span>
                           <GitHub />
@@ -194,6 +196,8 @@ class Team extends React.Component {
                         <a
                           href="https://github.com/Ilja2307"
                           className="text-gray-400 hover:text-gray-300"
+                          target="_blank"
+                          rel="noreferrer"
                         >
                           <span className="sr-only">GitHub</span>
                           <GitHub />
@@ -241,6 +245,8 @@ class Team extends React.Component {
                         <a
                           href="https://github.com/SaschaWebDev"
                           className="text-gray-400 hover:text-gray-300"
+                          target="_blank"
+                          rel="noreferrer"
                         >
                           <span className="sr-only">GitHub</span>
                           <GitHub />

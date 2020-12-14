@@ -126,13 +126,6 @@ class ViewProfilePage extends React.Component {
               }, 800)
             );
           } else if (updatedFirstname !== "" && updatedLastname === "") {
-            console.log("updatedFirstname", updatedFirstname);
-            console.log("updatedLastname", updatedLastname);
-            console.log("userData.firstname", userData.firstname);
-            console.log("userData.lastname", userData.lastname);
-            console.log("this.state.firstnameInput", this.state.firstnameInput);
-            console.log("this.state.firstnameInput", this.state.firstnameInput);
-
             this.calledUpdateAsync(
               userData.id,
               { firstname: updatedFirstname },
