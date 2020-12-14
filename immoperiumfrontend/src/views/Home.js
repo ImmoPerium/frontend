@@ -20,7 +20,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <div className="relative min-h-screen bg-gradient-to-b from-white to-orange-200 pt-24">
+        <div className="relative min-h-screen bg-orange-200">
           <Searchbar />
           <img
             src="./pictures/landing-bg2.jpg"

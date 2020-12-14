@@ -13,6 +13,7 @@ import Logout from "./views/Logout.js";
 import Explore from "./views/Explore.js";
 import NewOffer from "./views/NewOffer.js";
 import Offers from "./views/Offers.js";
+import ViewOffer from "./views/ViewOffer.js";
 import Favorites from "./views/Favorites.js";
 import Home from "./views/Home.js";
 import ViewProfilePage from "./views/ViewProfilePage.js";
@@ -43,6 +44,11 @@ function App() {
             exact
             path="/offers"
             render={(...props) => <Offers {...props} />}
+          />
+          <Route
+            exact
+            path="/immobilie/:id"
+            render={(...props) => <ViewOffer {...props} />}
           />
           <Route exact path="/" render={(...props) => <Home {...props} />} />
           <Route exact path="/!#" render={(...props) => <Home {...props} />} />
