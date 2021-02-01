@@ -147,13 +147,13 @@ import SearchFilters from "../components/SearchFilters";
 
 const data = [
   {
-    title: "Interessante Immobilien",
-    description: "Diese Immobilien entsprechen deinen Suchkriterien am besten.",
+    title: "Neue Angebote",
+    description: "Die neuesten Immobilien aus deiner Umgebung.",
     properties: [],
   },
   {
-    title: "Neue Angebote",
-    description: "Die neuesten Immobilien aus deiner Umgebung.",
+    title: "Interessante Immobilien",
+    description: "Diese Immobilien entsprechen deinen Suchkriterien am besten.",
     properties: [],
   },
   {
@@ -223,12 +223,15 @@ class Dashboard extends React.Component {
       );
     }
     if (this.state.maxPriceFilter) {
+      console.log("I HAVE A MAX BUDGET", parseFloat(this.state.maxPriceFilter));
       array = array.filter(
         (element) =>
           parseFloat(element.rental_price_total) <=
-            parseFloat(this.state.maxPriceFilter) ||
+          parseFloat(
+            this.state.maxPriceFilter
+          ) /* ||
           parseFloat(element.purchase_price) <=
-            parseFloat(this.state.maxPriceFilter)
+            parseFloat(this.state.maxPriceFilter) */
       );
     }
     if (array.length > 1 && !this.state.petsAllowedFilter) {
@@ -367,8 +370,11 @@ class Dashboard extends React.Component {
             </div>
             {this.props.allAdvertisements.length > 0 ? (
               this.addAllAdvertisementsToData(
-                this.props.allAdvertisements.slice(0, 3),
                 this.props.allAdvertisements.reverse().slice(0, 3),
+                this.props.allAdvertisements.slice(
+                  4,
+                  this.props.allAdvertisements.length
+                ),
                 this.props.allAdvertisements.slice(8, 11)
               ).map((segment) => (
                 <PropertyList
