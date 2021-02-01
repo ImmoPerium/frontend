@@ -30,7 +30,6 @@ class Favorites extends React.Component {
   }
 
   unfavoriteOffer = async (offer_id) => {
-    console.log("RECEIVED", offer_id);
     if (offer_id) {
       this.unfavoriteOfferAsync(
         JSON.parse(localStorage.getItem("user")).id,
@@ -103,7 +102,7 @@ class Favorites extends React.Component {
                       adId={offer.id}
                     />
                   ))
-              : console.log("NOTHING TO DISPLAY")}
+              : ""}
           </div>
         </div>
       </div>

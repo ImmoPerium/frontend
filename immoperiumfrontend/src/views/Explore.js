@@ -223,7 +223,6 @@ class Dashboard extends React.Component {
       );
     }
     if (this.state.maxPriceFilter) {
-      console.log("I HAVE A MAX BUDGET", parseFloat(this.state.maxPriceFilter));
       array = array.filter(
         (element) =>
           parseFloat(element.rental_price_total) <=
@@ -235,12 +234,10 @@ class Dashboard extends React.Component {
       );
     }
     if (array.length > 1 && !this.state.petsAllowedFilter) {
-      console.log("AM I DOING THINGS?");
       array = array.filter((element) => !element.pets_allowed);
     }
 
     if (array.length > 1 && !this.state.barrierFreeFilter) {
-      console.log("AM I DOING THINGS?");
       array = array.filter((element) => !element.barrier_free);
     }
     return array;
@@ -279,7 +276,6 @@ class Dashboard extends React.Component {
   };
 
   onChange = (event) => {
-    console.log("EVENT", event);
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -297,7 +293,6 @@ class Dashboard extends React.Component {
         <div className="xl:flex-1 xl:flex xl:overflow-y-hidden">
           <section className="bg-gray-800 xl:w-72 xl:h-screen">
             <div className="flex justify-between px-4 py-3 xl:hidden">
-              {console.log("THIS IS STATE", this.state)}
               <div className="relative max-w-xs w-full">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
@@ -311,7 +306,7 @@ class Dashboard extends React.Component {
                 </div>
                 <input
                   className="block w-full bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900 text-white rounded-lg pl-10 pr-4 py-2"
-                  placeholder="Wonach suchst du bitte?"
+                  placeholder="Wonach suchst du?"
                 />
               </div>
               <button

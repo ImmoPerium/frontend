@@ -9,7 +9,6 @@ class ViewOffer extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     let id = "";
     if (this.props.match.params.id) {
       id = this.props.match.params.id;

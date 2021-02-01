@@ -23,7 +23,6 @@ class Offers extends React.Component {
   }
 
   deleteOffer = (offer_id) => {
-    console.log("RECEIVED", offer_id);
     if (offer_id) {
       this.props.deleteOffer(offer_id, localStorage.getItem("token"));
     }
@@ -48,9 +47,7 @@ class Offers extends React.Component {
           <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none w-full">
             <NewOfferComponent />
             {/* FOR EACH OFFER A NEW PROPERTY COMPONENT */}
-            {this.props.offers
-              ? console.log("HERE IS YOUR DATA", this.props.offers)
-              : ""}
+            {this.props.offers ? console.log("", this.props.offers) : ""}
             {this.props.offers
               ? this.props.offers.map((offer) => (
                   <OfferComponent
@@ -83,7 +80,7 @@ class Offers extends React.Component {
                     adId={offer.id}
                   />
                 ))
-              : console.log("NOTHING TO DISPLAY")}
+              : ""}
           </div>
         </div>
       </div>
