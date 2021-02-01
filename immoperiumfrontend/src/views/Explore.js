@@ -370,7 +370,7 @@ class Dashboard extends React.Component {
                   4,
                   this.props.allAdvertisements.length
                 ),
-                this.props.allAdvertisements.slice(8, 11)
+                []
               ).map((segment) => (
                 <PropertyList
                   key={segment.title}
