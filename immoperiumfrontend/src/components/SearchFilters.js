@@ -103,7 +103,7 @@ class SearchFilters extends React.Component {
                 </span>
                 <input
                   name="maxPriceFilter"
-                  value={this.props.maxBudget ? this.props.maxBudget : 1500}
+                  value={this.props.maxBudget ? this.props.maxBudget : 2900}
                   onChange={(event) => this.props.onChangeCallback(event)}
                   className="mt-1 form-select block w-full text-gray-800 shadow "
                 ></input>
