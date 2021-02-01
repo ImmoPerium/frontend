@@ -224,6 +224,36 @@ export const getRealEstateById = (user_id, token) => (dispatch) => {
     });
 };
 
+export const GET_FAVORITE_REALESTATE_BY_USER_FETCHING =
+  "GET_FAVORITE_REALESTATE_BY_USER_FETCHING";
+export const GET_FAVORITE_REALESTATE_BY_USER_SUCCESS =
+  "GET_FAVORITE_REALESTATE_BY_USER_SUCCESS";
+export const GET_FAVORITE_REALESTATE_BY_USER_FAILURE =
+  "GET_FAVORITE_REALESTATE_BY_USER_FAILURE";
+
+export const getFavoriteRealEstateById = (user_id, token) => (dispatch) => {
+  dispatch({
+    type: GET_FAVORITE_REALESTATE_BY_USER_FETCHING,
+  });
+  axios
+    .get(`${url}/v1/users/${user_id}/realestatefavorites`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => {
+      dispatch({
+        type: GET_FAVORITE_REALESTATE_BY_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: GET_FAVORITE_REALESTATE_BY_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const DELETE_OFFER_FETCHING = "DELETE_OFFER_FETCHING";
 export const DELETE_OFFER_SUCCESS = "DELETE_OFFER_SUCCESS";
 export const DELETE_OFFER_FAILURE = "DELETE_OFFER_FAILURE";
@@ -369,6 +399,89 @@ export const addFavoriteOffer = (user_id, favorite_id, token) => (dispatch) => {
       console.log("ERROR", err);
       dispatch({
         type: ADD_USER_FAVORITE_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const CREATE_REAL_ESTATE_FETCHING = "CREATE_REAL_ESTATE_FETCHING";
+export const CREATE_REAL_ESTATE_SUCCESS = "CREATE_REAL_ESTATE_SUCCESS";
+export const CREATE_REAL_ESTATE_FAILURE = "CREATE_REAL_ESTATE_FAILURE";
+
+export const createRealEstate = (state, token, user_id) => (dispatch) => {
+  dispatch({
+    type: CREATE_REAL_ESTATE_FETCHING,
+  });
+  axios
+    .post(
+      `${url}/v1/realestate/add`,
+      {
+        user_id: user_id,
+        street: state.street,
+        streetnumber: state.streetnumber,
+        country: state.country,
+        city: state.city,
+        zip: state.zip,
+        level: 1,
+        lot_area: "1",
+        house_area: state.house_area,
+        rental_price_basic: "0",
+        rental_price_total: state.purchase_type === "Miete" ? state.price : 1,
+        rental_deposit: state.rental_deposit,
+        purchase_price: state.purchase_type === "Kaufen" ? state.price : 1,
+        courtage_percent: 1,
+        building_type: "Nicht angegeben",
+        overall_condition: state.overall_condition,
+        furnishing_condition: "Nicht angegeben",
+        construction_date: "2020-10-20T22:00:00.000Z",
+        renovation_date: "2020-10-20T22:00:00.000Z",
+        number_of_floors: 1,
+        rooms: state.rooms,
+        bedrooms: 2,
+        livingrooms: 1,
+        bathrooms: 2,
+        basement: state.basement === "Ja" ? true : false,
+        basement_area: "1",
+        pets_allowed: state.pets_allowed === "Ja" ? true : false,
+        barrier_free: state.barrier_free === "Ja" ? true : false,
+        heating: "Zentralheizung",
+        pool: false,
+        offstreet_parking: state.offstreet_parking === "Ja" ? true : false,
+        vacancy: "2020-10-20T22:00:00.000Z",
+        object_number: Math.floor(Math.random() * 10000) + 1,
+        advertisement_purpose: state.advertisement_purpose,
+        advertisement_title: "Hier steht Ihr Titel",
+        advertisement_description: state.advertisement_description,
+        furnishing_description: "Nicht angegeben",
+        location_description: "Nicht angegeben",
+        other_description: "https://i.imgur.com/LUDl3os.png",
+        photo_1: null,
+        photo_2: null,
+        photo_3: null,
+        photo_4: null,
+        photo_5: null,
+        photo_6: null,
+        photo_7: null,
+        photo_8: null,
+        photo_9: null,
+        photo_10: null,
+        is_public: true,
+        is_location_public: false,
+      },
+      {
+        headers: { Authorization: token },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: CREATE_REAL_ESTATE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR", err);
+      dispatch({
+        type: CREATE_REAL_ESTATE_FAILURE,
         payload: err,
       });
     });

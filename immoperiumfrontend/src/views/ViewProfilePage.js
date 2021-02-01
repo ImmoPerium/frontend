@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-
 import { deleteAccount, getUserById, updateAccount } from "../actions/index";
 
 class ViewProfilePage extends React.Component {
@@ -343,28 +342,16 @@ class ViewProfilePage extends React.Component {
                     <div className="hidden lg:block">
                       <div className="border-b border-gray-200">
                         <nav className="-mb-px flex">
-                          <a
-                            href="!#"
-                            className="whitespace-nowrap py-4 px-1 border-b-2 border-orange-500 font-medium text-sm text-orange-600"
-                          >
+                          <a className="whitespace-nowrap py-4 px-1 border-b-2 border-orange-500 font-medium text-sm text-orange-600 cursor-pointer">
                             Allgemein
                           </a>
-                          <a
-                            href="!#"
-                            className="whitespace-nowrap ml-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                          >
+                          <a className="whitespace-nowrap ml-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300 cursor-pointer">
                             Sicherheit
                           </a>
-                          <a
-                            href="!#"
-                            className="whitespace-nowrap ml-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                          >
+                          <a className="whitespace-nowrap ml-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300 cursor-pointer">
                             Benachrichtungen
                           </a>
-                          <a
-                            href="!#"
-                            className="whitespace-nowrap ml-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                          >
+                          <a className="whitespace-nowrap ml-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300 cursor-pointer">
                             Zahlungen
                           </a>
                         </nav>

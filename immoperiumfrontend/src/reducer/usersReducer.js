@@ -1,20 +1,23 @@
 import {
-  GET_USERS_FETCHING,
-  GET_USERS_SUCCESS,
-  GET_USERS_FAILURE,
-  REGISTER_FETCHING,
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE,
-  LOGIN_FETCHING,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
+  DELETE_ACCOUNT_SUCCESS,
+  GET_FAVORITE_REALESTATE_BY_USER_FAILURE,
+  GET_FAVORITE_REALESTATE_BY_USER_FETCHING,
+  GET_FAVORITE_REALESTATE_BY_USER_SUCCESS,
+  GET_REALESTATE_BY_USER_FAILURE,
   GET_REALESTATE_BY_USER_FETCHING,
   GET_REALESTATE_BY_USER_SUCCESS,
-  GET_REALESTATE_BY_USER_FAILURE,
-  DELETE_ACCOUNT_SUCCESS,
+  GET_USERS_BY_ID_FAILURE,
   GET_USERS_BY_ID_FETCHING,
   GET_USERS_BY_ID_SUCCESS,
-  GET_USERS_BY_ID_FAILURE,
+  GET_USERS_FAILURE,
+  GET_USERS_FETCHING,
+  GET_USERS_SUCCESS,
+  LOGIN_FAILURE,
+  LOGIN_FETCHING,
+  LOGIN_SUCCESS,
+  REGISTER_FAILURE,
+  REGISTER_FETCHING,
+  REGISTER_SUCCESS,
 } from "../actions";
 
 const initialState = {
@@ -30,6 +33,9 @@ const initialState = {
   realEstateOffersOfUser: [],
   fetchingRealEstateOffersOfUser: false,
   fetchingRealEstateOffersOfUserError: "",
+  favoriteRealEstateOffersOfUser: [],
+  fetchingFavoriteRealEstateOffersOfUser: false,
+  fetchingFavoriteRealEstateOffersOfUserError: "",
   accountDeletion: false,
   userByID: {},
   fetchingUserByID: false,
@@ -138,6 +144,25 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         fetchingUserByID: false,
         fetchingUserByIDError: action.payload,
+      };
+    case GET_FAVORITE_REALESTATE_BY_USER_FETCHING:
+      return {
+        ...state,
+        fetchingFavoriteRealEstateOffersOfUser: true,
+        fetchingFavoriteRealEstateOffersOfUserError: "",
+      };
+    case GET_FAVORITE_REALESTATE_BY_USER_SUCCESS:
+      return {
+        ...state,
+        favoriteRealEstateOffersOfUser: action.payload,
+        fetchingFavoriteRealEstateOffersOfUser: false,
+        fetchingFavoriteRealEstateOffersOfUserError: "",
+      };
+    case GET_FAVORITE_REALESTATE_BY_USER_FAILURE:
+      return {
+        ...state,
+        fetchingFavoriteRealEstateOffersOfUser: false,
+        fetchingFavoriteRealEstateOffersOfUserError: action.payload,
       };
     default:
       return state;

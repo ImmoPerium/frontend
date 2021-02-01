@@ -1,17 +1,20 @@
 import React from "react";
-
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.container = React.createRef();
     this.state = {
       location: "",
+      minbudget: "",
+      maxbudget: "",
       open: false,
+      redirectToExplore: false,
     };
   }
   setLocationValue = () => {
     this.setState({});
   };
+
   handleButtonClick = () => {
     this.setState((state) => {
       return {
@@ -19,6 +22,32 @@ class SearchBar extends React.Component {
       };
     });
   };
+
+  handleSearchClick = () => {
+    if (this.state.location || this.state.minbudget || this.state.maxbudget) {
+      localStorage.setItem(
+        "filter",
+        JSON.stringify({
+          location: this.state.location ? this.state.location : "",
+          minbudget: this.state.minbudget ? this.state.minbudget : "",
+          maxbudget: this.state.maxbudget ? this.state.maxbudget : "",
+        })
+      );
+    } else {
+      localStorage.setItem(
+        "filter",
+        JSON.stringify({
+          location: "",
+          minbudget: "",
+          maxbudget: "",
+        })
+      );
+    }
+    this.setState({ redirectToExplore: true }, () =>
+      this.setState({ redirectToExplore: false })
+    );
+  };
+
   handleClickOutside = (event) => {
     if (
       this.container.current &&
@@ -29,9 +58,16 @@ class SearchBar extends React.Component {
       });
     }
   };
-  editSearchTerm = (e) => {
-    this.setState({ searchTerm: e.target.value });
+
+  onChange = (event) =>
+    this.setState({ [event.target.name]: event.target.value });
+
+  _handleKeyDown = (e, change_input) => {
+    if (e.key === "Enter") {
+      this.handleSearchClick();
+    }
   };
+
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
   }
@@ -39,9 +75,14 @@ class SearchBar extends React.Component {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
+  redirectToExplore = () => {
+    this.props.history.push("/explore");
+  };
+
   render() {
     return (
       <div className="absolute inset-0 flex items-center justify-center z-10">
+        {this.state.redirectToExplore ? this.redirectToExplore() : ""}
         <div className="relative flex rounded-md border-2 border-gray-300 bg-white text-left divide-x-2 divide-gray-200">
           <div className="absolute divide-x-0 border-transparent inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <svg
@@ -65,9 +106,11 @@ class SearchBar extends React.Component {
             placeholder={"Traumort eingeben"}
             style={{ textIndent: "35px" }}
             onChange={(event) => {
-              this.editSearchTerm(event);
+              this.onChange(event);
             }}
-            value={this.state.searchTerm}
+            onKeyDown={(event) => this._handleKeyDown(event, "name")}
+            name="location"
+            value={this.state.location}
           />
           <div className="container" ref={this.container.current}>
             <button
@@ -104,8 +147,12 @@ class SearchBar extends React.Component {
                     </div>
                     <input
                       type="text"
-                      name="company_website"
                       id="company_website"
+                      name="minbudget"
+                      value={this.state.minbudget}
+                      onChange={(event) => {
+                        this.onChange(event);
+                      }}
                       className="block w-full h-full pl-16 sm:pl-14 sm:text-sm texl-l rounded-md focus:outline-none"
                       placeholder="in Euro"
                     />
@@ -118,8 +165,12 @@ class SearchBar extends React.Component {
                     </div>
                     <input
                       type="text"
-                      name="company_website"
                       id="company_website"
+                      name="maxbudget"
+                      value={this.state.maxbudget}
+                      onChange={(event) => {
+                        this.onChange(event);
+                      }}
                       className="block w-full h-full pl-16 sm:pl-14 sm:text-sm texl-l rounded-md focus:outline-none"
                       placeholder="in Euro"
                     />
@@ -130,6 +181,7 @@ class SearchBar extends React.Component {
           </div>
           <button
             type="button"
+            onClick={() => this.handleSearchClick()}
             className="inline-flex divide-x-0 border-transparent items-center w-35 px-5 text-base font-medium rounded-md text-white bg-orange-500 hover:bg-orange-700 focus:outline-none"
           >
             Suchen

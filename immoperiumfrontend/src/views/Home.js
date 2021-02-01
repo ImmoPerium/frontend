@@ -1,6 +1,6 @@
 import React from "react";
-import "../index.css";
 import Searchbar from "../components/SearchBar";
+import "../index.css";
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ export default class Home extends React.Component {
     return (
       <div>
         <div className="relative min-h-screen bg-orange-200">
-          <Searchbar />
+          <Searchbar history={this.props[0].history} />
           <img
             src="./pictures/landing-bg2.jpg"
             className="object-cover bg-center max-w-screen z-0"

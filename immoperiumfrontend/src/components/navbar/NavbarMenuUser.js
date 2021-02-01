@@ -1,6 +1,6 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 /* import { getUserById } from "../actions/index"; */
 class NavbarMenuUser extends React.Component {
   constructor(props) {
@@ -42,19 +42,19 @@ class NavbarMenuUser extends React.Component {
 
         <div
           onClick={() => this.redirectTo("explore")}
-          className="mt-1 block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800 sm:mt-0 sm:text-sm sm:px-2 sm:ml-2 xl:text-gray-900 xl:hover:bg-gray-200 cursor-pointer"
+          className="mt-1 block px-3 py-1 rounded font-semibold hover:bg-gray-200 sm:mt-0 sm:text-sm sm:px-2 sm:ml-2 text-gray-900 xl:hover:bg-gray-200 cursor-pointer"
         >
           Entdecke Immobilien
         </div>
         <div
           onClick={() => this.redirectTo("offers")}
-          className="mt-1 block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800 sm:mt-0 sm:text-sm sm:px-2 sm:ml-2 xl:text-gray-900 xl:hover:bg-gray-200 cursor-pointer"
+          className="mt-1 block px-3 py-1 rounded font-semibold hover:bg-gray-200 sm:mt-0 sm:text-sm sm:px-2 sm:ml-2 text-gray-900 xl:hover:bg-gray-200 cursor-pointer"
         >
           Deine Immobilien
         </div>
         <div
           onClick={() => this.redirectTo("favorites")}
-          className="mt-1 block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800 sm:mt-0 sm:text-sm sm:px-2 sm:ml-2 xl:text-gray-900 xl:hover:bg-gray-200 cursor-pointer"
+          className="mt-1 block px-3 py-1 rounded font-semibold hover:bg-gray-200 sm:mt-0 sm:text-sm sm:px-2 sm:ml-2 text-gray-900 xl:hover:bg-gray-200 cursor-pointer"
         >
           Favoriten
         </div>

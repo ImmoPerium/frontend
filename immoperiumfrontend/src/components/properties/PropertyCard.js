@@ -1,11 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import {
   addFavoriteOffer,
   getRealEstateById,
   getUserById,
 } from "../../actions";
-import { connect } from "react-redux";
 
 class PropertyCard extends React.Component {
   constructor(props) {
@@ -210,7 +210,7 @@ class PropertyCard extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    offers: state.usersReducer.realEstateOffersOfUser,
+    offers: state.advertisementsReducer.allAdvertisements,
     userByID: state.usersReducer.userByID,
   };
 };

@@ -1,10 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-
+import { connect } from "react-redux";
 import { getAllAdvertisements } from "../actions/index";
-import SearchFilters from "../components/SearchFilters";
 import PropertyList from "../components/properties/PropertyList";
+import SearchFilters from "../components/SearchFilters";
 
 /* const data = [
   {
@@ -153,8 +152,8 @@ const data = [
     properties: [],
   },
   {
-    title: "In deiner Nähe",
-    description: "Die besten Immobilien aus deiner Umgebung.",
+    title: "Neue Angebote",
+    description: "Die neuesten Immobilien aus deiner Umgebung.",
     properties: [],
   },
   {
@@ -165,7 +164,14 @@ const data = [
 ];
 
 class Dashboard extends React.Component {
-  state = { isFiltersOpen: false };
+  state = {
+    isFiltersOpen: false,
+    searchFilter: "",
+    minPriceFilter: "",
+    maxPriceFilter: "",
+    petsAllowedFilter: true,
+    barrierFreeFilter: true,
+  };
 
   constructor(props) {
     super(props);
@@ -178,9 +184,64 @@ class Dashboard extends React.Component {
     });
   }
 
+  loadSearchFilter = () => {
+    this.setState({
+      searchFilter: localStorage.getItem("filter")
+        ? JSON.parse(localStorage.getItem("filter")).location
+        : "",
+      minPriceFilter: localStorage.getItem("filter")
+        ? JSON.parse(localStorage.getItem("filter")).minbudget
+        : "",
+      maxPriceFilter: localStorage.getItem("filter")
+        ? JSON.parse(localStorage.getItem("filter")).maxbudget
+        : "",
+    });
+  };
+
   componentDidMount() {
     this.props.getAllAdvertisements();
+    this.loadSearchFilter();
   }
+
+  applyFilter = (array) => {
+    if (this.state.searchFilter) {
+      array = array.filter(
+        (element) =>
+          element.advertisement_description.includes(this.state.searchFilter) ||
+          element.advertisement_purpose.includes(this.state.searchFilter) ||
+          element.country.includes(this.state.searchFilter) ||
+          element.city.includes(this.state.searchFilter)
+      );
+    }
+    if (this.state.minPriceFilter) {
+      array = array.filter(
+        (element) =>
+          parseFloat(element.rental_price_total) >=
+            parseFloat(this.state.minPriceFilter) ||
+          parseFloat(element.purchase_price) >=
+            parseFloat(this.state.minPriceFilter)
+      );
+    }
+    if (this.state.maxPriceFilter) {
+      array = array.filter(
+        (element) =>
+          parseFloat(element.rental_price_total) <=
+            parseFloat(this.state.maxPriceFilter) ||
+          parseFloat(element.purchase_price) <=
+            parseFloat(this.state.maxPriceFilter)
+      );
+    }
+    if (array.length > 1 && !this.state.petsAllowedFilter) {
+      console.log("AM I DOING THINGS?");
+      array = array.filter((element) => !element.pets_allowed);
+    }
+
+    if (array.length > 1 && !this.state.barrierFreeFilter) {
+      console.log("AM I DOING THINGS?");
+      array = array.filter((element) => !element.barrier_free);
+    }
+    return array;
+  };
 
   addAllAdvertisementsToData(
     best_advertisement_data,
@@ -188,11 +249,44 @@ class Dashboard extends React.Component {
     newest_advertisement_data
   ) {
     let advertisement_data = data;
-    advertisement_data[0].properties = [...best_advertisement_data];
-    advertisement_data[1].properties = [...closest_advertisement_data];
-    advertisement_data[2].properties = [...newest_advertisement_data];
+    advertisement_data[0].properties = this.applyFilter([
+      ...best_advertisement_data,
+    ]);
+    advertisement_data[1].properties = this.applyFilter([
+      ...closest_advertisement_data,
+    ]);
+    advertisement_data[2].properties = this.applyFilter([
+      ...newest_advertisement_data,
+    ]);
     return advertisement_data;
   }
+
+  onChangeSearch = (event) => {
+    this.setState(
+      { searchFilter: event.target.value },
+      localStorage.setItem(
+        "filter",
+        JSON.stringify({
+          location: event.target.value,
+          minbudget: JSON.parse(localStorage.getItem("filter")).minbudget,
+          maxbudget: JSON.parse(localStorage.getItem("filter")).maxbudget,
+        })
+      )
+    );
+  };
+
+  onChange = (event) => {
+    console.log("EVENT", event);
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  onChangeCheckboxPets = () => {
+    this.setState({ petsAllowedFilter: !this.state.petsAllowedFilter });
+  };
+
+  onChangeCheckboxBarrier = (filterValue) => {
+    this.setState({ barrierFreeFilter: !this.state.barrierFreeFilter });
+  };
 
   render() {
     return (
@@ -200,6 +294,7 @@ class Dashboard extends React.Component {
         <div className="xl:flex-1 xl:flex xl:overflow-y-hidden">
           <section className="bg-gray-800 xl:w-72 xl:h-screen">
             <div className="flex justify-between px-4 py-3 xl:hidden">
+              {console.log("THIS IS STATE", this.state)}
               <div className="relative max-w-xs w-full">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
@@ -213,7 +308,7 @@ class Dashboard extends React.Component {
                 </div>
                 <input
                   className="block w-full bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900 text-white rounded-lg pl-10 pr-4 py-2"
-                  placeholder="Wonach suchst du?"
+                  placeholder="Wonach suchst du bitte?"
                 />
               </div>
               <button
@@ -240,13 +335,40 @@ class Dashboard extends React.Component {
             <SearchFilters
               open={this.state.isFiltersOpen}
               action={this.filtersHandler}
+              minBudget={this.state.minPriceFilter}
+              maxBudget={this.state.maxPriceFilter}
+              petsAllowed={this.state.petsAllowedFilter}
+              barrierFree={this.state.barrierFreeFilter}
+              onChangeCallback={this.onChange}
+              onChangeCheckboxPetsCallBack={this.onChangeCheckboxPets}
+              onChangeCheckboxBarrierCallBack={this.onChangeCheckboxBarrier}
             />
           </section>
+
           <main className="py-6 xl:flex-1 xl:overflow-x-hidden">
+            <div className=" ml-6 relative max-w-xs w-full">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg
+                  className="h-6 w-6 fill-current text-gray-600"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M16.32 14.9l1.1 1.1c.4-.02.83.13 1.14.44l3 3a1.5 1.5 0 0 1-2.12 2.12l-3-3a1.5 1.5 0 0 1-.44-1.14l-1.1-1.1a8 8 0 1 1 1.41-1.41l.01-.01zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
+                </svg>
+              </div>
+              <input
+                name="searchFilter"
+                value={this.state.searchFilter}
+                onChange={(event) => this.onChangeSearch(event)}
+                className="block w-full border border-transparent bg-white focus:outline-none focus:bg-white focus:border-gray-300 text-gray-900 rounded-lg pl-10 pr-4 py-2"
+                placeholder="Wonach suchst du?"
+              />
+            </div>
             {this.props.allAdvertisements.length > 0 ? (
               this.addAllAdvertisementsToData(
                 this.props.allAdvertisements.slice(0, 3),
-                this.props.allAdvertisements.slice(4, 7),
+                this.props.allAdvertisements.reverse().slice(0, 3),
                 this.props.allAdvertisements.slice(8, 11)
               ).map((segment) => (
                 <PropertyList

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { getUserById, getSingleAdvertisement } from "../actions/index";
+import { getSingleAdvertisement, getUserById } from "../actions/index";
 import PropertyCard from "../components/properties/PropertyCard";
 class ViewOffer extends React.Component {
   constructor(props) {
@@ -31,7 +30,10 @@ class ViewOffer extends React.Component {
     const userData = JSON.parse(localStorage.getItem("user"));
     const getUserByIdData = this.props.userByID;
     return (
-      <div className="h-screen bg-white overflow-hidden flex">
+      <div
+        className="min-h-screen overflow-hidden flex"
+        style={{ backgroundColor: "#e5e7eb" }}
+      >
         {this.state.showDeleteDialog ? (
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -165,12 +167,19 @@ class ViewOffer extends React.Component {
                         <p className="max-w-2xl text-sm text-gray-500">
                           Bei Fragen kontaktieren Sie den Vermittler direkt.
                         </p>
+                        <button
+                          type="button"
+                          onClick={this.onClick}
+                          className="w-1/4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-orange-400 focus:shadow-outline-orange active:bg-orange-400 transition duration-150 ease-in-out"
+                        >
+                          Kontakt aufnehmen
+                        </button>
                       </div>
                       <div className="mt-6">
                         <dl className="divide-y divide-gray-200">
                           <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                             <dt className="text-sm font-medium text-gray-500">
-                              Adressse
+                              Adresse
                             </dt>
                             <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                               <span className="flex-grow">
@@ -186,6 +195,7 @@ class ViewOffer extends React.Component {
                               <span className="flex-grow">
                                 {this.props.singleOffer
                                   ? this.props.singleOffer.zip +
+                                    " " +
                                     this.props.singleOffer.city
                                   : ""}
                               </span>
@@ -263,14 +273,6 @@ class ViewOffer extends React.Component {
                                 {this.props.singleOffer
                                   ? "Zustand: " +
                                     this.props.singleOffer.overall_condition
-                                  : ""}
-                              </span>
-                            </dd>
-                            <dt className="text-sm font-medium text-gray-500"></dt>
-                            <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                              <span className="flex-grow">
-                                {this.props.singleOffer.basement
-                                  ? "Keller vorhanden "
                                   : ""}
                               </span>
                             </dd>

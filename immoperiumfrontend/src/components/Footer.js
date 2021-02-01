@@ -50,7 +50,7 @@ class Footer extends React.Component {
                       </li>
                       <li>
                         <a
-                          href="!#"
+                          href="/#"
                           className="text-base leading-6 text-gray-300 hover:text-white"
                         >
                           Kunde werden
@@ -58,7 +58,7 @@ class Footer extends React.Component {
                       </li>
                       <li>
                         <a
-                          href="!#"
+                          href="/#"
                           className="text-base leading-6 text-gray-300 hover:text-white"
                         >
                           Newsletter abonnieren
@@ -81,7 +81,7 @@ class Footer extends React.Component {
                       </li>
                       <li>
                         <a
-                          href="!#"
+                          href="/#"
                           className="text-base leading-6 text-gray-300 hover:text-white"
                         >
                           Datenschutz
@@ -113,7 +113,7 @@ class Footer extends React.Component {
                     <ul className="mt-4 space-y-4">
                       <li>
                         <a
-                          href="!#"
+                          href="/#"
                           className="text-base leading-6 text-gray-300 hover:text-white"
                         >
                           Blog
@@ -252,7 +252,7 @@ class Footer extends React.Component {
                 </a>
               </div>
               <p className="mt-8 text-base leading-6 text-gray-400 md:mt-0 md:order-1">
-                2020 Immoperium
+                2021 Immoperium
               </p>
             </div>
           </div>

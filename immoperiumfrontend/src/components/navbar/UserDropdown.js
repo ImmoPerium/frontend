@@ -42,7 +42,7 @@ export default class UserDropdown extends React.Component {
         <div className="mt-5 sm:hidden">
           <div
             onClick={() => this.redirectTo("settings")}
-            className="block text-gray-400 hover:text-white"
+            className="block text-gray-400 hover:bg-gray-200 text-gray-800 cursor-pointer"
           >
             Einstellungen
           </div>
@@ -57,7 +57,7 @@ export default class UserDropdown extends React.Component {
           </a> */}
           <div
             onClick={() => this.redirectTo("logout")}
-            className="block text-gray-400 hover:text-white"
+            className="block text-gray-400 hover:bg-gray-200 text-gray-800 cursor-pointer"
           >
             Ausloggen
           </div>

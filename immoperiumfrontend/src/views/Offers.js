@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+import { deleteOffer, getRealEstateById } from "../actions/index";
 /* import { Route } from "react-router-dom"; */
-
 import NewOfferComponent from "../components/offers/NewOfferComponent";
 import OfferComponent from "../components/offers/OfferComponent";
-import { getRealEstateById, deleteOffer } from "../actions/index";
 
 class Offers extends React.Component {
   constructor(props) {
@@ -68,6 +67,10 @@ class Offers extends React.Component {
                     favoriteCount={offer.favorite_count}
                     createdAt={offer.created_at}
                     thumbnail={offer.other_description}
+                    isOwned={
+                      offer.user_id ===
+                      JSON.parse(localStorage.getItem("user")).id
+                    }
                     deleteOfferCallback={(offer_id) =>
                       this.deleteOffer(offer_id)
                     }

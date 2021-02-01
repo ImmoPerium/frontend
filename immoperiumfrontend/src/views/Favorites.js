@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-
-import { getUserById, getRealEstateById } from "../actions/index";
+import {
+  getFavoriteRealEstateById,
+  getUserById,
+  removeFavoriteOffer,
+} from "../actions/index";
 import FavoriteOfferComponent from "../components/offers/FavoriteOfferComponent";
-import { removeFavoriteOffer } from "../actions/index";
 
 class Favorites extends React.Component {
   constructor(props) {
@@ -16,7 +18,7 @@ class Favorites extends React.Component {
       JSON.parse(localStorage.getItem("user")) &&
       localStorage.getItem("token")
     ) {
-      this.props.getRealEstateById(
+      this.props.getFavoriteRealEstateById(
         JSON.parse(localStorage.getItem("user")).id,
         localStorage.getItem("token")
       );
@@ -93,7 +95,7 @@ class Favorites extends React.Component {
                         this.unfavoriteOffer(offer_id)
                       }
                       refreshOffersCallback={() =>
-                        this.props.getRealEstateById(
+                        this.props.getFavoriteRealEstateById(
                           JSON.parse(localStorage.getItem("user")).id,
                           localStorage.getItem("token")
                         )
@@ -110,12 +112,12 @@ class Favorites extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  offers: state.usersReducer.realEstateOffersOfUser,
+  offers: state.usersReducer.favoriteRealEstateOffersOfUser,
   userByID: state.usersReducer.userByID,
 });
 
 export default connect(mapStateToProps, {
-  getRealEstateById,
+  getFavoriteRealEstateById,
   getUserById,
   removeFavoriteOffer,
 })(Favorites);

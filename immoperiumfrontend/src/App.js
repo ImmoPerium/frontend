@@ -1,23 +1,21 @@
 import { createBrowserHistory } from "history";
-import { Route } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
-
-import "./tailwind.output.css";
-import Navbar from "./components/navbar/Navbar";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Footer from "./components/Footer.js";
-import Impressum from "./views/Impressum.js";
+import Navbar from "./components/navbar/Navbar";
 import Team from "./sections/Team.js";
-import Register from "./views/Register.js";
-import Login from "./views/Login.js";
-import Logout from "./views/Logout.js";
+import "./tailwind.output.css";
+import Credo from "./views/Credo.js";
 import Explore from "./views/Explore.js";
-import NewOffer from "./views/NewOffer.js";
-import Offers from "./views/Offers.js";
-import ViewOffer from "./views/ViewOffer.js";
 import Favorites from "./views/Favorites.js";
 import Home from "./views/Home.js";
+import Impressum from "./views/Impressum.js";
+import Login from "./views/Login.js";
+import Logout from "./views/Logout.js";
+import NewOffer from "./views/NewOffer.js";
+import Offers from "./views/Offers.js";
+import Register from "./views/Register.js";
+import ViewOffer from "./views/ViewOffer.js";
 import ViewProfilePage from "./views/ViewProfilePage.js";
-import Credo from "./views/Credo.js";
 
 const history = createBrowserHistory();
 
