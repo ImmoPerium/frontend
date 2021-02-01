@@ -327,7 +327,7 @@ class Dashboard extends React.Component {
                 >
                   <path d="M3 6a1 1 0 0 1 1-1h16a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1zm3 6a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1zm4 5a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-4z" />
                 </svg>
-                <span className="ml-1 text-white font-medium">Filters</span>
+                <span className="ml-1 text-white font-medium">Filter</span>
               </button>
             </div>
             <SearchFilters
