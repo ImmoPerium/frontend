@@ -41,7 +41,6 @@ export const getUserById = (user_id, token) => (dispatch) => {
       headers: { Authorization: token },
     })
     .then((res) => {
-      console.log("GOT SINGLE USER", res.data);
       dispatch({
         type: GET_USERS_BY_ID_SUCCESS,
         payload: res.data,
@@ -135,7 +134,6 @@ export const GET_SINGLE_ADVERTISEMENT_FAILURE =
   "GET_SINGLE_ADVERTISEMENT_FAILURE";
 
 export const getSingleAdvertisement = (offer_id, token) => (dispatch) => {
-  console.log("ACCEPTED ", offer_id);
   dispatch({
     type: GET_SINGLE_ADVERTISEMENT_FETCHING,
   });
@@ -318,9 +316,6 @@ export const updateAccount = (account_id, changes, token) => (
   dispatch,
   getState
 ) => {
-  console.log("UPDATING", account_id);
-  console.log("UPDATING", changes);
-  console.log("UPDATING", token);
   dispatch({
     type: UPDATE_ACCOUNT_FETCHING,
   });
@@ -341,11 +336,6 @@ export const updateAccount = (account_id, changes, token) => (
         payload: err,
       });
     });
-  /* const value = getState().fetchingUserByID;
-  while (!value) {
-    console.log("WAS TRUE");
-  }
-  return true; */
 };
 
 export const REMOVE_USER_FAVORITE_FETCHING = "REMOVE_USER_FAVORITE_FETCHING";

@@ -77,7 +77,6 @@ class PropertyCard extends React.Component {
             .includes(offer.id.toString())
         )
         .map((offer) => offer.id);
-      console.log("favoriteIdArray", favoriteIdArray);
     }
     return (
       <div
